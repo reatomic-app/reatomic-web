@@ -1,0 +1,11 @@
+{
+    "sidebar": {
+        "dashboard": {
+            "menu": "Dashboard",
+            "item": "Dashboard"
+        }
+    },
+    "dashboard": {
+        "title": "Dashboard"
+    }
+}
