@@ -8,8 +8,8 @@ export default class XSmallbox extends Vue {
     @Prop(String)
     public icon!: string;
 
-    @Prop(Number)
-    public digit!: number;
+    @Prop(String)
+    public title!: string;
 
     @Prop(String)
     public level!: string;

@@ -1,0 +1,19 @@
+<div class="create-project">
+    <a @click="handleOpenDialog" class="add-project btn btn-app">
+        <i class="fas fa-plus"></i>Create
+    </a>      
+    <create-dialog 
+        name="create-project-dialog" 
+        title="Create new project"
+        cancelCaption="Cancel"
+        acceptCaption="Accept"
+        @onCancel="handleCancel"
+        @onAccept="handleCreate">
+        <form>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input class="form-control" type="text" name="name" placeholder="Enter the name of the new project" />
+            </div>
+        </form>
+    </create-dialog>
+</div>  
