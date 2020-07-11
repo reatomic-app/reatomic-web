@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Dashboard from "@/reatomic/dashboard/Dashboard.vue";
-import ProjectEdition from "@/reatomic/projects/edit/ProjectEdition.vue";
+
+import { Projects, projectRoutes } from "@/reatomic/projects"
 
 Vue.use(VueRouter)
 
@@ -20,9 +21,9 @@ export default new VueRouter({
       component: Dashboard,
     },
     {
-      path: "/projects/:id",
-      name: "project:edit",
-      component: ProjectEdition,
+      path: "/projects",
+      component: Projects,
+      children: projectRoutes,
     },
   ]
 })

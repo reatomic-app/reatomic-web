@@ -33,6 +33,8 @@ export default class XSidebarEntry extends Vue {
     public handleSelectedToggle() {
         this.isSelected = !this.isSelected;
         this.isOpen = this.hasChildren && !this.isOpen;
+
+        this.$router.push({name: this.to});
     }
 }
 </script>

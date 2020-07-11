@@ -1,11 +1,6 @@
 {
     "sidebar": {
-        "dashboard": {
-            "menu": "Dashboard",
-            "item": "Dashboard"
-        }
-    },
-    "dashboard": {
-        "title": "Dashboard"
+        "projects": "Project List",
+        "dashboard": "Dashboard"
     }
 }

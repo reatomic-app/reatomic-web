@@ -2,7 +2,7 @@
 <style src="./Dashboard.css"></style>
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import CreateProject from "@/reatomic/projects/create/CreateProject.vue";
+import CreateProject from "@/reatomic/projects/adapters/views/CreateProject.vue";
 
 @Component({
     components: {

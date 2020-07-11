@@ -1,4 +1,4 @@
-<template src="./CreateProject.html"></template>
+<template src="./create/CreateProject.html"></template>
 <script lang="ts">
 
 import { Vue, Component } from "vue-property-decorator";

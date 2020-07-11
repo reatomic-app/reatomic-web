@@ -4,7 +4,7 @@
     </a>      
     <create-dialog 
         name="create-project-dialog" 
-        title="Create new project"
+        title="New project"
         cancelCaption="Cancel"
         acceptCaption="Accept"
         @onCancel="handleCancel"
@@ -13,6 +13,10 @@
             <div class="form-group">
                 <label for="name">Name</label>
                 <input class="form-control" type="text" name="name" placeholder="Enter the name of the new project" />
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" name="description" placeholder="Describe what the project is all about"></textarea>
             </div>
         </form>
     </create-dialog>
