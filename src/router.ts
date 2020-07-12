@@ -12,7 +12,7 @@ export default new VueRouter({
   routes: [
     {
       path: '/',
-      name: 'dashboard',
+      name: 'home',
       redirect: '/dashboard'
     },
     ...dashboardRoutes,
