@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Dashboard from "@/reatomic/dashboard/Dashboard.vue";
 
-import { Projects, projectRoutes } from "@/reatomic/projects"
+import { Projects, projectRoutes } from "@/reatomic/projects";
+import { dashboardRoutes } from "@/reatomic/dashboard";
 
 Vue.use(VueRouter)
 
@@ -15,11 +15,7 @@ export default new VueRouter({
       name: 'dashboard',
       redirect: '/dashboard'
     },
-    {
-      path: '/dashboard',
-      // component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-      component: Dashboard,
-    },
+    ...dashboardRoutes,
     {
       path: "/projects",
       component: Projects,
