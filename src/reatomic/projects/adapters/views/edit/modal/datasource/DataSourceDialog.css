@@ -1,0 +1,5 @@
+/*específico
+*/
+form > .form-group:first-child {
+	width: 50%;
+}

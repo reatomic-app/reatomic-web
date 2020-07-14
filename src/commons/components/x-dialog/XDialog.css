@@ -3,11 +3,8 @@
     height: 100%;
     border: none;
     border-radius: 0.25rem;
-    background-color: #F4F2F5;
+    background-color: var(--primary1);
     color: var(--primary3);
-}
-.modal-content label {
-	font-weight: 500;
 }
 .modal-header {
 	border-bottom: none;
@@ -23,4 +20,19 @@
 .modal-footer {
 	border: none;
 	padding: 1rem 1.5rem 2rem;
+}
+.modal-footer > * {
+	margin: 0;
+}
+.close {
+	color: var(--primary3);
+	opacity: 1;
+	font-weight: 100;
+	font-size: 3rem;
+}
+.close:not(:disabled):not(.disabled):hover, .mailbox-attachment-close:not(:disabled):not(.disabled):hover, .close:not(:disabled):not(.disabled):focus, .mailbox-attachment-close:not(:disabled):not(.disabled):focus {
+	opacity: 1
+}
+.close:focus {
+	outline: 1px var(--primary2) dotted;
 }

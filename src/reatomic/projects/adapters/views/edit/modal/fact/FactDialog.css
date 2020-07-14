@@ -1,0 +1,53 @@
+.fact-label {
+position: relative;
+display: flex;
+justify-content: left;
+align-items: center;
+flex-wrap: wrap;
+padding-left: 0;
+} 
+
+.fact-label .fact-label__item {
+position: relative;
+list-style: none;
+text-align: left;
+}
+
+.fact-label .fact-label__item label {
+position: relative; 
+cursor: pointer;
+margin-right: 1rem;
+}
+.fact-label .fact-label__item label:not(.form-check-label):not(.custom-file-label) {
+	margin-left: 0;
+}
+
+.fact-label .fact-label__item label input[type="checkbox"] {
+position: absolute;
+opacity: 0;
+}
+
+.fact-label .fact-label__item label :checked ~ .icon-box {
+background-color: var(--fact2);
+}
+
+.fact-label .fact-label__item label:checked ~ .icon-box .fa {
+transform: scale(0.95);
+}
+
+
+.fact-label .fact-label__item label .icon-box {
+width: 2.5rem;
+height: 2.5rem;
+background: white;
+display: flex;
+justify-content: center;
+align-items: center;
+border-radius: 100%;
+}
+
+.fact-label .fact-label__item label .icon-box .fa {
+font-size: 1.5rem;
+color: var(--fact3);
+}
+        

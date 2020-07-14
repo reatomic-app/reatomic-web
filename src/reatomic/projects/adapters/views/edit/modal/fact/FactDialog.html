@@ -1,22 +1,40 @@
 <x-dialog :height="468" :width="433" name="create-fact-dialog" title="new fact" accept-caption="add fact">
 	<form>
 		<div class="form-group">
-			<div class="custom-control custom-checkbox">
-				<input type="checkbox" class="custom-control-input" id="gain">
-				<label class="custom-control-label" for="gain"></label>
-			</div>
-			<div class="custom-control custom-checkbox">
-				<input type="checkbox" class="custom-control-input" id="pain">
-				<label class="custom-control-label" for="pain"></label>
-			</div>
-			<div class="custom-control custom-checkbox">
-				<input type="checkbox" class="custom-control-input" id="wish">
-				<label class="custom-control-label" for="wish"></label>
-			</div>
-			<div class="custom-control custom-checkbox">
-				<input type="checkbox" class="custom-control-input" id="quote">
-				<label class="custom-control-label" for="quote"></label>
-			</div>
+			<ul class="fact-label">
+				<li class="fact-label__item">
+					<label for="gain">
+						<input type="checkbox" id="gain">
+						<div class="icon-box">
+							<i class="fa fa-smile" aria-hidden="true"></i>
+						</div>
+					</label>
+				</li>
+				<li class="fact-label__item">
+					<label for="pain">
+						<input type="checkbox" id="pain">
+						<div class="icon-box">
+							<i class="fa fa-frown" aria-hidden="true"></i>
+						</div>
+					</label>
+				</li>
+				<li class="fact-label__item">
+					<label for="wish">
+						<input type="checkbox" id="wish">
+						<div class="icon-box">
+							<i class="fa fa-heart" aria-hidden="true"></i>
+						</div>
+					</label>
+				</li>
+				<li class="fact-label__item">
+					<label for="quote">
+						<input type="checkbox" id="quote">
+						<div class="icon-box">
+							<i class="fa fa-quote-left" aria-hidden="true"></i>
+						</div>
+					</label>
+				</li>
+			</ul>
 		</div>
 		<div class="form-group">
 			<label for="description">Description</label>
@@ -26,7 +44,7 @@
 			<label for="URL">URL</label>
 			<div class="input-group">
 				<div class="input-group-prepend">
-					<div class="input-group-text">linkIcon</div>
+					<div class="input-group-text"><i class="fa fa-link" aria-hidden="true"></i></div>
 				</div>
 				<input type="text" class="form-control" id="URL" placeholder="http://">
 			</div>

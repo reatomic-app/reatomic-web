@@ -1,5 +1,47 @@
 :root {
 	--primary1: #f4f2f5;
 	--primary2: #9D95A6;
-	--primary3: #3C3940;	
+	--primary3: #3C3940;
+	--fact1: #f5f9f9;
+	--fact2: #cde4e4;
+	--fact3: #479696;	
 }
+.btn {
+	border-radius: 0.125rem;
+	font-size: 0.875rem;
+}
+.btn-primary {
+	background-color: var(--primary2);
+	border: none;
+	min-width: 12rem;
+}
+.btn-primary:hover, .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
+	background-color: var(--primary3);
+}
+
+/* Forms */
+label:not(.form-check-label):not(.custom-file-label) {
+	font-weight: 500;
+	font-size: 0.875rem;
+	line-height: 1;
+	margin-bottom: 0.5rem;
+	margin-left: 0.5rem;
+}
+.form-control {
+	padding: 0.375rem 0.5rem;
+	border-color: white;
+	font-size: 0.875rem;
+	color: var(--primary3);
+}
+.form-control:focus {
+	border-color: var(--primary2);
+}
+.input-group-text {
+	background-color: white;
+	border: none;
+	color: var(--primary2);
+	padding: 0rem 0.5rem 0 1rem;
+	line-height: 1;
+	font-size: 0.875rem;
+}
+
