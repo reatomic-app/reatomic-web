@@ -1,17 +1,17 @@
 <modal :name="name" height="auto">
-<div class="modal-content">
-    <div class="modal-header">
-        <h4 class="modal-title">{{ title }}</h4>
-        <button @click="handleClickClose" type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-        </button>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">{{ title }}</h4>
+            <button @click="handleClickClose" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <slot></slot>
+        </div>
+        <div class="modal-footer justify-content-between">
+            <button @click="handleClickCancel" type="button" class="btn btn-default" data-dismiss="modal">{{ cancelCaption }}</button>
+            <button @click="handleClickCreate" type="button" class="btn btn-primary">{{ acceptCaption }}</button>
+        </div>
     </div>
-    <div class="modal-body">
-        <slot></slot>
-    </div>
-    <div class="modal-footer justify-content-between">
-        <button @click="handleClickCancel" type="button" class="btn btn-default" data-dismiss="modal">{{ cancelCaption }}</button>
-        <button @click="handleClickCreate" type="button" class="btn btn-primary">{{ acceptCaption }}</button>
-    </div>
-</div>
 </modal>
