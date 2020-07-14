@@ -1,3 +1,35 @@
-<modal :height="468" :width="433" name="create-fact-dialog">
-        fact
-</modal>
+<x-dialog :height="468" :width="433" name="create-fact-dialog" title="new fact" accept-caption="add fact">
+	<form>
+		<div class="form-group">
+			<div class="custom-control custom-checkbox">
+				<input type="checkbox" class="custom-control-input" id="gain">
+				<label class="custom-control-label" for="gain"></label>
+			</div>
+			<div class="custom-control custom-checkbox">
+				<input type="checkbox" class="custom-control-input" id="pain">
+				<label class="custom-control-label" for="pain"></label>
+			</div>
+			<div class="custom-control custom-checkbox">
+				<input type="checkbox" class="custom-control-input" id="wish">
+				<label class="custom-control-label" for="wish"></label>
+			</div>
+			<div class="custom-control custom-checkbox">
+				<input type="checkbox" class="custom-control-input" id="quote">
+				<label class="custom-control-label" for="quote"></label>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="description">Description</label>
+			<textarea class="form-control" id="description" rows="3"></textarea>
+		</div>
+		<div class="form-group">
+			<label for="URL">URL</label>
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<div class="input-group-text">linkIcon</div>
+				</div>
+				<input type="text" class="form-control" id="URL" placeholder="http://">
+			</div>
+		</div>
+	</form>
+</x-dialog>
