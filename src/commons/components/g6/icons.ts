@@ -18,11 +18,11 @@ const resolveIcon = (key: string): string => {
     }
 }
 
-export const createIcon = (group: Group, width: number, height: number, type: string): void => {
+export const createIcon = (x: number, y: number, group: Group, width: number, height: number, type: string): void => {
     group.addShape("image", {
         attrs: {
-            x: width * 0.1,
-            y: height * 0.1,
+            x: x + (width * 0.1),
+            y: y + (height * 0.1),
             width: 25,
             height: 25,
             img: resolveIcon(type),

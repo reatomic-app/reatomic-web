@@ -12,7 +12,7 @@ const data = {
     {
       id: 'node1',
       x: 0,
-      y: 100,
+      y: 0,
       type: "card",
       cardType: "experiment",
       experimentType: "interview",
@@ -21,15 +21,15 @@ const data = {
     {
       id: 'node2',
       x: 0,
-      y: 200,
+      y: 150,
       type: "card",
       cardType: "fact",
       factType: "QUOTE",
     },  
     {
       id: 'node3',
-      x: 0,
-      y: 400,
+      x: 150,
+      y: 150,
       type: "card",
       cardType: "fact",
       factType: "SAD",
@@ -37,23 +37,23 @@ const data = {
     {
       id: 'node4',
       x: 0,
-      y: 600,
+      y: 300,
       type: "card",      
       cardType: "insight",
       insightType: "medium",
     },      
     {
       id: 'node5',
-      x: 0,
-      y: 700,
+      x: 150,
+      y: 300,
       type: "card",      
       cardType: "insight",
       insightType: "high",
     },          
     {
       id: 'node6',
-      x: 0,
-      y: 800,
+      x: 300,
+      y: 300,
       type: "card",      
       cardType: "insight",
       insightType: "low",
@@ -61,7 +61,7 @@ const data = {
     {
       id: 'node7',
       x: 0,
-      y: 900,
+      y: 550,
       type: "card",
       cardType: "conclusion",
     },                  
@@ -91,20 +91,22 @@ export default class EditProject extends Vue {
                 container: this.projectGraphElement,
                 width: this.projectGraphElement.offsetWidth,
                 height: this.projectGraphElement.offsetHeight,                
-
+                modes: {
+                  default: [
+                   "drag-canvas", "zoom-canvas"
+                  ],
+                },
                 defaultNode: {
                     type: 'card',
-                    size: [120, 40],
+                    size: [160, 232],
                 },
-                layout: {
-                    type: 'dagre',
-                    direction: 'TB',
-                },
+
             });
 
-            this.projectGraph.data(data);
+            this.projectGraph.data(data);            
             this.projectGraph.render();
-            this.projectGraph.fitCenter();
+            //this.projectGraph.zoom(0.9, undefined);
+            // this.projectGraph.fitCenter();
         }
     }
 }

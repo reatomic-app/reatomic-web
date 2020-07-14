@@ -4,11 +4,13 @@ import { IShape } from "@antv/g-base/lib/interfaces";
 import { createIcon } from "./icons";
 
 export const createContentCard = (cfg: ReatomicModel, group: Group, width: number, height: number, colors: CardColors): IShape => {
+    const x = cfg.x || 0;
+    const y = cfg.y || 0;
     // BACKGROUND
     const container = group.addShape('rect', {
         attrs: {
-            x: 0,
-            y: 0,
+            x,
+            y,
             width,
             height,                
             fill: colors.principal,
@@ -21,8 +23,8 @@ export const createContentCard = (cfg: ReatomicModel, group: Group, width: numbe
     // BACKGROUND_DOWN
     group.addShape('rect', {
         attrs: {
-            x: 0,
-            y: 0,
+            x,
+            y,
             width,
             height: height + (height * 0.05),                
             fill: colors.shadow,
@@ -37,8 +39,8 @@ export const createContentCard = (cfg: ReatomicModel, group: Group, width: numbe
     // FOREGROUND
     group.addShape('rect', {
         attrs: {
-            x: width * 0.0075,
-            y: height * 0.0075,
+            x: x + (width * 0.0075),
+            y: y + (height * 0.0075),
             width: width - (width * 0.015),
             height: height - (height * 0.015),                
             fill: "#FFF",
@@ -53,8 +55,8 @@ export const createContentCard = (cfg: ReatomicModel, group: Group, width: numbe
         attrs: {
             text: "A 7 neurologos",
             class: "card-text",
-            x: width * 0.1,
-            y: height * 0.32,
+            x: x + (width * 0.1),
+            y: y + (height * 0.32),
             textAnchor: "middle",
             fontSize: 16,
             textBaseline: 'middle',
@@ -67,8 +69,8 @@ export const createContentCard = (cfg: ReatomicModel, group: Group, width: numbe
         attrs: {
             text: "implicados en el",
             class: "card-text",
-            x: width * 0.1,
-            y: height * 0.385,
+            x: x + (width * 0.1),
+            y: y + (height * 0.385),
             textAnchor: "middle",
             fontSize: 16,
             textBaseline: 'middle',
@@ -81,8 +83,8 @@ export const createContentCard = (cfg: ReatomicModel, group: Group, width: numbe
         attrs: {
             text: "proyecto, con",
             class: "card-text",
-            x: width * 0.1,
-            y: height * 0.45,
+            x: x + (width * 0.1),
+            y: y + (height * 0.45),
             textAnchor: "middle",
             fontSize: 16,
             textBaseline: 'middle',
@@ -95,8 +97,8 @@ export const createContentCard = (cfg: ReatomicModel, group: Group, width: numbe
         attrs: {
             text: "wireframes de apoyo.",
             class: "card-text",
-            x: width * 0.1,
-            y: height * 0.52,
+            x: x + (width * 0.1),
+            y: y + (height * 0.52),
             textAnchor: "middle",
             fontSize: 16,
             textBaseline: 'middle',
@@ -109,8 +111,8 @@ export const createContentCard = (cfg: ReatomicModel, group: Group, width: numbe
         attrs: {
             text: "dfajspianpisjnd adfd",
             class: "card-text",
-            x: width * 0.1,
-            y: height * 0.59,
+            x: x + (width * 0.1),
+            y: y + (height * 0.59),
             textAnchor: "middle",
             fontSize: 16,
             textBaseline: 'middle',
@@ -123,8 +125,8 @@ export const createContentCard = (cfg: ReatomicModel, group: Group, width: numbe
         attrs: {
             text: "dfajspianpisjnd adfd",
             class: "card-text",
-            x: width * 0.1,
-            y: height * 0.66,
+            x: x + (width * 0.1),
+            y: y + (height * 0.66),
             textAnchor: "middle",
             fontSize: 16,
             textBaseline: 'middle',
@@ -137,8 +139,8 @@ export const createContentCard = (cfg: ReatomicModel, group: Group, width: numbe
         attrs: {
             text: "dfajspianpisjnd adfd",
             class: "card-text",
-            x: width * 0.1,
-            y: height * 0.73,
+            x: x + (width * 0.1),
+            y: y + (height * 0.73),
             textAnchor: "middle",
             fontSize: 16,
             textBaseline: 'middle',
@@ -151,8 +153,8 @@ export const createContentCard = (cfg: ReatomicModel, group: Group, width: numbe
         attrs: {
             text: "source",
             class: "card-text",
-            x: width - (width * 0.34),
-            y: height - (height * 0.1),
+            x: x + (width - (width * 0.34)),
+            y: y + (height - (height * 0.1)),
             textAnchor: "middle",
             fontWeight: "bold",
             fontSize: 14,
@@ -167,13 +169,16 @@ export const createContentCard = (cfg: ReatomicModel, group: Group, width: numbe
 };
 
 export const createDataSourceCard = (cfg: ReatomicModel, group: Group, width: number, height: number, colors: CardColors): IShape => {
+    const x = cfg.x || 0;
+    const y = cfg.y || 0;
+
     const container = createContentCard(cfg, group, 200, 260, colors);
 
     group.addShape('text', {
         attrs: {
             text: "Entrevista",
-            x: width * 0.1,
-            y: height * 0.12,
+            x: x + (width * 0.1),
+            y: y + (height * 0.12),
             textAnchor: "middle",
             fontSize: 18,
             fontWeight: "bold",
@@ -186,8 +191,8 @@ export const createDataSourceCard = (cfg: ReatomicModel, group: Group, width: nu
     group.addShape('text', {
         attrs: {
             text: "29/03/2020",
-            x: width * 0.1,
-            y: height * 0.185,
+            x: x + (width * 0.1),
+            y: y + (height * 0.185),
             textAnchor: "middle",
             fontSize: 14,
             fontWeight: "bold",
@@ -213,8 +218,10 @@ interface FactAttrs {
 }
 
 export const createFactCard = (cfg: ReatomicModel, group: Group, width: number, height: number, attrs: FactAttrs): IShape => {
+    const x = cfg.x || 0;
+    const y = cfg.y || 0;
     const container = createContentCard(cfg, group, width, height, attrs.colors);
-    createIcon(group, width, height, attrs.iconType);
+    createIcon(x, y, group, width, height, attrs.iconType);
     return container;
 }
 
@@ -247,6 +254,9 @@ const resolveExperimentCard = (cfg: ReatomicModel, group: Group): any => {
 };
 
 const resolveInsightCard = (cfg: ReatomicModel, group: Group): any => {    
+    const x = cfg.x || 0;
+    const y = cfg.y || 0;
+
     const high = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgd2lkdGg9Ijg4IiBoZWlnaHQ9IjM2IiB2aWV3Qm94PSIwIDAgODggMzYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0wIDBINzBDNzkuOTQxMSAwIDg4IDguMDU4ODggODggMThWMzZIMThDOC4wNTg4NyAzNiAwIDI3Ljk0MTEgMCAxOFYwWiIgZmlsbD0iI0ZERDRFMyIvPgo8L3N2Zz4K";
     const low = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgd2lkdGg9Ijg4IiBoZWlnaHQ9IjM2IiB2aWV3Qm94PSIwIDAgODggMzYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0wIDBINzBDNzkuOTQxMSAwIDg4IDguMDU4ODggODggMThWMzZIMThDOC4wNTg4NyAzNiAwIDI3Ljk0MTEgMCAxOFYwWiIgZmlsbD0iI0ZFRjZENiIvPgo8L3N2Zz4K";
     const medium = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgd2lkdGg9Ijg4IiBoZWlnaHQ9IjM2IiB2aWV3Qm94PSIwIDAgODggMzYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0wIDBINzBDNzkuOTQxMSAwIDg4IDguMDU4ODggODggMThWMzZIMThDOC4wNTg4NyAzNiAwIDI3Ljk0MTEgMCAxOFYwWiIgZmlsbD0iI0ZERUFENCIvPgo8L3N2Zz4K";
@@ -281,8 +291,8 @@ const resolveInsightCard = (cfg: ReatomicModel, group: Group): any => {
     const container = createContentCard(cfg, group, 200, 260, cardColors);
     group.addShape("image", {
         attrs: {
-            x: 200 - 88,
-            y: 0, 
+            x: x + (200 - 88),
+            y, 
             width: 88,
             height: 36,
             img: resolved.image,
@@ -291,8 +301,8 @@ const resolveInsightCard = (cfg: ReatomicModel, group: Group): any => {
 
     group.addShape("text", {
         attrs: {
-            x: 200 - (56 + resolved.text.length),
-            y: 20, 
+            x: x + (200 - (56 + resolved.text.length)),
+            y: y + 20, 
             width: 88,
             height: 36,
             textAnchor: "middle",
