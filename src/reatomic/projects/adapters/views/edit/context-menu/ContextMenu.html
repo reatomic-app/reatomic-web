@@ -1,0 +1,36 @@
+<div>
+<button 
+    @click="toggleContextMenu"
+    class="btn btn-material context-menu-button" 
+    type="button">
+    <i class="fas fa-plus"></i>
+</button>
+<ul 
+    class="context-menu"
+    :class="{visible: showContextMenu}">
+    <li class="item">
+        <span class="title">Data Source</span>
+        <button @click="handleDataSource" class="btn btn-material">
+            <i class="fas fa-bars"></i>
+        </button>
+    </li>
+    <li class="item">
+        <span class="title">Fact</span>
+        <button @click="handleFact" class="btn btn-material">
+            <i class="fas fa-search-plus"></i>
+        </button>
+    </li>
+    <li class="item">
+        <span class="title">Insight</span>
+        <button @click="handleInsight" class="btn btn-material">
+            <i class="fas fa-lightbulb"></i>
+        </button>
+    </li>                        
+    <li class="item">
+        <span class="title">Conclusion</span>
+        <button @click="handleConclusion" class="btn btn-material">
+            <i class="fas fa-list"></i>
+        </button>
+    </li>                                    
+</ul>
+</div>

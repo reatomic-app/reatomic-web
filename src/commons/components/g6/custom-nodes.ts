@@ -3,7 +3,28 @@ import Group from '@antv/g-canvas/lib/group';
 import { IShape } from "@antv/g-base/lib/interfaces";
 import { createIcon } from "./icons";
 
-export const createContentCard = (cfg: ReatomicModel, group: Group, width: number, height: number, colors: CardColors): IShape => {
+const resolveWidth = (dimensions: number | number[] | undefined): number => {
+    return dimensions 
+        ? typeof(dimensions) === "number" 
+        ? dimensions 
+        : dimensions[0]
+        : 0;
+}
+
+const resolveHeight = (dimensions: number | number[] | undefined): number => {
+    return dimensions 
+        ? typeof(dimensions) === "number" 
+        ? dimensions 
+        : dimensions[1]
+        : 0;
+}
+
+export const createContentCard = (cfg: ReatomicModel, group: Group, colors: CardColors): IShape => {
+    const width = resolveWidth(cfg.size);
+    const height = resolveHeight(cfg.size);
+
+    console.log({width, height});
+
     const x = cfg.x || 0;
     const y = cfg.y || 0;
     // BACKGROUND
@@ -168,11 +189,13 @@ export const createContentCard = (cfg: ReatomicModel, group: Group, width: numbe
     return container;
 };
 
-export const createDataSourceCard = (cfg: ReatomicModel, group: Group, width: number, height: number, colors: CardColors): IShape => {
+export const createDataSourceCard = (cfg: ReatomicModel, group: Group, colors: CardColors): IShape => {
     const x = cfg.x || 0;
     const y = cfg.y || 0;
+    const width = resolveWidth(cfg.size);
+    const height = resolveHeight(cfg.size);
 
-    const container = createContentCard(cfg, group, 200, 260, colors);
+    const container = createContentCard(cfg, group, colors);
 
     group.addShape('text', {
         attrs: {
@@ -217,10 +240,13 @@ interface FactAttrs {
     iconType: string;
 }
 
-export const createFactCard = (cfg: ReatomicModel, group: Group, width: number, height: number, attrs: FactAttrs): IShape => {
+export const createFactCard = (cfg: ReatomicModel, group: Group, attrs: FactAttrs): IShape => {
     const x = cfg.x || 0;
     const y = cfg.y || 0;
-    const container = createContentCard(cfg, group, width, height, attrs.colors);
+    const width = resolveWidth(cfg.size);
+    const height = resolveHeight(cfg.size);
+
+    const container = createContentCard(cfg, group, attrs.colors);
     createIcon(x, y, group, width, height, attrs.iconType);
     return container;
 }
@@ -241,7 +267,7 @@ const resolveFactCard = (cfg: ReatomicModel, group: Group): any => {
         iconType: cfg.factType,
     };
 
-    return createFactCard(cfg, group, 200, 260, facts)
+    return createFactCard(cfg, group, facts)
 }
 
 const resolveExperimentCard = (cfg: ReatomicModel, group: Group): any => {
@@ -250,7 +276,7 @@ const resolveExperimentCard = (cfg: ReatomicModel, group: Group): any => {
         shadow: "#F0EEF7",
         text: "#413673"
     };
-    return createDataSourceCard(cfg, group, 200, 260, colors);
+    return createDataSourceCard(cfg, group, colors);
 };
 
 const resolveInsightCard = (cfg: ReatomicModel, group: Group): any => {    
@@ -288,7 +314,7 @@ const resolveInsightCard = (cfg: ReatomicModel, group: Group): any => {
         ? values.low 
         : values.medium;
 
-    const container = createContentCard(cfg, group, 200, 260, cardColors);
+    const container = createContentCard(cfg, group, cardColors);
     group.addShape("image", {
         attrs: {
             x: x + (200 - 88),
@@ -324,7 +350,7 @@ const resolveConclusionCard = (cfg: ReatomicModel, group: Group): any => {
         text: "#FF5345",
     };
 
-    return createContentCard(cfg, group, 200, 260, cardColors);
+    return createContentCard(cfg, group, cardColors);
 };
 
 const resolveCard = (cfg: ReatomicModel, group: Group): any => {

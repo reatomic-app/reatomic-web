@@ -1,7 +1,16 @@
 <div class="container-fluid">
     <div class="row">
-        <div ref="graph" class="graph col-lg-12 col-12">
-            
+        <div ref="graph" class="graph col-lg-12 col-12">            
         </div>
     </div>
+    <context-menu 
+        @onDataSource="handleDataSource"
+        @onFact="handleFact"
+        @onInsight="handleInsight"
+        @onConclusion="handleConclusion"
+    />
+    <data-source-dialog />
+    <conclusion-dialog />
+    <fact-dialog />
+    <insight-dialog />
 </div>

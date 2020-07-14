@@ -5,6 +5,11 @@
 import { Vue, Component, Prop, Ref } from "vue-property-decorator";
 import G6, { Graph } from "@antv/g6";
 import { CardNode } from "@/commons/components/g6/custom-nodes";
+import ContextMenu from "./edit/context-menu/ContextMenu.vue";
+import DataSourceDialog from "./edit/modal/datasource/DataSourceDialog.vue";
+import ConclusionDialog from "./edit/modal/conclusion/ConclusionDialog.vue";
+import FactDialog from "./edit/modal/fact/FactDialog.vue";
+import InsightDialog from "./edit/modal/insight/InsightDialog.vue";
 
 const data = {
   // The array of nodes
@@ -61,7 +66,7 @@ const data = {
     {
       id: 'node7',
       x: 0,
-      y: 550,
+      y: 450,
       type: "card",
       cardType: "conclusion",
     },                  
@@ -72,8 +77,16 @@ const data = {
   ],
 };
 
-@Component
-export default class EditProject extends Vue {
+@Component({
+  components: {
+    ContextMenu,
+    DataSourceDialog,
+    ConclusionDialog,
+    InsightDialog,
+    FactDialog,
+  }
+})
+export default class EditProject extends Vue {    
 
     @Prop(String)
     public id!: string;
@@ -82,6 +95,7 @@ export default class EditProject extends Vue {
     public projectGraphElement!: HTMLElement;
 
     public projectGraph!: Graph;
+    
 
     public mounted() {
         if (this.projectGraphElement) {
@@ -98,7 +112,7 @@ export default class EditProject extends Vue {
                 },
                 defaultNode: {
                     type: 'card',
-                    size: [160, 232],
+                    size: [200, 260],
                 },
 
             });
@@ -106,8 +120,25 @@ export default class EditProject extends Vue {
             this.projectGraph.data(data);            
             this.projectGraph.render();
             //this.projectGraph.zoom(0.9, undefined);
-            // this.projectGraph.fitCenter();
+            this.projectGraph.fitView();
+            this.projectGraph.moveTo(0,0);
         }
+    }
+
+    public handleDataSource() {
+      this.$modal.show("create-datasource-dialog");
+    }
+
+    public handleFact() {
+      this.$modal.show("create-fact-dialog");
+    }
+
+    public handleInsight() {
+      this.$modal.show("create-insight-dialog");            
+    }
+
+    public handleConclusion() {
+      this.$modal.show("create-conclusion-dialog");                  
     }
 }
 </script>
