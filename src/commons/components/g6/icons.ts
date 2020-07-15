@@ -10,9 +10,9 @@ const icons = {
 
 const resolveIcon = (key: string): string => {
     switch(key) {
-        case "HEART": return icons.HEART;
-        case "SAD": return icons.SAD;
-        case "QUOTE": return icons.QUOTE;
+        case "wish": return icons.HEART;
+        case "pain": return icons.SAD;
+        case "quote": return icons.QUOTE;
         default:
             return icons.HAPPY;
     }

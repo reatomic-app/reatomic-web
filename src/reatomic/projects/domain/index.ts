@@ -67,6 +67,10 @@ export interface Card extends NodeConfig {
     width: number;
     height: number;
     cardType: string;
+    factType?: string;
+    dataSourceType?: string;
+    source?: string;
+    date?: Date;
 }
 
 export interface DataSourceCard extends Card {
