@@ -2,7 +2,7 @@
 <style src="./FactDialog.css" scoped></style>
 <script lang="ts">
 
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component, Emit } from "vue-property-decorator";
 import XDialog from "@/commons/components/x-dialog/XDialog.vue";
 
 @Component({
@@ -11,6 +11,26 @@ import XDialog from "@/commons/components/x-dialog/XDialog.vue";
     }
 })
 export default class FactDialog extends Vue {
+    public input = {
+        description: "",
+        url: "",
+        selectedType: [] as string[],
+    }
 
+    public handleSelectedType(evt: MouseEvent) {        
+        const input = evt.target as HTMLInputElement;
+        const value = input.value;
+
+        this.input.selectedType = input.checked ? [value] : [];
+    }
+
+    @Emit("onSubmit")
+    public handleSubmitClick() {
+        return {
+            type: this.input.selectedType.find((val: string) => val !== undefined),
+            description: this.input.description,
+            url: this.input.url,
+        }
+    }
 }
 </script>

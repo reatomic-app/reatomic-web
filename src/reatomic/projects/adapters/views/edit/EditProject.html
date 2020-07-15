@@ -9,8 +9,8 @@
         @onInsight="handleInsight"
         @onConclusion="handleConclusion"
     />    
-    <data-source-dialog />
-    <conclusion-dialog />
-    <fact-dialog />
-    <insight-dialog/>    
+    <data-source-dialog @onSubmit="handleDataSourceSubmit"/>
+    <conclusion-dialog @onSubmit="handleConclusionSubmit" />
+    <fact-dialog @onSubmit="handleFactSubmit" />
+    <insight-dialog @onSubmit="handleInsightSubmit" />    
 </div>

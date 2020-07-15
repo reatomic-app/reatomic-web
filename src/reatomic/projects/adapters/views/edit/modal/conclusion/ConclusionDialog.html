@@ -1,8 +1,19 @@
-<x-dialog :height="468" :width="433" name="create-conclusion-dialog" title="new conclusion" accept-caption="add conclusion">
+<x-dialog 
+	:height="468" 
+	:width="433" 
+	@onCreate="handleSubmitClick"
+	name="create-conclusion-dialog" 
+	title="new conclusion" 
+	accept-caption="add conclusion">
 	<form>
 		<div class="form-group">
 			<label for="description">Description</label>
-			<textarea class="form-control" id="description" maxlength="120" rows="3"></textarea>
+			<textarea 
+				v-model="input.description"
+				class="form-control" 
+				id="description" 
+				maxlength="120" 
+				rows="3"></textarea>
 		</div>
 		<div class="form-group">
 			<label for="URL">URL</label>
@@ -10,7 +21,12 @@
 				<div class="input-group-prepend">
 					<div class="input-group-text"><i class="fa fa-link" aria-hidden="true"></i></div>
 				</div>
-				<input type="text" class="form-control" id="URL" placeholder="http://">
+				<input 
+					v-model="input.url"
+					type="text" 
+					class="form-control" 
+					id="URL" 
+					placeholder="http://">
 			</div>
 		</div>
 	</form>

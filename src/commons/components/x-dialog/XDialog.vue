@@ -21,7 +21,7 @@ export default class XDialog extends Vue {
 
     @Emit("onCreate")
     public handleClickCreate() {
-        console.log("create in Dialog");
+        this.$modal.hide(this.name);
     }
 
     @Emit("onCancel")

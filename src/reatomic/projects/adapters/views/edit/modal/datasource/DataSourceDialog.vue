@@ -2,7 +2,7 @@
 <style src="./DataSourceDialog.css" scoped></style>
 <script lang="ts">
 
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component, Emit } from "vue-property-decorator";
 import XDialog from "@/commons/components/x-dialog/XDialog.vue";
 
 @Component({
@@ -11,6 +11,16 @@ import XDialog from "@/commons/components/x-dialog/XDialog.vue";
     }
 })
 export default class DataSourceDialog extends Vue {
+    public input = {
+        type: "",
+        description: "",
+        date: new Date(),
+        url: "",
+    };
 
+    @Emit("onSubmit")
+    public handleSubmitClick() {
+        return this.input;
+    }
 }
 </script>

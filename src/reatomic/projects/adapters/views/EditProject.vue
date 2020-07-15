@@ -10,6 +10,7 @@ import DataSourceDialog from "./edit/modal/datasource/DataSourceDialog.vue";
 import ConclusionDialog from "./edit/modal/conclusion/ConclusionDialog.vue";
 import FactDialog from "./edit/modal/fact/FactDialog.vue";
 import InsightDialog from "./edit/modal/insight/InsightDialog.vue";
+import { FactInput, DataSourceInput, InsightInput, ConclusionInput } from '../../domain';
 
 const data = {
   // The array of nodes
@@ -129,16 +130,32 @@ export default class EditProject extends Vue {
       this.$modal.show("create-datasource-dialog");
     }
 
+    public handleDataSourceSubmit(input: DataSourceInput) {
+      console.log("data source input: ", input);
+    }
+
     public handleFact() {
       this.$modal.show("create-fact-dialog");
+    }
+
+    public handleFactSubmit(input: FactInput) {
+      console.log("fact input: ", input);
     }
 
     public handleInsight() {
       this.$modal.show("create-insight-dialog");            
     }
 
+    public handleInsightSubmit(input: InsightInput) {
+      console.log("insight input: ", input);
+    }
+
     public handleConclusion() {
       this.$modal.show("create-conclusion-dialog");                  
+    }
+
+    public handleConclusionSubmit(input: ConclusionInput) {
+      console.log("conclusion input: ", input);
     }
 }
 </script>
