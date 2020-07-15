@@ -1,14 +1,16 @@
-.context-menu-container {
-    position: absolute;
+.context-menu-overlay {
+    position: fixed;
+    box-sizing: border-box;
     top: 0;
-    bottom: 0;
     left: 0;
-    right: 0;
-    background-color: rgba(255,255,255,0);
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(255,255,255,0.85);
+    z-index: -1;
     transition: 0.3s;
 }
-.context-menu-container.visible {
-    background-color: rgba(255,255,255,0.8);
+.context-menu-container.visible .context-menu-overlay {
+    z-index: 0;
 }
 .btn-material {
     border-radius: 100%;    
@@ -27,7 +29,11 @@
     height: 3.75rem;    
     position: absolute;
     right: 8rem;    
-    width: 3.75rem; 
+    width: 3.75rem;
+    z-index: 2;
+}
+.context-menu-button:hover {
+    background-color: #231E29;
 }
 .context-menu-button img {
     height: 1.5rem;
@@ -49,6 +55,7 @@
     transition: 0.1s;
     transform-origin: 170px 250px;
     opacity: 0;
+    z-index: 2;
 }
 .context-menu.visible {
   transform: scale(1);

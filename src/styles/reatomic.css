@@ -23,12 +23,12 @@ body {
 	font-size: 0.875rem;
 }
 .btn-primary {
-	background-color: var(--primary2);
+	background-color: var(--primary3);
 	border: none;
 	min-width: 12rem;
 }
 .btn-primary:hover, .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
-	background-color: var(--primary3);
+	background-color: #231E29;
 }
 
 /* Forms */
