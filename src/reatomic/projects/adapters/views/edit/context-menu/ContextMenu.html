@@ -3,7 +3,7 @@
     @click="toggleContextMenu"
     class="btn btn-material context-menu-button" 
     type="button">
-    <i class="fas fa-plus"></i>
+    <img src="@/assets/img/icon-add.svg" alt="new item" />
 </button>
 <ul 
     class="context-menu"
@@ -11,25 +11,25 @@
     <li class="item">
         <span class="title">Data Source</span>
         <button @click="handleDataSource" class="btn btn-material">
-            <i class="fas fa-bars"></i>
+            <img src="@/assets/img/icon-source.svg" alt="new data source" />
         </button>
     </li>
     <li class="item">
         <span class="title">Fact</span>
         <button @click="handleFact" class="btn btn-material">
-            <i class="fas fa-search-plus"></i>
+            <img src="@/assets/img/icon-fact.svg" alt="new fact" />
         </button>
     </li>
     <li class="item">
         <span class="title">Insight</span>
         <button @click="handleInsight" class="btn btn-material">
-            <i class="fas fa-lightbulb"></i>
+            <img src="@/assets/img/icon-insight.svg" alt="new insight" />
         </button>
     </li>                        
     <li class="item">
         <span class="title">Conclusion</span>
         <button @click="handleConclusion" class="btn btn-material">
-            <i class="fas fa-list"></i>
+            <img src="@/assets/img/icon-conclusion.svg" alt="new conclusion" />
         </button>
     </li>                                    
 </ul>

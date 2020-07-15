@@ -1,7 +1,9 @@
 <div class="container-fluid">
     <div class="row">
-        <div ref="graph" class="graph col-lg-12 col-12">            
-        </div>
+        <g6-graph 
+            class="col-lg-12 col-12" 
+            :nodes="nodes"
+            :edges="edges" />
     </div>
     <context-menu 
         @onDataSource="handleDataSource"
