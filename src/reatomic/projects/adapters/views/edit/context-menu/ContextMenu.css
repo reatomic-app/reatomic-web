@@ -2,33 +2,89 @@
     border-radius: 100%;    
     background-color: #3C3940;    
     color: #FFF;
-    height: 60px;
-    width: 60px;
+    height: 2.5rem;
+    width: 2.5rem;
+    box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.25);
+    padding: 0;
 }
-
+.btn-material img {
+    height: 1.125rem;
+}
 .context-menu-button {
     bottom: 20rem;    
-    height: 60px;    
+    height: 3.75rem;    
     position: absolute;
     right: 8rem;    
-    width: 60px;
+    width: 3.75rem; 
+}
+.context-menu-button img {
+    height: 1.5rem;
+}
+.context-menu-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255,255,255,0);
+    transition: 0.3s;
+}
+.context-menu-container.visible {
+    background-color: rgba(255,255,255,0.8);
+}
+
+.context-menu-container .context-menu-button img {
+    transition: 0.5s;
+}
+.context-menu-container.visible .context-menu-button img {
+    transform: rotate(45deg);
 }
 
 .context-menu {
     position: absolute;
-    bottom: 25rem;
+    bottom: 24rem;
     visibility: hidden;
     list-style: none;
-    right: 8rem;
+    right: 8.5rem;
     text-align: right;
+    transform: scale(0.8);
+    transition: 0.1s;
+    transform-origin: 170px 250px;
+    opacity: 0;
+
+}
+.context-menu.visible {
+  transform: scale(1);
+  opacity: 1;
 }
 
 .context-menu > .item {
+    margin-bottom: 0.5rem;
+}
+.context-menu.visible > .item {
     margin-bottom: 1rem;
 }
 
 .context-menu > .item > .title {
     background-color: white;
-    margin-right: 10px;
-    padding: .5rem;    
+    margin-right: 1rem;
+    padding: 0.5rem 1rem;   
+    color: var(--primary3); 
+    font-size: 0.875rem;
+    min-width: 100px;
+}
+.btn-material:hover {
+    box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.25);
+}
+.item-ds .btn-material:hover {
+    background-color: var(--source3);
+}
+.item-f .btn-material:hover {
+    background-color: var(--fact3);
+}
+.item-i .btn-material:hover {
+    background-color: var(--insight3);
+}
+.item-c .btn-material:hover {
+    background-color: var(--conclusion3);
 }

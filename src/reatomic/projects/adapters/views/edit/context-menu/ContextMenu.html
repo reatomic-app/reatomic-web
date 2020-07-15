@@ -1,36 +1,36 @@
-<div>
-<button 
-    @click="toggleContextMenu"
-    class="btn btn-material context-menu-button" 
-    type="button">
-    <img src="@/assets/img/icon-add.svg" alt="new item" />
-</button>
-<ul 
-    class="context-menu"
-    :class="{visible: showContextMenu}">
-    <li class="item">
-        <span class="title">Data Source</span>
-        <button @click="handleDataSource" class="btn btn-material">
-            <img src="@/assets/img/icon-source.svg" alt="new data source" />
-        </button>
-    </li>
-    <li class="item">
-        <span class="title">Fact</span>
-        <button @click="handleFact" class="btn btn-material">
-            <img src="@/assets/img/icon-fact.svg" alt="new fact" />
-        </button>
-    </li>
-    <li class="item">
-        <span class="title">Insight</span>
-        <button @click="handleInsight" class="btn btn-material">
-            <img src="@/assets/img/icon-insight.svg" alt="new insight" />
-        </button>
-    </li>                        
-    <li class="item">
-        <span class="title">Conclusion</span>
-        <button @click="handleConclusion" class="btn btn-material">
-            <img src="@/assets/img/icon-conclusion.svg" alt="new conclusion" />
-        </button>
-    </li>                                    
-</ul>
+<div :class="['context-menu-container', {visible: showContextMenu}]">
+    <button 
+        @click="toggleContextMenu"
+        class="btn btn-material context-menu-button"
+        type="button">
+        <img src="@/assets/img/icon-add.svg" alt="new item" />
+    </button>
+    <ul 
+        class="context-menu"
+        :class="{visible: showContextMenu}">
+        <li class="item item-ds">
+            <span class="title">data source</span>
+            <button @click="handleDataSource" class="btn btn-material">
+                <img src="@/assets/img/icon-source.svg" alt="new data source" />
+            </button>
+        </li>
+        <li class="item item-f">
+            <span class="title">fact</span>
+            <button @click="handleFact" class="btn btn-material">
+                <img src="@/assets/img/icon-fact.svg" alt="new fact" />
+            </button>
+        </li>
+        <li class="item item-i">
+            <span class="title">insight</span>
+            <button @click="handleInsight" class="btn btn-material">
+                <img src="@/assets/img/icon-insight.svg" alt="new insight" />
+            </button>
+        </li>                        
+        <li class="item item-c">
+            <span class="title">conclusion</span>
+            <button @click="handleConclusion" class="btn btn-material">
+                <img src="@/assets/img/icon-conclusion.svg" alt="new conclusion" />
+            </button>
+        </li>                                    
+    </ul>
 </div>

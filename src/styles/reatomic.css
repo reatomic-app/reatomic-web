@@ -4,7 +4,16 @@
 	--primary3: #3C3940;
 	--fact1: #f5f9f9;
 	--fact2: #cde4e4;
-	--fact3: #479696;	
+	--fact3: #479696;
+	--source1: #F0EEF7;
+	--source2: #C4BFD9;
+	--source3: #413673;
+	--conclusion1: #FDF2F3;
+	--conclusion2: #FFE0DB;
+	--conclusion3: #FF5345;
+	--insight1: #FDF9FB;
+	--insight2: #F7EBF2;
+	--insight3: #C93F8D;	
 }
 body {
 	font-family: 'Cabin', sans-serif;
@@ -70,3 +79,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   color: var(--primary2);
 }
 
+
+.vm--container .vm--overlay {
+	background-color: rgba(255,255,255,0.85);
+}
+.vm--container .vm--modal {
+	box-shadow: none;
+}

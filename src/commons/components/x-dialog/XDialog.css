@@ -1,4 +1,7 @@
 
+.vm--modal {
+	background-color: red;
+}
 .modal-content {
     height: 100%;
     border: none;
