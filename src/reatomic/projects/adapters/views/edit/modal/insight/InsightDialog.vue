@@ -18,7 +18,9 @@ export default class InsightDialog extends Vue {
 
     @Emit("onSubmit")
     public handleSubmitClick() {
-        return this.input;
+        const toReturn = {...this.input,}
+        this.input = {description: "", url: ""};
+        return toReturn;
     }
 }
 </script>

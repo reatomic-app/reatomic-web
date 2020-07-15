@@ -20,7 +20,14 @@ export default class DataSourceDialog extends Vue {
 
     @Emit("onSubmit")
     public handleSubmitClick() {
-        return this.input;
+        const toReturn = {...this.input,}
+        this.input = {
+          type: "",
+          date: new Date(),
+          description: "",
+          url: ""
+        };
+        return toReturn;
     }
 }
 </script>

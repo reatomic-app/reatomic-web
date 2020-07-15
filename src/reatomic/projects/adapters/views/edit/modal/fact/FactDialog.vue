@@ -17,7 +17,7 @@ export default class FactDialog extends Vue {
         selectedType: [] as string[],
     }
 
-    public handleSelectedType(evt: MouseEvent) {        
+    public handleSelectedType(evt: MouseEvent) {
         const input = evt.target as HTMLInputElement;
         const value = input.value;
 
@@ -26,11 +26,17 @@ export default class FactDialog extends Vue {
 
     @Emit("onSubmit")
     public handleSubmitClick() {
-        return {
-            type: this.input.selectedType.find((val: string) => val !== undefined),
+        const toReturn = {
+          type: this.input.selectedType.find((val: string) => val !== undefined),
             description: this.input.description,
             url: this.input.url,
         }
+        this.input = {
+          selectedType: [],
+          description: "",
+          url: ""
+        };
+        return toReturn;
     }
 }
 </script>
