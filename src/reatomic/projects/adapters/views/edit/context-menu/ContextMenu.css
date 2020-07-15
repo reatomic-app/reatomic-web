@@ -1,3 +1,15 @@
+.context-menu-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255,255,255,0);
+    transition: 0.3s;
+}
+.context-menu-container.visible {
+    background-color: rgba(255,255,255,0.8);
+}
 .btn-material {
     border-radius: 100%;    
     background-color: #3C3940;    
@@ -11,7 +23,7 @@
     height: 1.125rem;
 }
 .context-menu-button {
-    bottom: 20rem;    
+    bottom: 18rem;    
     height: 3.75rem;    
     position: absolute;
     right: 8rem;    
@@ -20,29 +32,15 @@
 .context-menu-button img {
     height: 1.5rem;
 }
-.context-menu-container {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(255,255,255,0);
-    transition: 0.3s;
-}
-.context-menu-container.visible {
-    background-color: rgba(255,255,255,0.8);
-}
-
 .context-menu-container .context-menu-button img {
     transition: 0.5s;
 }
 .context-menu-container.visible .context-menu-button img {
     transform: rotate(45deg);
 }
-
 .context-menu {
     position: absolute;
-    bottom: 24rem;
+    bottom: 22rem;
     visibility: hidden;
     list-style: none;
     right: 8.5rem;
@@ -51,7 +49,6 @@
     transition: 0.1s;
     transform-origin: 170px 250px;
     opacity: 0;
-
 }
 .context-menu.visible {
   transform: scale(1);
@@ -64,7 +61,6 @@
 .context-menu.visible > .item {
     margin-bottom: 1rem;
 }
-
 .context-menu > .item > .title {
     background-color: white;
     margin-right: 1rem;
