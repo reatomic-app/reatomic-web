@@ -4,17 +4,17 @@ import { IShape } from "@antv/g-base/lib/interfaces";
 import { createIcon } from "./icons";
 
 const resolveWidth = (dimensions: number | number[] | undefined): number => {
-    return dimensions 
-        ? typeof(dimensions) === "number" 
-        ? dimensions 
+    return dimensions
+        ? typeof(dimensions) === "number"
+        ? dimensions
         : dimensions[0]
         : 0;
 }
 
 const resolveHeight = (dimensions: number | number[] | undefined): number => {
-    return dimensions 
-        ? typeof(dimensions) === "number" 
-        ? dimensions 
+    return dimensions
+        ? typeof(dimensions) === "number"
+        ? dimensions
         : dimensions[1]
         : 0;
 }
@@ -31,27 +31,25 @@ interface TextLines {
 
 // inspired by https://j11y.io/snippets/wordwrap-for-javascript/
 const convertTextToLines = (text: string, width = 20): TextLines => {
-    if (!text) { 
+    if (!text) {
         return {
             line1: "", line2: "", line3: "", line4: "", line5: "", line6: "", line7: ""
-        }; 
+        };
     }
- 
+
     /* eslint-disable no-useless-escape */
     const regex = '.{1,' +width+ '}(\s|$)' + '|.{' +width+ '}|.+$';
     /* eslint-enable no-useless-escape */
     const found = text.match(RegExp(regex, 'g'));
 
-    console.log("text: ", text);
-    console.log("found: ", found);
     return {
-        line1: found && found.length >= 1 ? found[0] : "",
-        line2: found && found.length >= 2 ? found[1] : "",
-        line3: found && found.length >= 3 ? found[2] : "",
-        line4: found && found.length >= 4 ? found[3] : "",
-        line5: found && found.length >= 5 ? found[4] : "",
-        line6: found && found.length >= 6 ? found[5] : "",
-        line7: found && found.length >= 7 ? found[6] : "",
+        line1: found && found.length >= 1 ? found[0].trim() : "",
+        line2: found && found.length >= 2 ? found[1].trim() : "",
+        line3: found && found.length >= 3 ? found[2].trim() : "",
+        line4: found && found.length >= 4 ? found[3].trim() : "",
+        line5: found && found.length >= 5 ? found[4].trim() : "",
+        line6: found && found.length >= 6 ? found[5].trim() : "",
+        line7: found && found.length >= 7 ? found[6].trim() : "",
     }
 };
 
@@ -61,150 +59,124 @@ export const createContentCard = (cfg: ReatomicModel, group: Group, colors: Card
     const x = cfg.x || 0;
     const y = cfg.y || 0;
     const textLines: TextLines = convertTextToLines(cfg.description);
-    
+    const commonTextAttrs = {
+        class: "card-text",
+        textAnchor: "middle",
+        fontSize: 16,
+        fontFamily: "Cabin",
+        textBaseline: 'middle',
+        fill: colors.text,
+        cursor: 'pointer',
+    };
+
     // BACKGROUND
     const container = group.addShape('rect', {
         attrs: {
             x,
             y,
             width,
-            height,                
+            height,
             fill: colors.principal,
             stroke: 0,
             radius: 20,
-        },            
+        },
         name: "card",
         draggable: true
-    });  
+    });
     // BACKGROUND_DOWN
     group.addShape('rect', {
         attrs: {
             x,
             y,
             width,
-            height: height + (height * 0.05),                
+            height: height + (height * 0.05),
             fill: colors.shadow,
             // "rgba(196, 191, 217, 0.5)"
             stroke: 0,
             radius: 20,
         },
-        
+
         name: "card",
         draggable: true
-    });              
+    });
     // FOREGROUND
     group.addShape('rect', {
         attrs: {
             x: x + (width * 0.0075),
             y: y + (height * 0.0075),
             width: width - (width * 0.015),
-            height: height - (height * 0.015),                
+            height: height - (height * 0.015),
             fill: "#FFF",
             stroke: 0,
             radius: 20,
         },
-        
+
         name: "card",
         draggable: true
-    });  
+    });
     group.addShape('text', {
         attrs: {
             text: textLines.line1,
-            class: "card-text",
             x: x + (width * 0.1),
             y: y + (height * 0.32),
-            textAnchor: "middle",
-            fontSize: 16,
-            textBaseline: 'middle',
-            fill: colors.text,
-            cursor: 'pointer',
+            ...commonTextAttrs,
           },
           name: 'text-line-1',
-    });        
+    });
     group.addShape('text', {
         attrs: {
             text: textLines.line2,
-            class: "card-text",
             x: x + (width * 0.1),
             y: y + (height * 0.385),
-            textAnchor: "middle",
-            fontSize: 16,
-            textBaseline: 'middle',
-            fill: colors.text,
-            cursor: 'pointer',
+            ...commonTextAttrs,
           },
           name: 'text-line-2',
-    });        
+    });
     group.addShape('text', {
         attrs: {
             text: textLines.line3,
-            class: "card-text",
             x: x + (width * 0.1),
             y: y + (height * 0.45),
-            textAnchor: "middle",
-            fontSize: 16,
-            textBaseline: 'middle',
-            fill: colors.text,
-            cursor: 'pointer',
+            ...commonTextAttrs,
           },
           name: 'text-line-3',
-    });                
+    });
     group.addShape('text', {
         attrs: {
             text: textLines.line4,
-            class: "card-text",
             x: x + (width * 0.1),
             y: y + (height * 0.52),
-            textAnchor: "middle",
-            fontSize: 16,
-            textBaseline: 'middle',
-            fill: colors.text,
-            cursor: 'pointer',
+            ...commonTextAttrs,
           },
           name: 'text-line-4',
-    });        
+    });
     group.addShape('text', {
         attrs: {
             text: textLines.line5,
-            class: "card-text",
             x: x + (width * 0.1),
             y: y + (height * 0.59),
-            textAnchor: "middle",
-            fontSize: 16,
-            textBaseline: 'middle',
-            fill: colors.text,
-            cursor: 'pointer',
+            ...commonTextAttrs,
           },
           name: 'text-line-5',
-    });            
+    });
     group.addShape('text', {
         attrs: {
             text: textLines.line6,
-            class: "card-text",
             x: x + (width * 0.1),
             y: y + (height * 0.66),
-            textAnchor: "middle",
-            fontSize: 16,
-            textBaseline: 'middle',
-            fill: colors.text,
-            cursor: 'pointer',
+            ...commonTextAttrs,
           },
           name: 'text-line-6',
-    });            
+    });
     group.addShape('text', {
         attrs: {
             text: textLines.line7,
-            class: "card-text",
             x: x + (width * 0.1),
             y: y + (height * 0.73),
-            textAnchor: "middle",
-            fontSize: 16,
-            textBaseline: 'middle',
-            fill: colors.text,
-            cursor: 'pointer',
+            ...commonTextAttrs,
           },
           name: 'text-line-7',
-    });                    
+    });
     group.addShape('text', {
         attrs: {
             text: "source",
@@ -214,12 +186,13 @@ export const createContentCard = (cfg: ReatomicModel, group: Group, colors: Card
             textAnchor: "middle",
             fontWeight: "bold",
             fontSize: 14,
+            fontFamily: "Cabin",
             textBaseline: 'middle',
             fill: colors.text,
             cursor: 'pointer',
           },
           name: 'source',
-    });           
+    });
 
     return container;
 };
@@ -245,7 +218,7 @@ export const createDataSourceCard = (cfg: ReatomicModel, group: Group, colors: C
             cursor: 'pointer',
           },
           name: 'ip-text-shape',
-    });                
+    });
     group.addShape('text', {
         attrs: {
             text: "29/03/2020",
@@ -259,7 +232,7 @@ export const createDataSourceCard = (cfg: ReatomicModel, group: Group, colors: C
             cursor: 'pointer',
           },
           name: 'ip-text-shape',
-    });                        
+    });
 
     return container;
 }
@@ -315,7 +288,7 @@ const resolveExperimentCard = (cfg: ReatomicModel, group: Group): any => {
     return createDataSourceCard(cfg, group, colors);
 };
 
-const resolveInsightCard = (cfg: ReatomicModel, group: Group): any => {    
+const resolveInsightCard = (cfg: ReatomicModel, group: Group): any => {
     const x = cfg.x || 0;
     const y = cfg.y || 0;
 
@@ -344,17 +317,17 @@ const resolveInsightCard = (cfg: ReatomicModel, group: Group): any => {
         }
     }
 
-    const resolved = cfg.insightType === "high" 
-        ? values.high 
+    const resolved = cfg.insightType === "high"
+        ? values.high
         : cfg.insightType === "low"
-        ? values.low 
+        ? values.low
         : values.medium;
 
     const container = createContentCard(cfg, group, cardColors);
     group.addShape("image", {
         attrs: {
             x: x + (200 - 88),
-            y, 
+            y,
             width: 88,
             height: 36,
             img: resolved.image,
@@ -364,18 +337,18 @@ const resolveInsightCard = (cfg: ReatomicModel, group: Group): any => {
     group.addShape("text", {
         attrs: {
             x: x + (200 - (56 + resolved.text.length)),
-            y: y + 20, 
+            y: y + 20,
             width: 88,
             height: 36,
             textAnchor: "middle",
             fontSize: 12,
             fontWeight: "normal",
             textBaseline: 'middle',
-            fill: '#F60057',            
+            fill: '#F60057',
             text: resolved.text,
         }
-    });    
-    
+    });
+
     return container;
 };
 
@@ -394,13 +367,13 @@ const resolveCard = (cfg: ReatomicModel, group: Group): any => {
         case "fact": return resolveFactCard(cfg, group);
         case "insight": return resolveInsightCard(cfg, group);
         case "conclusion": return resolveConclusionCard(cfg, group);
-        default: 
+        default:
             return resolveExperimentCard(cfg, group);
     }
 }
 
 export const CardNode: any = {
-    draw: (cfg: ReatomicModel, group: Group) => {   
+    draw: (cfg: ReatomicModel, group: Group) => {
         console.log("cfg: ", cfg);
         return resolveCard(cfg, group);
     },
