@@ -6,6 +6,9 @@
 	--fact2: #cde4e4;
 	--fact3: #479696;	
 }
+body {
+	font-family: 'Cabin', sans-serif;
+}
 .btn {
 	border-radius: 0.125rem;
 	font-size: 0.875rem;
@@ -46,6 +49,7 @@ label:not(.form-check-label):not(.custom-file-label) {
 }
 input[type="date"] {
 	padding-right: 0;
+	position: relative;
 }
 input[type="date"]::-webkit-calendar-picker-indicator {
     opacity: 0;
