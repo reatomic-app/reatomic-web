@@ -12,7 +12,7 @@
 					<label for="gain">
 						<input @click="handleSelectedType" v-model="input.selectedType" value="gain" name="type" type="checkbox" id="gain">
 						<div class="icon-box">
-							<i class="fa fa-smile" aria-hidden="true"></i>
+            				<img src="@/assets/img/icon-gain.svg" alt="is a gain" />
 						</div>
 					</label>
 				</li>
@@ -20,7 +20,7 @@
 					<label for="pain">
 						<input @click="handleSelectedType" v-model="input.selectedType" value="pain" name="type" type="checkbox" id="pain">
 						<div class="icon-box">
-							<i class="fa fa-frown" aria-hidden="true"></i>
+            				<img src="@/assets/img/icon-pain.svg" alt="is a pain" />
 						</div>
 					</label>
 				</li>
@@ -28,7 +28,7 @@
 					<label for="wish">
 						<input @click="handleSelectedType" v-model="input.selectedType" value="wish" name="type" type="checkbox" id="wish">
 						<div class="icon-box">
-							<i class="fa fa-heart" aria-hidden="true"></i>
+            				<img src="@/assets/img/icon-wish.svg" alt="is a wish" />
 						</div>
 					</label>
 				</li>
@@ -36,7 +36,7 @@
 					<label for="quote">
 						<input @click="handleSelectedType" v-model="input.selectedType" value="quote" name="type" type="checkbox" id="quote">
 						<div class="icon-box">
-							<i class="fa fa-quote-left" aria-hidden="true"></i>
+            				<img src="@/assets/img/icon-quote.svg" alt="is a quote" />
 						</div>
 					</label>
 				</li>
@@ -50,7 +50,7 @@
 			<label for="URL">URL</label>
 			<div class="input-group">
 				<div class="input-group-prepend">
-					<div class="input-group-text"><i class="fa fa-link" aria-hidden="true"></i></div>
+					<div class="input-group-text"><img src="@/assets/img/icon-link.svg" alt="source" /></div>
 				</div>
 				<input type="text" class="form-control" v-model="input.url" name="url" id="URL" placeholder="http://">
 			</div>

@@ -40,8 +40,29 @@ label:not(.form-check-label):not(.custom-file-label) {
 	background-color: white;
 	border: none;
 	color: var(--primary2);
-	padding: 0rem 0.5rem 0 1rem;
+	padding: 0rem 0.25rem 0 0.5rem;
 	line-height: 1;
 	font-size: 0.875rem;
+}
+input[type="date"] {
+	padding-right: 0;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    background: transparent;
+    width: 15px;
+    height: 20px;
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--primary2);
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: var(--primary2);
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: var(--primary2);
 }
 
