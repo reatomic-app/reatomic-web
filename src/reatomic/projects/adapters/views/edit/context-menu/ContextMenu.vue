@@ -14,21 +14,25 @@ export default class ContextMenu extends Vue {
 
     @Emit("onDataSource")
     public handleDataSource() {
+        this.toggleContextMenu();
         return;
     }
 
     @Emit("onFact")
     public handleFact() {
+        this.toggleContextMenu();
         return;
     }
 
     @Emit("onInsight")
     public handleInsight() {
+        this.toggleContextMenu();
         return;
     }
 
     @Emit("onConclusion")
     public handleConclusion() {
+        this.toggleContextMenu();
         return;
     }
 }
