@@ -19,14 +19,49 @@ const resolveHeight = (dimensions: number | number[] | undefined): number => {
         : 0;
 }
 
+interface TextLines {
+    line1: string;
+    line2: string;
+    line3: string;
+    line4: string;
+    line5: string;
+    line6: string;
+    line7: string;
+}
+
+// inspired by https://j11y.io/snippets/wordwrap-for-javascript/
+const convertTextToLines = (text: string, width = 20): TextLines => {
+    if (!text) { 
+        return {
+            line1: "", line2: "", line3: "", line4: "", line5: "", line6: "", line7: ""
+        }; 
+    }
+ 
+    /* eslint-disable no-useless-escape */
+    const regex = '.{1,' +width+ '}(\s|$)' + '|.{' +width+ '}|.+$';
+    /* eslint-enable no-useless-escape */
+    const found = text.match(RegExp(regex, 'g'));
+
+    console.log("text: ", text);
+    console.log("found: ", found);
+    return {
+        line1: found && found.length >= 1 ? found[0] : "",
+        line2: found && found.length >= 2 ? found[1] : "",
+        line3: found && found.length >= 3 ? found[2] : "",
+        line4: found && found.length >= 4 ? found[3] : "",
+        line5: found && found.length >= 5 ? found[4] : "",
+        line6: found && found.length >= 6 ? found[5] : "",
+        line7: found && found.length >= 7 ? found[6] : "",
+    }
+};
+
 export const createContentCard = (cfg: ReatomicModel, group: Group, colors: CardColors): IShape => {
     const width = resolveWidth(cfg.size);
     const height = resolveHeight(cfg.size);
-
-    console.log({width, height});
-
     const x = cfg.x || 0;
     const y = cfg.y || 0;
+    const textLines: TextLines = convertTextToLines(cfg.description);
+    
     // BACKGROUND
     const container = group.addShape('rect', {
         attrs: {
@@ -74,7 +109,7 @@ export const createContentCard = (cfg: ReatomicModel, group: Group, colors: Card
     });  
     group.addShape('text', {
         attrs: {
-            text: "A 7 neurologos",
+            text: textLines.line1,
             class: "card-text",
             x: x + (width * 0.1),
             y: y + (height * 0.32),
@@ -88,7 +123,7 @@ export const createContentCard = (cfg: ReatomicModel, group: Group, colors: Card
     });        
     group.addShape('text', {
         attrs: {
-            text: "implicados en el",
+            text: textLines.line2,
             class: "card-text",
             x: x + (width * 0.1),
             y: y + (height * 0.385),
@@ -102,7 +137,7 @@ export const createContentCard = (cfg: ReatomicModel, group: Group, colors: Card
     });        
     group.addShape('text', {
         attrs: {
-            text: "proyecto, con",
+            text: textLines.line3,
             class: "card-text",
             x: x + (width * 0.1),
             y: y + (height * 0.45),
@@ -116,7 +151,7 @@ export const createContentCard = (cfg: ReatomicModel, group: Group, colors: Card
     });                
     group.addShape('text', {
         attrs: {
-            text: "wireframes de apoyo.",
+            text: textLines.line4,
             class: "card-text",
             x: x + (width * 0.1),
             y: y + (height * 0.52),
@@ -130,7 +165,7 @@ export const createContentCard = (cfg: ReatomicModel, group: Group, colors: Card
     });        
     group.addShape('text', {
         attrs: {
-            text: "dfajspianpisjnd adfd",
+            text: textLines.line5,
             class: "card-text",
             x: x + (width * 0.1),
             y: y + (height * 0.59),
@@ -144,7 +179,7 @@ export const createContentCard = (cfg: ReatomicModel, group: Group, colors: Card
     });            
     group.addShape('text', {
         attrs: {
-            text: "dfajspianpisjnd adfd",
+            text: textLines.line6,
             class: "card-text",
             x: x + (width * 0.1),
             y: y + (height * 0.66),
@@ -158,7 +193,7 @@ export const createContentCard = (cfg: ReatomicModel, group: Group, colors: Card
     });            
     group.addShape('text', {
         attrs: {
-            text: "dfajspianpisjnd adfd",
+            text: textLines.line7,
             class: "card-text",
             x: x + (width * 0.1),
             y: y + (height * 0.73),
@@ -252,6 +287,7 @@ export const createFactCard = (cfg: ReatomicModel, group: Group, attrs: FactAttr
 }
 
 interface ReatomicModel extends ModelConfig {
+    description: string;
     cardType: string;
     factType: string;
     insightType: string;
@@ -365,6 +401,7 @@ const resolveCard = (cfg: ReatomicModel, group: Group): any => {
 
 export const CardNode: any = {
     draw: (cfg: ReatomicModel, group: Group) => {   
+        console.log("cfg: ", cfg);
         return resolveCard(cfg, group);
     },
 };
