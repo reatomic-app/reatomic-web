@@ -3,6 +3,7 @@
 import { Vue, Component, Ref, Prop, Watch } from "vue-property-decorator";
 import G6, { Graph } from "@antv/g6";
 import { CardNode } from "@/commons/components/g6/custom-nodes";
+import { AddEdgeByClickBehavior } from "@/commons/components/g6/custom-behavior";
 import { NodeConfig, EdgeConfig } from '@antv/g6/lib/types';
 
 @Component
@@ -13,7 +14,7 @@ export default class G6Graph extends Vue {
 
     @Prop()
     public edges!: EdgeConfig[];
-    
+
     @Ref("graph")
     public projectGraphElement!: HTMLElement;
 
@@ -26,23 +27,35 @@ export default class G6Graph extends Vue {
             this.projectGraph = new Graph({
                 container: this.projectGraphElement,
                 width: this.projectGraphElement.offsetWidth,
-                height: this.projectGraphElement.offsetHeight,                
+                height: this.projectGraphElement.offsetHeight,
                 modes: {
                   default: [
                    "drag-canvas", "zoom-canvas"
                   ],
+                  addEdge: [
+                    'click-add-edge', 'click-select'
+                  ]
                 },
                 defaultNode: {
                     type: 'card',
                     size: [200, 260],
                 },
-
+                defaultEdge: {
+                  type: "line",
+                  style: {
+                    lineWidth: 2,
+                    stroke: "#ABA4B2",
+                  },
+                },
             });
+
+            G6.registerBehavior('click-add-edge', AddEdgeByClickBehavior(this.projectGraph));
 
             this.projectGraph.data({
                 nodes: this.nodes,
                 edges: this.edges,
             })
+            this.projectGraph.setMode("addEdge");
             this.projectGraph.render();
             this.projectGraph.fitView();
             this.projectGraph.moveTo(0,0);
@@ -58,7 +71,7 @@ export default class G6Graph extends Vue {
         this.projectGraph.refresh();
         this.projectGraph.render();
             this.projectGraph.fitView();
-            this.projectGraph.moveTo(0,0);        
+            this.projectGraph.moveTo(0,0);
     }
 }
 </script>

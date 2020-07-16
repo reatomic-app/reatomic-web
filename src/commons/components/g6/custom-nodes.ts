@@ -374,8 +374,16 @@ const resolveCard = (cfg: ReatomicModel, group: Group): any => {
 
 export const CardNode: any = {
     draw: (cfg: ReatomicModel, group: Group) => {
-        console.log("cfg: ", cfg);
         return resolveCard(cfg, group);
+    },
+    getAnchorPoints: () => {
+      console.log("getAnchorPoints: ");
+      return [
+        [0.5, 0], // middle of top side
+        [1, 0.5], // middle of right side
+        [0.5, 1.05], // middle of bottom side
+        [0, 0.5], // middle of left side
+      ];
     },
 };
 
