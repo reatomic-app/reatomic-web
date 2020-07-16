@@ -15,6 +15,10 @@
 	--insight2: #F7EBF2;
 	--insight3: #C93F8D;	
 }
+h1 {
+	color: var(--primary3);
+	font-size: 1.1rem;
+}
 body {
 	font-family: 'Cabin', sans-serif;
 }

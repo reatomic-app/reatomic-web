@@ -25,10 +25,10 @@
     height: 1.125rem;
 }
 .context-menu-button {
-    bottom: 18rem;    
+    bottom: 6rem;    
     height: 3.75rem;    
-    position: absolute;
-    right: 8rem;    
+    position: fixed;
+    right: 6rem;    
     width: 3.75rem;
     z-index: 2;
 }
@@ -46,10 +46,10 @@
 }
 .context-menu {
     position: absolute;
-    bottom: 22rem;
+    bottom: 14rem;
     visibility: hidden;
     list-style: none;
-    right: 8.5rem;
+    right: 6.5rem;
     text-align: right;
     transform: scale(0.8);
     transition: 0.1s;
