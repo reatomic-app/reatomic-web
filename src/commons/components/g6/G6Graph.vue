@@ -31,7 +31,7 @@ export default class G6Graph extends Vue {
                 height: this.projectGraphElement.offsetHeight,
                 modes: {
                   default: [
-                   "drag-canvas", "drag-node", "zoom-canvas", "click-add-edge",
+                   "drag-canvas", "zoom-canvas", "click-add-edge",
                   ],
                   addEdge: [
                     'click-add-edge', 'click-select'

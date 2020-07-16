@@ -1,8 +1,8 @@
-import { ModelConfig } from '@antv/g6/lib/types';
 import Group from '@antv/g-canvas/lib/group';
 import { IShape } from "@antv/g-base/lib/interfaces";
 import { createIcon } from "./icons";
 import VueI18n from 'vue-i18n';
+import { ReatomicModel } from "./custom-model";
 
 const resolveWidth = (dimensions: number | number[] | undefined): number => {
     return dimensions
@@ -258,15 +258,6 @@ export const createFactCard = (cfg: ReatomicModel, group: Group, attrs: FactAttr
     const container = createContentCard(cfg, group, attrs.colors);
     createIcon(x, y, group, width, height, attrs.iconType);
     return container;
-}
-
-interface ReatomicModel extends ModelConfig {
-    description: string;
-    cardType: string;
-    dataSourceType: string;
-    factType: string;
-    insightType: string;
-    date: Date;
 }
 
 const resolveFactCard = (cfg: ReatomicModel, group: Group, i18n: VueI18n): any => {

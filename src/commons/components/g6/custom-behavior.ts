@@ -1,6 +1,12 @@
 import { BehaviorOption, IG6GraphEvent, Item } from '@antv/g6/lib/types';
 import Graph from '@antv/g6/lib/graph/graph';
+import { ReatomicModel } from "./custom-model";
 
+
+const hasClickedOnSourceLink = (ev: IG6GraphEvent): boolean => {
+  const shapeClicked = ev.shape;
+  return shapeClicked.attr() && shapeClicked.attr("text") && shapeClicked.attr("text") === "source";
+}
 
 export const AddEdgeByClickBehavior = (graph: Graph): BehaviorOption => {
   let edge: Item | null = null;
@@ -18,8 +24,14 @@ export const AddEdgeByClickBehavior = (graph: Graph): BehaviorOption => {
   // The responsing function for node:click defined in getEvents
   onClick(ev: IG6GraphEvent) {
     const node = ev.item;
+    const isSourceClicked = hasClickedOnSourceLink(ev);
+    const model: ReatomicModel = (node ? node.getModel() : null) as ReatomicModel;
+
+    if (isSourceClicked && model && model.url) {
+      window.open(model.url);
+      return;
+    }
     // The position where the mouse clicks
-    const model = node ? node.getModel() : null;
     if (addingEdge && edge && model) {
       graph.updateItem(edge, {
         target: model.id,

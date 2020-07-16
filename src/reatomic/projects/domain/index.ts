@@ -46,7 +46,7 @@ export interface DataSourceInput {
 export interface FactInput {
     type: string;
     description: string;
-    link: string;
+    url: string;
 }
 
 export interface ConclusionInput {
@@ -71,6 +71,7 @@ export interface Card extends NodeConfig {
     dataSourceType?: string;
     source?: string;
     date?: Date;
+    url?: string;
 }
 
 export interface DataSourceCard extends Card {

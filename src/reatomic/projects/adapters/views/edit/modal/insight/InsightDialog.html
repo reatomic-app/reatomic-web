@@ -1,17 +1,17 @@
-<x-dialog 
-	:height="468" 
-	:width="433" 
+<x-dialog
+	:height="468"
+	:width="433"
 	@onCreate="handleSubmitClick"
-	name="create-insight-dialog" 
-	title="new insight" 
+	name="create-insight-dialog"
+	title="new insight"
 	accept-caption="add insight">
 	<form>
 		<div class="form-group">
 			<label for="description">Description</label>
-			<textarea 
+			<textarea
 				v-model="input.description"
-				class="form-control" 
-				id="description" 
+				class="form-control"
+				id="description"
 				rows="3"></textarea>
 		</div>
 		<div class="form-group">
@@ -24,7 +24,8 @@
 						v-model="input.url"
 						type="text"
 						class="form-control"
-						id="URL"
+            id="url"
+            name="url"
 						placeholder="http://"
 						autocomplete="off">
 			</div>

@@ -11,6 +11,7 @@ export const fromDataSource = (id: string, x: number, y: number, input: DataSour
         date: input.date,
         dataSourceType: input.type,
         description: input.description,
+        url: input.url,
     };
 };
 
@@ -25,6 +26,7 @@ export const fromFact = (id: string, x: number, y: number, input: FactInput): Ca
         cardType: "fact",
         factType: input.type,
         description: input.description,
+        url: input.url,
     };
 };
 
@@ -37,6 +39,7 @@ export const fromInsight = (id: string, x: number, y: number, input: InsightInpu
         height: 260,
         cardType: "insight",
         description: input.description,
+        url: input.url,
     };
 };
 
@@ -49,6 +52,7 @@ export const fromConclusion = (id: string, x: number, y: number, input: Conclusi
         height: 260,
         cardType: "conclusion",
         description: input.description,
+        url: input.url,
     };
 };
 

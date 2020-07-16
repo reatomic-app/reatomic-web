@@ -1,9 +1,9 @@
-<x-dialog 
-	:height="468" 
-	:width="433" 
+<x-dialog
+	:height="468"
+	:width="433"
 	@onCreate="handleSubmitClick"
-	name="create-fact-dialog" 
-	title="new fact" 
+	name="create-fact-dialog"
+	title="new fact"
 	accept-caption="add fact">
 	<form>
 		<div class="form-group">
@@ -56,7 +56,8 @@
 						v-model="input.url"
 						type="text"
 						class="form-control"
-						id="URL"
+            id="url"
+            name="url"
 						placeholder="http://"
 						autocomplete="off">
 			</div>
