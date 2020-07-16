@@ -61,7 +61,7 @@ export default class G6Graph extends Vue {
 
             this.projectGraph.setMode("default");
             this.projectGraph.render();
-            this.projectGraph.moveTo(0,0);
+            this.projectGraph.moveTo(30,100);
         }
     }
 
@@ -73,7 +73,7 @@ export default class G6Graph extends Vue {
         });
         this.projectGraph.refresh();
         this.projectGraph.render();
-        this.projectGraph.moveTo(0,0);
+        this.projectGraph.moveTo(30,100);
     }
 }
 </script>
