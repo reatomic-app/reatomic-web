@@ -63,7 +63,7 @@ export const createContentCard = (cfg: ReatomicModel, group: Group, colors: Card
     const commonTextAttrs = {
         class: "card-text",
         textAnchor: "middle",
-        fontSize: 16,
+        fontSize: 14,
         fontFamily: "Cabin",
         textBaseline: 'middle',
         fill: colors.text,
@@ -182,10 +182,10 @@ export const createContentCard = (cfg: ReatomicModel, group: Group, colors: Card
         attrs: {
             text: "source",
             class: "card-text",
-            x: x + (width - (width * 0.34)),
-            y: y + (height - (height * 0.1)),
+            x: x + (width - (width * 0.3)),
+            y: y + (height - (height * 0.09)),
             textAnchor: "middle",
-            fontWeight: "bold",
+            fontWeight: "600",
             fontSize: 14,
             fontFamily: "Cabin",
             textBaseline: 'middle',
@@ -212,7 +212,8 @@ export const createDataSourceCard = (cfg: ReatomicModel, group: Group, colors: C
             x: x + (width * 0.1),
             y: y + (height * 0.12),
             textAnchor: "middle",
-            fontSize: 18,
+            fontSize: 20,
+            fontFamily: "Cabin",
             fontWeight: "bold",
             textBaseline: 'middle',
             fill: '#413673',
@@ -224,10 +225,11 @@ export const createDataSourceCard = (cfg: ReatomicModel, group: Group, colors: C
         attrs: {
             text: i18n.d(cfg.date, "short", "es-ES"),
             x: x + (width * 0.1),
-            y: y + (height * 0.185),
+            y: y + (height * 0.21),
             textAnchor: "middle",
             fontSize: 14,
-            fontWeight: "bold",
+            fontFamily: "Cabin",
+            fontWeight: "normal",
             textBaseline: 'middle',
             fill: 'rgba(196, 191, 217, 1)',
             cursor: 'pointer',
@@ -264,7 +266,7 @@ const resolveFactCard = (cfg: ReatomicModel, group: Group, i18n: VueI18n): any =
     const facts = {
         colors: {
             principal: "#CDE4E4",
-            shadow: "#F5F9F9",
+            shadow: "#CDE4E4",
             text: "#479696"
         },
         iconType: cfg.factType,
@@ -276,7 +278,7 @@ const resolveFactCard = (cfg: ReatomicModel, group: Group, i18n: VueI18n): any =
 const resolveExperimentCard = (cfg: ReatomicModel, group: Group, i18n: VueI18n): any => {
     const colors = {
         principal: "#C4BFD9",
-        shadow: "#F0EEF7",
+        shadow: "#C4BFD9",
         text: "#413673"
     };
     return createDataSourceCard(cfg, group, colors, i18n);
@@ -291,8 +293,8 @@ const resolveInsightCard = (cfg: ReatomicModel, group: Group, i18n: VueI18n): an
     const medium = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgd2lkdGg9Ijg4IiBoZWlnaHQ9IjM2IiB2aWV3Qm94PSIwIDAgODggMzYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0wIDBINzBDNzkuOTQxMSAwIDg4IDguMDU4ODggODggMThWMzZIMThDOC4wNTg4NyAzNiAwIDI3Ljk0MTEgMCAxOFYwWiIgZmlsbD0iI0ZERUFENCIvPgo8L3N2Zz4K";
 
     const cardColors = {
-        principal: "#FEF1F8",
-        shadow: "#FEF1F8",
+        principal: "#F1DAE7",
+        shadow: "#F1DAE7",
         text: "#C93F8D",
     };
 
@@ -331,7 +333,7 @@ const resolveInsightCard = (cfg: ReatomicModel, group: Group, i18n: VueI18n): an
     group.addShape("text", {
         attrs: {
             x: x + (200 - (56 + resolved.text.length)),
-            y: y + 20,
+            y: y + 24,
             width: 88,
             height: 36,
             textAnchor: "middle",
@@ -348,8 +350,8 @@ const resolveInsightCard = (cfg: ReatomicModel, group: Group, i18n: VueI18n): an
 
 const resolveConclusionCard = (cfg: ReatomicModel, group: Group, i18n: VueI18n): any => {
     const cardColors = {
-        principal: "#FFE0DB",
-        shadow: "#FFE0DB",
+        principal: "#FFD3CC",
+        shadow: "#FFD3CC",
         text: "#FF5345",
     };
 
