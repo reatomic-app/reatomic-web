@@ -20,12 +20,10 @@ export const AddEdgeByClickBehavior = (graph: Graph): BehaviorOption => {
     const node = ev.item;
     // The position where the mouse clicks
     const model = node ? node.getModel() : null;
-
     if (addingEdge && edge && model) {
       graph.updateItem(edge, {
         target: model.id,
       });
-
       edge = null;
       addingEdge = false;
     } else if (model){
@@ -38,6 +36,8 @@ export const AddEdgeByClickBehavior = (graph: Graph): BehaviorOption => {
         targetAnchor: 0,
       });
       addingEdge = true;
+    } else if (edge) {
+      graph.removeItem(edge);
     }
   },
   // The responsing function for mousemove defined in getEvents
@@ -63,4 +63,3 @@ export const AddEdgeByClickBehavior = (graph: Graph): BehaviorOption => {
   },
 }
 };
-
