@@ -2,6 +2,7 @@ import { ModelConfig } from '@antv/g6/lib/types';
 import Group from '@antv/g-canvas/lib/group';
 import { IShape } from "@antv/g-base/lib/interfaces";
 import { createIcon } from "./icons";
+import VueI18n from 'vue-i18n';
 
 const resolveWidth = (dimensions: number | number[] | undefined): number => {
     return dimensions
@@ -197,7 +198,7 @@ export const createContentCard = (cfg: ReatomicModel, group: Group, colors: Card
     return container;
 };
 
-export const createDataSourceCard = (cfg: ReatomicModel, group: Group, colors: CardColors): IShape => {
+export const createDataSourceCard = (cfg: ReatomicModel, group: Group, colors: CardColors, i18n: VueI18n): IShape => {
     const x = cfg.x || 0;
     const y = cfg.y || 0;
     const width = resolveWidth(cfg.size);
@@ -207,7 +208,7 @@ export const createDataSourceCard = (cfg: ReatomicModel, group: Group, colors: C
 
     group.addShape('text', {
         attrs: {
-            text: "Entrevista",
+            text: cfg.dataSourceType,
             x: x + (width * 0.1),
             y: y + (height * 0.12),
             textAnchor: "middle",
@@ -221,7 +222,7 @@ export const createDataSourceCard = (cfg: ReatomicModel, group: Group, colors: C
     });
     group.addShape('text', {
         attrs: {
-            text: "29/03/2020",
+            text: i18n.d(cfg.date, "short", "es-ES"),
             x: x + (width * 0.1),
             y: y + (height * 0.185),
             textAnchor: "middle",
@@ -262,11 +263,13 @@ export const createFactCard = (cfg: ReatomicModel, group: Group, attrs: FactAttr
 interface ReatomicModel extends ModelConfig {
     description: string;
     cardType: string;
+    dataSourceType: string;
     factType: string;
     insightType: string;
+    date: Date;
 }
 
-const resolveFactCard = (cfg: ReatomicModel, group: Group): any => {
+const resolveFactCard = (cfg: ReatomicModel, group: Group, i18n: VueI18n): any => {
     const facts = {
         colors: {
             principal: "#CDE4E4",
@@ -279,16 +282,16 @@ const resolveFactCard = (cfg: ReatomicModel, group: Group): any => {
     return createFactCard(cfg, group, facts)
 }
 
-const resolveExperimentCard = (cfg: ReatomicModel, group: Group): any => {
+const resolveExperimentCard = (cfg: ReatomicModel, group: Group, i18n: VueI18n): any => {
     const colors = {
         principal: "#C4BFD9",
         shadow: "#F0EEF7",
         text: "#413673"
     };
-    return createDataSourceCard(cfg, group, colors);
+    return createDataSourceCard(cfg, group, colors, i18n);
 };
 
-const resolveInsightCard = (cfg: ReatomicModel, group: Group): any => {
+const resolveInsightCard = (cfg: ReatomicModel, group: Group, i18n: VueI18n): any => {
     const x = cfg.x || 0;
     const y = cfg.y || 0;
 
@@ -352,7 +355,7 @@ const resolveInsightCard = (cfg: ReatomicModel, group: Group): any => {
     return container;
 };
 
-const resolveConclusionCard = (cfg: ReatomicModel, group: Group): any => {
+const resolveConclusionCard = (cfg: ReatomicModel, group: Group, i18n: VueI18n): any => {
     const cardColors = {
         principal: "#FFE0DB",
         shadow: "#FFE0DB",
@@ -362,22 +365,22 @@ const resolveConclusionCard = (cfg: ReatomicModel, group: Group): any => {
     return createContentCard(cfg, group, cardColors);
 };
 
-const resolveCard = (cfg: ReatomicModel, group: Group): any => {
+const resolveCard = (cfg: ReatomicModel, group: Group, i18n: VueI18n): any => {
     switch(cfg.cardType) {
-        case "fact": return resolveFactCard(cfg, group);
-        case "insight": return resolveInsightCard(cfg, group);
-        case "conclusion": return resolveConclusionCard(cfg, group);
+        case "fact": return resolveFactCard(cfg, group, i18n);
+        case "insight": return resolveInsightCard(cfg, group, i18n);
+        case "conclusion": return resolveConclusionCard(cfg, group, i18n);
         default:
-            return resolveExperimentCard(cfg, group);
+            return resolveExperimentCard(cfg, group, i18n);
     }
 }
 
-export const CardNode: any = {
+export const CardNode = (i18n: VueI18n): any => {
+  return {
     draw: (cfg: ReatomicModel, group: Group) => {
-        return resolveCard(cfg, group);
+        return resolveCard(cfg, group, i18n);
     },
     getAnchorPoints: () => {
-      console.log("getAnchorPoints: ");
       return [
         [0.5, 0], // middle of top side
         [1, 0.5], // middle of right side
@@ -385,5 +388,6 @@ export const CardNode: any = {
         [0, 0.5], // middle of left side
       ];
     },
-};
+  };
+}
 

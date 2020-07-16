@@ -22,7 +22,8 @@ export default class G6Graph extends Vue {
 
     public mounted() {
         if (this.projectGraphElement) {
-            G6.registerNode('card', CardNode, 'single-node');
+
+            G6.registerNode('card', CardNode(this.$i18n), 'single-node');
 
             this.projectGraph = new Graph({
                 container: this.projectGraphElement,
@@ -57,7 +58,6 @@ export default class G6Graph extends Vue {
             })
             this.projectGraph.setMode("addEdge");
             this.projectGraph.render();
-            this.projectGraph.fitView();
             this.projectGraph.moveTo(0,0);
         }
     }
@@ -70,8 +70,7 @@ export default class G6Graph extends Vue {
         });
         this.projectGraph.refresh();
         this.projectGraph.render();
-            this.projectGraph.fitView();
-            this.projectGraph.moveTo(0,0);
+        this.projectGraph.moveTo(0,0);
     }
 }
 </script>

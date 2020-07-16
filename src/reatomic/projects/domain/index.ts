@@ -21,7 +21,7 @@ export interface Fact {
     type: string;
     description: string;
     link: string;
-}   
+}
 
 export interface Conclusion {
     id: string;
@@ -32,7 +32,7 @@ export interface Conclusion {
 export interface Insight {
     id: string;
     description: string;
-    url: string;    
+    url: string;
 }
 
 // INPUTS
@@ -63,7 +63,7 @@ export interface InsightInput {
 export interface Card extends NodeConfig {
     id: string;
     x: number;
-    y: number;   
+    y: number;
     width: number;
     height: number;
     cardType: string;

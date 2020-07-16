@@ -8,7 +8,8 @@ export const fromDataSource = (id: string, x: number, y: number, input: DataSour
         width: 200,
         height: 260,
         cardType: "dataSource",
-        factType: input.type,
+        date: input.date,
+        dataSourceType: input.type,
         description: input.description,
     };
 };

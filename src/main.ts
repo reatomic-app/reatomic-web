@@ -5,12 +5,14 @@ import store from "./store"
 import i18n from "@/commons/i18n/i18n";
 import VModal from "vue-js-modal";
 import { vueSetupValidation } from "@/commons/validation/validation";
+import VCalendar from "v-calendar";
 
 Vue.config.productionTip = false
 
 vueSetupValidation();
 
 Vue.use(VModal);
+Vue.use(VCalendar);
 
 new Vue({
   router,

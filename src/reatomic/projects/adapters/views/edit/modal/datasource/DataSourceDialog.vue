@@ -4,6 +4,7 @@
 
 import { Vue, Component, Emit } from "vue-property-decorator";
 import XDialog from "@/commons/components/x-dialog/XDialog.vue";
+import { DataSourceInput } from '../../../../../domain';
 
 @Component({
     components: {
@@ -11,7 +12,7 @@ import XDialog from "@/commons/components/x-dialog/XDialog.vue";
     }
 })
 export default class DataSourceDialog extends Vue {
-    public input = {
+    public input: DataSourceInput = {
         type: "",
         description: "",
         date: new Date(),
@@ -20,6 +21,7 @@ export default class DataSourceDialog extends Vue {
 
     @Emit("onSubmit")
     public handleSubmitClick() {
+      console.log("date is of type: ", typeof(this.input.date));
         const toReturn = {...this.input,}
         this.input = {
           type: "",

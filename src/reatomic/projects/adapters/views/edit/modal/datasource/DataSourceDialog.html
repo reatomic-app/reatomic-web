@@ -34,13 +34,14 @@
 					<div class="input-group">
 						<div class="input-group-prepend">
 							<div class="input-group-text"><img src="@/assets/img/icon-calendar.svg" alt="date" /></div>
-						</div>
-						<input
-							v-model="input.date"
-							type="date"
+            </div>
+            <v-date-picker
               class="form-control"
-							id="date"
-							placeholder="dd/mm/aaaa">
+              name="date"
+              locale="es-ES"
+              :popover="{ placement: 'top'}"
+              v-model="input.date"
+              />
 					</div>
 				</div>
 			</div>
