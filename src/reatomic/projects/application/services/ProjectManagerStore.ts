@@ -6,6 +6,15 @@ import { GraphData } from '@antv/g6/lib/types';
 import { fromFact, fromDataSource, fromConclusion, fromInsight } from './converters';
 
 const moduleName = "projects:manager";
+
+// 135 means one level right after the previous one
+// the next operand means the real separation between levels
+const SEPARATION = 135 + 40;
+const LEVEL_DATASOURCE = 100;
+const LEVEL_FACT = LEVEL_DATASOURCE + SEPARATION;
+const LEVEL_INSIGHT = LEVEL_FACT + SEPARATION;
+const LEVEL_CONCLUSION = LEVEL_INSIGHT + SEPARATION;
+
 let dataSourceCounter = 0;
 let factCounter = 0;
 let insightCounter = 0;
@@ -28,7 +37,7 @@ export class ProjectManagerStore extends VuexModule implements AddDataSourceUseC
         const dataSource = fromDataSource(
             "id-data-source-" + dataSourceCounter,
             dataSourceCounter,
-            0,
+            LEVEL_DATASOURCE,
             input,
         );
         dataSourceCounter += 125;
@@ -40,7 +49,7 @@ export class ProjectManagerStore extends VuexModule implements AddDataSourceUseC
         const fact = fromFact(
             "id-fact-" + factCounter,
             factCounter,
-            150,
+            LEVEL_FACT,
             input
         );
         factCounter += 125;
@@ -52,7 +61,7 @@ export class ProjectManagerStore extends VuexModule implements AddDataSourceUseC
         const insight = fromInsight(
             "id-insight-" + insightCounter,
             insightCounter,
-            300,    
+            LEVEL_INSIGHT,
             input,
         )
         insightCounter += 125;
@@ -64,12 +73,12 @@ export class ProjectManagerStore extends VuexModule implements AddDataSourceUseC
         const conclusion = fromConclusion(
             "id-conclusion-" + conclusionCounter,
             conclusionCounter,
-            450,        
+            LEVEL_CONCLUSION,
             input,
         );
         conclusionCounter += 125;
         return conclusion;
-    }    
+    }
 }
 
 export default getModule(ProjectManagerStore);
