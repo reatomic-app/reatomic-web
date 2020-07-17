@@ -261,7 +261,11 @@ export const createFactCard = (cfg: ReatomicModel, group: Group, attrs: FactAttr
     const height = resolveHeight(cfg.size);
 
     const container = createContentCard(cfg, group, attrs.colors);
-    createIcon(x, y, group, width, height, attrs.iconType);
+
+    if (attrs.iconType) {
+      createIcon(x, y, group, width, height, attrs.iconType);
+    }
+
     return container;
 }
 
