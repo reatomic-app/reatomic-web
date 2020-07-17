@@ -101,11 +101,12 @@ export default class G6Graph extends Vue {
     }
 
     public refreshData(data: GraphData) {
+        const zoom = this.projectGraph.getZoom()
         this.projectGraph.data(data);
         this.projectGraph.refresh();
         this.projectGraph.render();
         this.projectGraph.moveTo(30,100);
-
+        this.projectGraph.zoom(zoom);
         // EL PROBLEMA ES QUE LOS NODOS SE CREARON EN UNAS COORDENADAS
         // Y ESAS COORDENADAS NO SE ACTUALIZAN POR LO QUE CUANDO SE
         // REFRESCA EL CANVAS SE VUELVEN A PINTAR CON LA UNICA INFORMACION
