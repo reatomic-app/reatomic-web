@@ -178,22 +178,25 @@ export const createContentCard = (cfg: ReatomicModel, group: Group, colors: Card
           },
           name: 'text-line-7',
     });
-    group.addShape('text', {
-        attrs: {
-            text: "source",
-            class: "card-text",
-            x: x + (width - (width * 0.3)),
-            y: y + (height - (height * 0.09)),
-            textAnchor: "middle",
-            fontWeight: "600",
-            fontSize: 14,
-            fontFamily: "Cabin",
-            textBaseline: 'middle',
-            fill: colors.text,
-            cursor: 'pointer',
-          },
-          name: 'source',
-    });
+
+    if (cfg.url) {
+      group.addShape('text', {
+          attrs: {
+              text: "source",
+              class: "card-text",
+              x: x + (width - (width * 0.3)),
+              y: y + (height - (height * 0.09)),
+              textAnchor: "middle",
+              fontWeight: "600",
+              fontSize: 14,
+              fontFamily: "Cabin",
+              textBaseline: 'middle',
+              fill: colors.text,
+              cursor: 'pointer',
+            },
+            name: 'source',
+      });
+    }
 
     return container;
 };
