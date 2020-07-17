@@ -1,5 +1,5 @@
 import { AddDataSourceUseCase } from "../AddDataSourceUseCase";
-import { DataSourceInput, Card, FactInput, InsightInput, ConclusionInput } from "../../domain";
+import { DataSourceInput, Card, FactInput, InsightInput, ConclusionInput, Link } from "../../domain";
 import { Action, Module, Mutation, getModule, VuexModule } from "vuex-module-decorators";
 import store from "@/store";
 import { GraphData } from '@antv/g6/lib/types';
@@ -23,12 +23,23 @@ let conclusionCounter = 0;
 @Module({ stateFactory: true, dynamic: true, namespaced: true, name: moduleName, store })
 export class ProjectManagerStore extends VuexModule implements AddDataSourceUseCase {
     public graphData = {
-        cards: [] as Card[]
+        cards: [] as Card[],
+        links: [] as Link[],
     };
 
     @Mutation
     public addNodeCard(card: Card) {
         this.graphData.cards?.push(card);
+    }
+
+    @Mutation
+    public addEdgeLink(link: Link) {
+      this.graphData.links?.push(link);
+    }
+
+    @Action({ commit: "addEdgeLink" })
+    public addLink(link: Link) {
+      return link;
     }
 
     @Action({ commit: "addNodeCard"})

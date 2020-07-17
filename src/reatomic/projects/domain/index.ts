@@ -1,7 +1,7 @@
 
 // DOMAINS
 
-import { GraphData, NodeConfig } from '@antv/g6/lib/types';
+import { GraphData, NodeConfig, EdgeConfig } from '@antv/g6/lib/types';
 
 export interface Project {
     name: string;
@@ -73,6 +73,16 @@ export interface Card {
     source?: string;
     date?: Date;
     url?: string;
+}
+
+export interface Link {
+  id: string;
+  target?: string;
+  source?: string;
+}
+
+export interface LinkEdgeConfig extends EdgeConfig {
+
 }
 
 export interface CardNodeConfig extends NodeConfig {

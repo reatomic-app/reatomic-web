@@ -31,6 +31,10 @@ export default class EditProject extends Vue {
       return projectManagerStore.graphData.cards;
     }
 
+    public get links() {
+      return projectManagerStore.graphData.links;
+    }
+
     public handleDataSource() {
       this.$modal.show("create-datasource-dialog");
     }

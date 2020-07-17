@@ -1,6 +1,8 @@
 import { BehaviorOption, IG6GraphEvent, Item } from '@antv/g6/lib/types';
 import Graph from '@antv/g6/lib/graph/graph';
 import { ReatomicModel } from "./custom-model";
+import { ProjectManagerStore } from '@/reatomic/projects/application/services/ProjectManagerStore';
+import { IEdge } from '@antv/g6/lib/interface/item';
 
 
 const hasClickedOnSourceLink = (ev: IG6GraphEvent): boolean => {
@@ -8,7 +10,7 @@ const hasClickedOnSourceLink = (ev: IG6GraphEvent): boolean => {
   return shapeClicked.attr() && shapeClicked.attr("text") && shapeClicked.attr("text") === "source";
 }
 
-export const AddEdgeByClickBehavior = (graph: Graph): BehaviorOption => {
+export const AddEdgeByClickBehavior = (graph: Graph, store: ProjectManagerStore): BehaviorOption => {
   let edge: Item | null = null;
   let addingEdge = false;
 
@@ -36,6 +38,15 @@ export const AddEdgeByClickBehavior = (graph: Graph): BehaviorOption => {
       graph.updateItem(edge, {
         target: model.id,
       });
+
+      const myEdge = edge as IEdge;
+      const link = {
+        id: myEdge.getID(),
+        source: myEdge.getSource().getID(),
+        target: myEdge.getTarget().getID(),
+      };
+      console.log("link to create: ", link);
+      store.addLink(link);
       edge = null;
       addingEdge = false;
     } else if (model){
