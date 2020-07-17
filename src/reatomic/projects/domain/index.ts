@@ -60,18 +60,34 @@ export interface InsightInput {
 }
 
 // GRAPH
-export interface Card extends NodeConfig {
+export interface Card {
     id: string;
     x: number;
     y: number;
     width: number;
     height: number;
+    description: string;
     cardType: string;
     factType?: string;
     dataSourceType?: string;
     source?: string;
     date?: Date;
     url?: string;
+}
+
+export interface CardNodeConfig extends NodeConfig {
+  id: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  description: string;
+  cardType: string;
+  factType?: string;
+  dataSourceType?: string;
+  source?: string;
+  date?: Date;
+  url?: string;
 }
 
 export interface DataSourceCard extends Card {

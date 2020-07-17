@@ -5,15 +5,17 @@ import G6, { Graph } from "@antv/g6";
 import { CardNode } from "@/commons/components/g6/custom-nodes";
 import { AddEdgeByClickBehavior } from "@/commons/components/g6/custom-behavior";
 import { NodeConfig, EdgeConfig } from '@antv/g6/lib/types';
+import { Card, CardNodeConfig } from '../../../reatomic/projects/domain';
+
+const convertToNodeConfig = (next: Card): CardNodeConfig => {
+  return {...next} as CardNodeConfig
+}
 
 @Component
 export default class G6Graph extends Vue {
 
     @Prop()
-    public nodes!: NodeConfig[];
-
-    @Prop()
-    public edges!: EdgeConfig[];
+    public cards!: Card[];
 
     @Ref("graph")
     public projectGraphElement!: HTMLElement;
@@ -55,8 +57,7 @@ export default class G6Graph extends Vue {
             G6.registerBehavior('click-add-edge', AddEdgeByClickBehavior(this.projectGraph));
 
             this.projectGraph.data({
-                nodes: this.nodes,
-                edges: this.edges,
+                nodes: this.cards.map((next: Card) => convertToNodeConfig(next)),
             })
 
             this.projectGraph.setMode("default");
@@ -65,11 +66,10 @@ export default class G6Graph extends Vue {
         }
     }
 
-    @Watch("nodes")
-    public onNodesChanged(val: NodeConfig[]) {
+    @Watch("cards")
+    public onCardsChanged(val: Card[], old: Card[]) {
         this.projectGraph.data({
-            edges: this.edges,
-            nodes: val,
+            nodes: val.map((next) => convertToNodeConfig(next)),
         });
         this.projectGraph.refresh();
         this.projectGraph.render();

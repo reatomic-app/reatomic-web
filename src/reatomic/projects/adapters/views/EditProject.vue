@@ -22,17 +22,13 @@ import G6Graph from "@/commons/components/g6/G6Graph.vue";
     G6Graph,
   }
 })
-export default class EditProject extends Vue {    
+export default class EditProject extends Vue {
 
     @Prop(String)
     public id!: string;
-    
-    public get nodes() {
-      return projectManagerStore.graphData.nodes;
-    }
 
-    public get edges() {
-      return projectManagerStore.graphData.edges;
+    public get cards() {
+      return projectManagerStore.graphData.cards;
     }
 
     public handleDataSource() {
@@ -40,7 +36,7 @@ export default class EditProject extends Vue {
     }
 
     public handleDataSourceSubmit(input: DataSourceInput) {
-      projectManagerStore.addDataSource(input);      
+      projectManagerStore.addDataSource(input);
     }
 
     public handleFact() {
@@ -52,7 +48,7 @@ export default class EditProject extends Vue {
     }
 
     public handleInsight() {
-      this.$modal.show("create-insight-dialog");            
+      this.$modal.show("create-insight-dialog");
     }
 
     public handleInsightSubmit(input: InsightInput) {
@@ -60,7 +56,7 @@ export default class EditProject extends Vue {
     }
 
     public handleConclusion() {
-      this.$modal.show("create-conclusion-dialog");                  
+      this.$modal.show("create-conclusion-dialog");
     }
 
     public handleConclusionSubmit(input: ConclusionInput) {

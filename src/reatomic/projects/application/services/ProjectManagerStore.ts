@@ -22,14 +22,13 @@ let conclusionCounter = 0;
 
 @Module({ stateFactory: true, dynamic: true, namespaced: true, name: moduleName, store })
 export class ProjectManagerStore extends VuexModule implements AddDataSourceUseCase {
-    public graphData: GraphData = {
-        nodes: [],
-        edges: [],
+    public graphData = {
+        cards: [] as Card[]
     };
 
     @Mutation
     public addNodeCard(card: Card) {
-        this.graphData.nodes?.push(card);
+        this.graphData.cards?.push(card);
     }
 
     @Action({ commit: "addNodeCard"})
