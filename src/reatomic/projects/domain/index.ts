@@ -78,7 +78,9 @@ export interface Card {
 export interface Link {
   id: string;
   target?: string;
+  targetAnchor?: number;
   source?: string;
+  sourceAnchor?: number;
 }
 
 export interface LinkEdgeConfig extends EdgeConfig {

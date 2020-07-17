@@ -16,7 +16,6 @@ export const fromDataSource = (id: string, x: number, y: number, input: DataSour
 };
 
 export const fromFact = (id: string, x: number, y: number, input: FactInput): Card => {
-    console.log("fact type: " + input.type);
     return {
         id,
         x,

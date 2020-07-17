@@ -88,14 +88,12 @@ export default class G6Graph extends Vue {
 
     @Watch("cards")
     public onCardsChanged(val: Card[]) {
-      console.log("update cards");
       const data = convertToData(val, this.links);
       this.refreshData(data);
     }
 
     @Watch("links")
     public onLinksChanged(val: Link[]) {
-        console.log("update links");
         const data = convertToData(this.cards, val);
         this.refreshData(data);
     }
@@ -115,15 +113,7 @@ export default class G6Graph extends Vue {
         // HAY QUE ACTUALIZAR LAS COORDENADAS DE LAS TARJETAS CUANDO
         // SE MUEVEN
         //
-        // LOS NODOS TIENEN HOOKS PARA PODER ACTUALIZAR SU INFORMACION
-        // ECHAR UN VISTAZO EN custom-nodes.ts
-        //
-        // LA IDEA ES QUE EN custom-nodes.ts PUEDA HABER UN HOOK QUE SOLO
-        // SE EJECUTE CUANDO EL NODO DEJE DE ACTUALIZARSE EN LLUGAR DE
-        // ACTUALIZARSE CADA MS PORQUE EL USUARIO ESTE MOVIENDO TODO
-        // EL RATO EL NODO
-        //
-        // EN EL PEOR DE LOS CASOS MIRAR LOS EVENTOS
+        // on node:dragend => actualizar coordenadas
     }
 }
 </script>

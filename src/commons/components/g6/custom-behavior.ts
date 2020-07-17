@@ -39,13 +39,15 @@ export const AddEdgeByClickBehavior = (graph: Graph, store: ProjectManagerStore)
         target: model.id,
       });
 
+    // TODO: check we're not linking one with itself
       const myEdge = edge as IEdge;
       const link = {
         id: myEdge.getID(),
         source: myEdge.getSource().getID(),
+        sourceAnchor: 2,
         target: myEdge.getTarget().getID(),
+        targetAnchor: 0
       };
-      console.log("link to create: ", link);
       store.addLink(link);
       edge = null;
       addingEdge = false;
