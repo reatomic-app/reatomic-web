@@ -64,10 +64,10 @@ export interface Card {
     id: string;
     x: number;
     y: number;
+    type: string;
     width: number;
     height: number;
     description: string;
-    cardType: string;
     factType?: string;
     dataSourceType?: string;
     source?: string;

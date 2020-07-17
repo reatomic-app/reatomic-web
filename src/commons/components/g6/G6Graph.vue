@@ -2,11 +2,16 @@
 <script lang="ts">
 import { Vue, Component, Ref, Prop, Watch } from "vue-property-decorator";
 import G6, { Graph } from "@antv/g6";
-import { CardNode } from "@/commons/components/g6/custom-nodes";
 import { AddEdgeByClickBehavior } from "@/commons/components/g6/custom-behavior";
 import { GraphData } from '@antv/g6/lib/types';
 import { Card, CardNodeConfig, LinkEdgeConfig, Link } from '../../../reatomic/projects/domain';
 import projectManagerStore from "@/reatomic/projects/application/services/ProjectManagerStore";
+import {
+  ConclusionNode,
+  DataSourceNode,
+  FactNode,
+  InsightNode
+} from "@/commons/components/g6/nodes";
 
 const convertToNodeConfig = (next: Card): CardNodeConfig => {
   return {...next} as CardNodeConfig
@@ -39,8 +44,7 @@ export default class G6Graph extends Vue {
 
     public mounted() {
         if (this.projectGraphElement) {
-
-            G6.registerNode('card', CardNode(this.$i18n), 'single-node');
+            this.registerNodes();
 
             this.projectGraph = new Graph({
                 container: this.projectGraphElement,
@@ -84,6 +88,13 @@ export default class G6Graph extends Vue {
             this.projectGraph.render();
             this.projectGraph.moveTo(30,100);
         }
+    }
+
+    public registerNodes() {
+      G6.registerNode("data-source", DataSourceNode(this.$i18n), "single-node");
+      G6.registerNode("fact", FactNode(), "single-node");
+      G6.registerNode("insight", InsightNode(), "single-node");
+      G6.registerNode("conclusion", ConclusionNode(), "single-node");
     }
 
     @Watch("cards")

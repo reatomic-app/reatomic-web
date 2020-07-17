@@ -1,5 +1,11 @@
-import Group from '@antv/g-canvas/lib/group';
-
+import Group from "@antv/g-canvas/lib/group";
+import { ShapeOptions } from "@antv/g6/lib/interface/shape";
+import {
+  ReatomicModel,
+  resolveWidth,
+  resolveHeight,
+  createContentCard
+} from "./base";
 
 const icons = {
     HAPPY: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0xMiAyMkMxNy41MjI4IDIyIDIyIDE3LjUyMjggMjIgMTJDMjIgNi40NzcxNSAxNy41MjI4IDIgMTIgMkM2LjQ3NzE1IDIgMiA2LjQ3NzE1IDIgMTJDMiAxNy41MjI4IDYuNDc3MTUgMjIgMTIgMjJaIiBzdHJva2U9IiM0Nzk2OTYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CjxwYXRoIGQ9Ik04IDE0QzggMTQgOS41IDE2IDEyIDE2QzE0LjUgMTYgMTYgMTQgMTYgMTQiIHN0cm9rZT0iIzQ3OTY5NiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHBhdGggZD0iTTkgOUg5LjAxIiBzdHJva2U9IiM0Nzk2OTYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CjxwYXRoIGQ9Ik0xNSA5SDE1LjAxIiBzdHJva2U9IiM0Nzk2OTYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgoK",
@@ -29,4 +35,39 @@ export const createIcon = (x: number, y: number, group: Group, width: number, he
         },
         name: "fact-type",
     })
+}
+
+export const FactNode = (): ShapeOptions => {
+  return {
+    draw: (cfg: ReatomicModel, group: Group) => {
+      const x = cfg.x || 0;
+      const y = cfg.y || 0;
+      const width = resolveWidth(cfg.size);
+      const height = resolveHeight(cfg.size);
+      const attrs = {
+        colors: {
+            principal: "#CDE4E4",
+            shadow: "#CDE4E4",
+            text: "#479696"
+        },
+        iconType: cfg.factType,
+      };
+
+      const container = createContentCard(cfg, group, attrs.colors);
+
+      if (attrs.iconType) {
+        createIcon(x, y, group, width, height, attrs.iconType);
+      }
+
+      return container;
+    },
+    getAnchorPoints: () => {
+      return [
+        [0.5, 0], // middle of top side
+        [1, 0.5], // middle of right side
+        [0.5, 1.05], // middle of bottom side
+        [0, 0.5], // middle of left side
+      ];
+    },
+  };
 }
