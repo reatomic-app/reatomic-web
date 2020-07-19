@@ -1,6 +1,6 @@
 import { BehaviorOption, IG6GraphEvent, Item } from '@antv/g6/lib/types';
 import Graph from '@antv/g6/lib/graph/graph';
-import { ReatomicModel } from "./nodes/base";
+import { ReatomicModel } from "../nodes/base";
 import { ProjectManagerStore } from '@/reatomic/projects/application/services/ProjectManagerStore';
 import { IEdge } from '@antv/g6/lib/interface/item';
 

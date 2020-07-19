@@ -3,7 +3,7 @@
 import { Vue, Component, Ref, Prop, Watch } from "vue-property-decorator";
 import G6, { Graph } from "@antv/g6";
 import { GraphData } from '@antv/g6/lib/types';
-import { AddEdgeByClickBehavior } from "@/commons/components/g6/custom-behavior";
+import { AddEdgeByClickBehavior, UpdateNodePosition } from "@/commons/components/g6/behaviors";
 import { Card, Link } from '../../../reatomic/projects/domain';
 import projectManagerStore from "@/reatomic/projects/application/services/ProjectManagerStore";
 import {
@@ -40,7 +40,9 @@ export default class G6Graph extends Vue {
                 default: [
                 "drag-canvas",
                 "drag-node",
-                "zoom-canvas", "click-add-edge",
+                "zoom-canvas",
+                "click-add-edge",
+                "update-node-position"
                 ],
                 addEdge: [
                   'click-add-edge', 'click-select'
@@ -72,6 +74,7 @@ export default class G6Graph extends Vue {
 
     public registerBehaviors() {
       G6.registerBehavior('click-add-edge', AddEdgeByClickBehavior(this.graph, projectManagerStore));
+      G6.registerBehavior('update-node-position', UpdateNodePosition());
     }
 
     public registerNodes() {
