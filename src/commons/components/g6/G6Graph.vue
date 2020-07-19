@@ -2,9 +2,9 @@
 <script lang="ts">
 import { Vue, Component, Ref, Prop, Watch } from "vue-property-decorator";
 import G6, { Graph } from "@antv/g6";
-import { AddEdgeByClickBehavior } from "@/commons/components/g6/custom-behavior";
 import { GraphData } from '@antv/g6/lib/types';
-import { Card, CardNodeConfig, LinkEdgeConfig, Link } from '../../../reatomic/projects/domain';
+import { AddEdgeByClickBehavior } from "@/commons/components/g6/custom-behavior";
+import { Card, Link } from '../../../reatomic/projects/domain';
 import projectManagerStore from "@/reatomic/projects/application/services/ProjectManagerStore";
 import {
   ConclusionNode,
@@ -12,21 +12,7 @@ import {
   FactNode,
   InsightNode
 } from "@/commons/components/g6/nodes";
-
-const convertToNodeConfig = (next: Card): CardNodeConfig => {
-  return {...next} as CardNodeConfig
-};
-
-const convertToEdgeConfig = (next: Link): LinkEdgeConfig => {
-  return {...next} as LinkEdgeConfig
-};
-
-const convertToData = (cards: Card[], links: Link[]): GraphData => {
-  return {
-    nodes: cards.map(convertToNodeConfig),
-    edges: links.map(convertToEdgeConfig),
-  }
-};
+import { convertToData } from "./graph/index";
 
 @Component
 export default class G6Graph extends Vue {
@@ -38,56 +24,54 @@ export default class G6Graph extends Vue {
     public links!: Link[];
 
     @Ref("graph")
-    public projectGraphElement!: HTMLElement;
+    public graphContainer!: HTMLElement;
 
-    public projectGraph!: Graph;
+    public graph!: Graph;
 
     public mounted() {
-        if (this.projectGraphElement) {
+        if (this.graphContainer) {
             this.registerNodes();
 
-            this.projectGraph = new Graph({
-                container: this.projectGraphElement,
-                width: this.projectGraphElement.offsetWidth,
-                height: this.projectGraphElement.offsetHeight,
-                modes: {
-                  default: [
-                   "drag-canvas",
-                   "drag-node",
-                   "zoom-canvas", "click-add-edge",
-                  ],
-                  addEdge: [
-                    'click-add-edge', 'click-select'
-                  ]
+            this.graph = new Graph({
+              container: this.graphContainer,
+              width: this.graphContainer.offsetWidth,
+              height: this.graphContainer.offsetHeight,
+              modes: {
+                default: [
+                "drag-canvas",
+                "drag-node",
+                "zoom-canvas", "click-add-edge",
+                ],
+                addEdge: [
+                  'click-add-edge', 'click-select'
+                ]
+              },
+              defaultNode: {
+                  type: 'card',
+                  size: [200, 260],
+              },
+              defaultEdge: {
+                type: "line",
+                style: {
+                  lineWidth: 2,
+                  stroke: "#ABA4B2",
                 },
-                defaultNode: {
-                    type: 'card',
-                    size: [200, 260],
-                },
-                defaultEdge: {
-                  type: "line",
-                  style: {
-                    lineWidth: 2,
-                    stroke: "#ABA4B2",
-                  },
-                },
+              },
             });
 
-            G6.registerBehavior(
-              'click-add-edge',
-              AddEdgeByClickBehavior(
-                this.projectGraph,
-                projectManagerStore,
-              )
-            );
+            this.registerBehaviors();
 
             const data = convertToData(this.cards, this.links);
 
-            this.projectGraph.data(data);
-            this.projectGraph.setMode("default");
-            this.projectGraph.render();
-            this.projectGraph.moveTo(30,100);
+            this.graph.data(data);
+            this.graph.setMode("default");
+            this.graph.render();
+            this.graph.moveTo(30,100);
         }
+    }
+
+    public registerBehaviors() {
+      G6.registerBehavior('click-add-edge', AddEdgeByClickBehavior(this.graph, projectManagerStore));
     }
 
     public registerNodes() {
@@ -110,12 +94,12 @@ export default class G6Graph extends Vue {
     }
 
     public refreshData(data: GraphData) {
-        const zoom = this.projectGraph.getZoom()
-        this.projectGraph.data(data);
-        this.projectGraph.refresh();
-        this.projectGraph.render();
-        this.projectGraph.moveTo(30,100);
-        this.projectGraph.zoom(zoom);
+        const zoom = this.graph.getZoom()
+        this.graph.data(data);
+        this.graph.refresh();
+        this.graph.render();
+        this.graph.moveTo(30,100);
+        this.graph.zoom(zoom);
         // EL PROBLEMA ES QUE LOS NODOS SE CREARON EN UNAS COORDENADAS
         // Y ESAS COORDENADAS NO SE ACTUALIZAN POR LO QUE CUANDO SE
         // REFRESCA EL CANVAS SE VUELVEN A PINTAR CON LA UNICA INFORMACION
