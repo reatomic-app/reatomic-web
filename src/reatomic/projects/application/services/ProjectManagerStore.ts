@@ -2,7 +2,6 @@ import { AddDataSourceUseCase } from "../AddDataSourceUseCase";
 import { DataSourceInput, Card, FactInput, InsightInput, ConclusionInput, Link } from "../../domain";
 import { Action, Module, Mutation, getModule, VuexModule } from "vuex-module-decorators";
 import store from "@/store";
-import { GraphData } from '@antv/g6/lib/types';
 import { fromFact, fromDataSource, fromConclusion, fromInsight } from './converters';
 
 const moduleName = "projects:manager";
