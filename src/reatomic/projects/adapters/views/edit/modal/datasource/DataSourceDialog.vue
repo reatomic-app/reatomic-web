@@ -12,23 +12,22 @@ import { DataSourceInput } from '../../../../../domain';
     }
 })
 export default class DataSourceDialog extends Vue {
-    public input: DataSourceInput = {
-      type: "",
-      description: "",
-      date: new Date(),
-      url: "",
-    };
+    public input: DataSourceInput = DataSourceDialog.reset();
 
     @Emit("onSubmit")
     public handleSubmitClick() {
-      const toReturn = {...this.input,}
-      this.input = {
-        type: "",
-        date: new Date(),
-        description: "",
-        url: ""
-      };
+      const toReturn = {...this.input}
+      this.input = DataSourceDialog.reset();
       return toReturn;
+    }
+
+    public static reset(): DataSourceInput {
+      return {
+        type: "",
+        description: "",
+        date: new Date(),
+        url: "",
+      }
     }
 }
 </script>
