@@ -65,8 +65,8 @@ export interface Card {
     x: number;
     y: number;
     type: string;
-    width: number;
-    height: number;
+    width?: number;
+    height?: number;
     description: string;
     factType?: string;
     dataSourceType?: string;

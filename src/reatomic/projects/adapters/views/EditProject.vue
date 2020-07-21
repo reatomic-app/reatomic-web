@@ -8,9 +8,10 @@ import DataSourceDialog from "./edit/modal/datasource/DataSourceDialog.vue";
 import ConclusionDialog from "./edit/modal/conclusion/ConclusionDialog.vue";
 import FactDialog from "./edit/modal/fact/FactDialog.vue";
 import InsightDialog from "./edit/modal/insight/InsightDialog.vue";
-import { FactInput, DataSourceInput, InsightInput, ConclusionInput } from '../../domain';
+import { FactInput, DataSourceInput, InsightInput, ConclusionInput, Card, Link } from '../../domain';
 import projectManagerStore from "@/reatomic/projects/application/services/ProjectManagerStore";
 import G6Graph from "@/commons/components/g6/G6Graph.vue";
+import { toArray } from "@/commons/utils/rx";
 
 @Component({
   components: {
@@ -20,20 +21,20 @@ import G6Graph from "@/commons/components/g6/G6Graph.vue";
     InsightDialog,
     FactDialog,
     G6Graph,
+  },
+  subscriptions() {
+    return {
+      cards: projectManagerStore.cards$.pipe(toArray()),
+      links: projectManagerStore.links$.pipe(toArray())
+    }
   }
 })
 export default class EditProject extends Vue {
+    public cards: Card[] = [];
+    public links: Link[] = [];
 
     @Prop(String)
     public id!: string;
-
-    public get cards() {
-      return projectManagerStore.graphData.cards;
-    }
-
-    public get links() {
-      return projectManagerStore.graphData.links;
-    }
 
     public handleDataSource() {
       this.$modal.show("create-datasource-dialog");

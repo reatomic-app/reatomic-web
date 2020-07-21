@@ -1,10 +1,8 @@
-import { AddDataSourceUseCase } from "../AddDataSourceUseCase";
 import { DataSourceInput, Card, FactInput, InsightInput, ConclusionInput, Link } from "../../domain";
-import { Action, Module, Mutation, getModule, VuexModule } from "vuex-module-decorators";
-import store from "@/store";
 import { fromFact, fromDataSource, fromConclusion, fromInsight } from './converters';
-
-const moduleName = "projects:manager";
+import { Observable, BehaviorSubject } from "rxjs";
+import { List } from "immutable";
+import { generateID } from "@/commons/utils/uuid";
 
 // 135 means one level right after the previous one
 // the next operand means the real separation between levels
@@ -19,75 +17,65 @@ let factCounter = 0;
 let insightCounter = 0;
 let conclusionCounter = 0;
 
-@Module({ stateFactory: true, dynamic: true, namespaced: true, name: moduleName, store })
-export class ProjectManagerStore extends VuexModule implements AddDataSourceUseCase {
-    public graphData = {
-        cards: [] as Card[],
-        links: [] as Link[],
-    };
+export class ProjectManagerStore {
+    public _cards$: BehaviorSubject<List<Card>> = new BehaviorSubject<List<Card>>(List.of());
+    public cards$: Observable<List<Card>> = this._cards$.asObservable();
 
-    @Mutation
-    public addNodeCard(card: Card) {
-        this.graphData.cards?.push(card);
+    public _links$: BehaviorSubject<List<Link>> = new BehaviorSubject<List<Link>>(List.of());
+    public links$: Observable<List<Link>> = this._links$.asObservable();
+
+    public addCard(card: Card) {
+      this._cards$.next(this._cards$.getValue().push(card));
     }
 
-    @Mutation
-    public addEdgeLink(link: Link) {
-      this.graphData.links?.push(link);
-    }
-
-    @Action({ commit: "addEdgeLink" })
     public addLink(link: Link) {
-      return link;
+      this._links$.next(this._links$.getValue().push(link));
     }
 
-    @Action({ commit: "addNodeCard"})
-    public addDataSource(input: DataSourceInput): Card {
+    public addDataSource(input: DataSourceInput): void {
         const dataSource = fromDataSource(
-            "id-data-source-" + dataSourceCounter,
+            generateID(),
             dataSourceCounter,
             LEVEL_DATASOURCE,
             input,
         );
         dataSourceCounter += 125;
-        return dataSource;
+        this.addCard(dataSource);
     }
 
-    @Action({ commit: "addNodeCard"})
-    public addFact(input: FactInput): Card {
+    public addFact(input: FactInput): void {
         const fact = fromFact(
-            "id-fact-" + factCounter,
+            generateID(),
             factCounter,
             LEVEL_FACT,
             input
         );
         factCounter += 125;
-        return fact;
+        this.addCard(fact);
     }
 
-    @Action({ commit: "addNodeCard"})
-    public addInsight(input: InsightInput): Card {
+    public addInsight(input: InsightInput): void {
         const insight = fromInsight(
-            "id-insight-" + insightCounter,
+            generateID(),
             insightCounter,
             LEVEL_INSIGHT,
             input,
         )
         insightCounter += 125;
-        return insight;
+
+        this.addCard(insight);
     }
 
-    @Action({ commit: "addNodeCard"})
-    public addConclusion(input: ConclusionInput): Card {
+    public addConclusion(input: ConclusionInput): void {
         const conclusion = fromConclusion(
-            "id-conclusion-" + conclusionCounter,
+            generateID(),
             conclusionCounter,
             LEVEL_CONCLUSION,
             input,
         );
         conclusionCounter += 125;
-        return conclusion;
+        this.addCard(conclusion);
     }
 }
 
-export default getModule(ProjectManagerStore);
+export default new ProjectManagerStore();

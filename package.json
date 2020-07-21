@@ -10,7 +10,11 @@
   },
   "dependencies": {
     "@antv/g6": "^3.5.10",
+    "@types/uuid": "^8.0.0",
     "core-js": "^3.6.5",
+    "immutable": "^4.0.0-rc.12",
+    "rxjs": "^6.6.0",
+    "uuid": "^8.2.0",
     "v-calendar": "^1.0.8",
     "vee-validate": "^3.3.5",
     "vue": "^2.6.11",
@@ -19,6 +23,7 @@
     "vue-js-modal": "^2.0.0-rc.5",
     "vue-property-decorator": "^8.4.2",
     "vue-router": "^3.2.0",
+    "vue-rx": "^6.2.0",
     "vuex": "^3.4.0",
     "vuex-module-decorators": "^0.17.0"
   },
