@@ -62,9 +62,12 @@ export interface InsightInput {
 // GRAPH
 export interface Card {
     id: string;
-    x: number;
-    y: number;
+    x?: number;
+    y?: number;
+    index?: number;
     type: string;
+    empty?: boolean;
+    comboId: string;
     width?: number;
     height?: number;
     description: string;
@@ -73,6 +76,11 @@ export interface Card {
     source?: string;
     date?: Date;
     url?: string;
+}
+
+export interface Point {
+  x: number;
+  y: number;
 }
 
 export interface Link {

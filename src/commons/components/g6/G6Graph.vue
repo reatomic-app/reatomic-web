@@ -10,8 +10,9 @@ import {
   ConclusionNode,
   DataSourceNode,
   FactNode,
-  InsightNode
+  InsightNode,
 } from "@/commons/components/g6/nodes";
+import { ReatomicLayout } from "@/commons/components/g6/layouts";
 import { convertToData } from "./graph/index";
 
 @Component
@@ -32,10 +33,19 @@ export default class G6Graph extends Vue {
         if (this.graphContainer) {
             this.registerNodes();
 
+            G6.registerLayout('reatomic', ReatomicLayout);
+
             this.graph = new Graph({
               container: this.graphContainer,
               width: this.graphContainer.offsetWidth,
               height: this.graphContainer.offsetHeight,
+              layout: {
+                type: "reatomic",
+                rankdir: "TB",
+                align: "UR",
+                nodeSep: 20,
+                rankSep: 50,
+              },
               modes: {
                 default: [
                 "drag-canvas",
@@ -74,7 +84,7 @@ export default class G6Graph extends Vue {
 
     public registerBehaviors() {
       G6.registerBehavior('click-add-edge', AddEdgeByClickBehavior(this.graph, projectManagerStore));
-      G6.registerBehavior('update-node-position', UpdateNodePosition());
+      G6.registerBehavior('update-node-position', UpdateNodePosition(this.graph, projectManagerStore));
     }
 
     public registerNodes() {

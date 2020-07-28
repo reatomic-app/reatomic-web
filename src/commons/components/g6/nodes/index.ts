@@ -7,5 +7,5 @@ export {
   ConclusionNode,
   DataSourceNode,
   FactNode,
-  InsightNode
+  InsightNode,
 }

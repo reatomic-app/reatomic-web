@@ -4,22 +4,27 @@ import {
   ReatomicModel,
   createContentCard,
 } from "./base";
+import { createEmptyCard } from "./empty";
 
 export const InsightNode = (): ShapeOptions => {
   return {
     draw: (cfg: ReatomicModel, group: Group) => {
+      const colors = {
+        principal: "#F1DAE7",
+        shadow: "#F1DAE7",
+        text: "#C93F8D",
+      };
+
+      if (cfg.empty) {
+        return createEmptyCard(cfg, group, colors);
+      }
+
       const x = cfg.x || 0;
       const y = cfg.y || 0;
 
       const high = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgd2lkdGg9Ijg4IiBoZWlnaHQ9IjM2IiB2aWV3Qm94PSIwIDAgODggMzYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0wIDBINzBDNzkuOTQxMSAwIDg4IDguMDU4ODggODggMThWMzZIMThDOC4wNTg4NyAzNiAwIDI3Ljk0MTEgMCAxOFYwWiIgZmlsbD0iI0ZERDRFMyIvPgo8L3N2Zz4K";
       const low = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgd2lkdGg9Ijg4IiBoZWlnaHQ9IjM2IiB2aWV3Qm94PSIwIDAgODggMzYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0wIDBINzBDNzkuOTQxMSAwIDg4IDguMDU4ODggODggMThWMzZIMThDOC4wNTg4NyAzNiAwIDI3Ljk0MTEgMCAxOFYwWiIgZmlsbD0iI0ZFRjZENiIvPgo8L3N2Zz4K";
       const medium = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgd2lkdGg9Ijg4IiBoZWlnaHQ9IjM2IiB2aWV3Qm94PSIwIDAgODggMzYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0wIDBINzBDNzkuOTQxMSAwIDg4IDguMDU4ODggODggMThWMzZIMThDOC4wNTg4NyAzNiAwIDI3Ljk0MTEgMCAxOFYwWiIgZmlsbD0iI0ZERUFENCIvPgo8L3N2Zz4K";
-
-      const cardColors = {
-          principal: "#F1DAE7",
-          shadow: "#F1DAE7",
-          text: "#C93F8D",
-      };
 
       const values = {
           high: {
@@ -42,7 +47,7 @@ export const InsightNode = (): ShapeOptions => {
           ? values.low
           : values.medium;
 
-      const container = createContentCard(cfg, group, cardColors);
+      const container = createContentCard(cfg, group, colors);
       group.addShape("image", {
           attrs: {
               x: x + (200 - 88),

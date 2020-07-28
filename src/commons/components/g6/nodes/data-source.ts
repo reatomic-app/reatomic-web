@@ -7,20 +7,25 @@ import {
   resolveHeight,
   resolveWidth,
 } from "./base";
+import { createEmptyCard } from "./empty";
 
 export const DataSourceNode = (i18n: VueI18n): ShapeOptions => {
   return {
     draw: (cfg: ReatomicModel, group: Group) => {
-      const x = cfg.x || 0;
-      const y = cfg.y || 0;
-      const width = resolveWidth(cfg.size);
-      const height = resolveHeight(cfg.size);
       const colors = {
         principal: "#C4BFD9",
         shadow: "#C4BFD9",
         text: "#413673"
       };
 
+      if (cfg.empty) {
+        return createEmptyCard(cfg, group, colors);
+      }
+
+      const x = cfg.x || 0;
+      const y = cfg.y || 0;
+      const width = resolveWidth(cfg.size);
+      const height = resolveHeight(cfg.size);
       const container = createContentCard(cfg, group, colors);
 
       group.addShape('text', {

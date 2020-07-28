@@ -1,11 +1,11 @@
 import { FactInput, Card, InsightInput, DataSourceInput, ConclusionInput } from "../../domain";
+import { generateID } from "@/commons/utils/uuid"
 
-export const fromDataSource = (id: string, x: number, y: number, input: DataSourceInput): Card => {
+export const fromDataSource = (input: DataSourceInput): Card => {
     return {
-        id,
-        x,
-        y,
+        id: generateID(),
         type: "data-source",
+        comboId: "data-source",
         date: input.date,
         dataSourceType: input.type,
         description: input.description,
@@ -13,35 +13,32 @@ export const fromDataSource = (id: string, x: number, y: number, input: DataSour
     };
 };
 
-export const fromFact = (id: string, x: number, y: number, input: FactInput): Card => {
+export const fromFact = (input: FactInput): Card => {
     return {
-        id,
-        x,
-        y,
+        id: generateID(),
         type: "fact",
+        comboId: "fact",
         factType: input.type,
         description: input.description,
         url: input.url,
     };
 };
 
-export const fromInsight = (id: string, x: number, y: number, input: InsightInput): Card => {
+export const fromInsight = (input: InsightInput): Card => {
     return {
-        id,
-        x,
-        y,
+        id: generateID(),
         type: "insight",
+        comboId: "insight",
         description: input.description,
         url: input.url,
     };
 };
 
-export const fromConclusion = (id: string, x: number, y: number, input: ConclusionInput): Card => {
+export const fromConclusion = (input: ConclusionInput): Card => {
     return {
-        id,
-        x,
-        y,
+        id: generateID(),
         type: "conclusion",
+        comboId: "conclusion",
         description: input.description,
         url: input.url,
     };

@@ -1,17 +1,22 @@
 import Group from "@antv/g-canvas/lib/group";
 import { ShapeOptions } from "@antv/g6/lib/interface/shape";
 import { ReatomicModel, createContentCard } from "./base";
+import { createEmptyCard } from "./empty";
 
 export const ConclusionNode = (): ShapeOptions => {
   return {
     draw: (cfg: ReatomicModel, group: Group) => {
-      const cardColors = {
+      const colors = {
         principal: "#FFD3CC",
         shadow: "#FFD3CC",
         text: "#FF5345",
       };
 
-      return createContentCard(cfg, group, cardColors);
+      if (cfg.empty) {
+        return createEmptyCard(cfg, group, colors);
+      }
+
+      return createContentCard(cfg, group, colors);
     },
     getAnchorPoints: () => {
       return [
