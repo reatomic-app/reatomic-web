@@ -2,9 +2,21 @@
 
 import * as G6 from '@antv/g6/lib';
 
+export interface Data<T> {
+  state: 'empty' | 'loading' | 'fetched' | 'error';
+  error?: unknown;
+  data?: T;
+}
+
 export interface Project {
+  id: string;
   name: string;
-  description: string;
+  description?: string;
+}
+
+export interface ProjectFull extends Project{
+  cards?: Card[];
+  links?: Link[];
 }
 
 export interface DataSource {

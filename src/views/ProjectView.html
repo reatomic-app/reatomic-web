@@ -1,0 +1,9 @@
+<router-link to="/">Back</router-link>
+<p v-if="current?.state === 'loading'">Loading...</p>
+<p v-if="current?.state === 'error'">
+  {{ current?.error }}
+</p>
+<div v-if="current?.state === 'fetched'">
+  <h1>Project: {{ current?.data?.name }}</h1>
+</div>
+

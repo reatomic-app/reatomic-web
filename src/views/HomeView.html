@@ -1,13 +1,11 @@
-<h1>HOME!</h1>
-
-<button @click="showProject">Project</button>
-<button @click="showDatasource">Datasource</button>
-<button @click="showFact">Fact</button>
-<button @click="showInsight">Insight</button>
-<button @click="showConclusion">Conclusion</button>
-
-<!-- <MarkdownArea :data="documentText"></MarkdownArea> -->
-
-<div class="home">
-  <g6-graph :cards="cards"></g6-graph>
-</div>
+<h1>Project list</h1>
+<p v-if="projectList?.state === 'loading'">Loading...</p>
+<p v-if="projectList?.state === 'error'">
+  {{ projectList?.error }}
+</p>
+<ul v-if="projectList?.state === 'fetched'">
+  {{ projectList?.data?.map((it) => it.name) }}
+  <li v-for="project in projectList?.data">
+    <router-link :to="`/project/${project.id}`">{{ project.name }}</router-link>
+  </li>
+</ul>

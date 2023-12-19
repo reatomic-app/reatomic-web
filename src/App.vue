@@ -4,6 +4,7 @@
  import MainLayout from './components/MainLayout.vue';
 
  const ModalContainer = container;
+ 
 </script>
 
 <template>
