@@ -1,0 +1,47 @@
+.modal-wrapper {
+  width: var(--modal-width);
+  height: var(--modal-height);
+}
+
+.modal-content {
+  height: 100%;
+  border: none;
+  border-radius: 0.25rem;
+  background-color: var(--primary1);
+  color: var(--primary3);
+}
+.modal-header {
+	border-bottom: none;
+	padding: 2.5rem 1.5rem 1rem;
+}
+.modal-title {
+	text-transform: uppercase;
+	line-height: 1;
+}
+.modal-body {
+	padding: 1rem 1.5rem;
+}
+.modal-footer {
+	border: none;
+	padding: 1rem 1.5rem 2rem;
+}
+.modal-footer > * {
+	margin: 0;
+}
+
+.modal-header .close,
+.close:not(:disabled):not(.disabled):hover,
+.mailbox-attachment-close:not(:disabled):not(.disabled):hover,
+.close:not(:disabled):not(.disabled):focus,
+.mailbox-attachment-close:not(:disabled):not(.disabled):focus  {
+	opacity: 1;
+	padding: 0.5rem;
+	margin-top: -1.5rem;
+}
+.close:focus {
+	outline: 1px var(--primary2) dotted;
+}
+.close img {
+	width: 48px;
+	height: auto;
+}

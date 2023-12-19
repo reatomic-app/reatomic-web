@@ -1,22 +1,25 @@
-import Vue from "vue"
-import App from "./App.vue"
-import router from "./router"
-import store from "./store"
-import i18n from "@/commons/i18n/i18n";
-import VModal from "vue-js-modal";
-import { vueSetupValidation } from "@/commons/validation/validation";
+import './assets/main.css'
+import "v-calendar/style.css";
+
+
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 import VCalendar from "v-calendar";
 
-Vue.config.productionTip = false
+import App from './App.vue'
+import router from './router'
 
-vueSetupValidation();
+const app = createApp(App);
 
-Vue.use(VModal);
-Vue.use(VCalendar);
+app.config.errorHandler = (err, instance, info) => {
+  console.log("ERROR", info);
+  console.error(err);
+}
 
-new Vue({
-  router,
-  store,
-  i18n,
-  render: h => h(App)
-}).$mount("#app")
+app.use(createPinia());
+app.use(router);
+app.use(VCalendar, {});
+
+app.mount('#app');
+
+

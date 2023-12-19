@@ -1,20 +1,17 @@
-<template>  
-  <main-layout>
-    <router-view/>
-  </main-layout>
-</template>
+<script setup lang="ts">
+ import { RouterLink, RouterView } from 'vue-router'
+ import { container } from "jenesius-vue-modal";
+ import MainLayout from './components/MainLayout.vue';
 
-<script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
-import MainLayout from "@/commons/layout/main/MainLayout.vue";
-
-@Component({
-  components: {    
-    MainLayout,
-  }
-})
-export default class App extends Vue {}
+ const ModalContainer = container;
 </script>
 
-<style src="./App.css">
-</style>
+<template>
+  <main-layout>
+    <router-view />
+  </main-layout>
+
+  <ModalContainer/>
+</template>
+
+<style src="./App.css"></style>

@@ -1,0 +1,31 @@
+<x-dialog
+	:width="433"
+	@onCreate="handleSubmitClick"
+  @onCancel="$emit('return', false)"
+	name="create-project-dialog"
+	title="new project"
+	accept-caption="create">
+	<form>
+    <div class="form-group">
+			<label for="name">Name</label>
+			<div class="input-group">
+				<input
+					v-model="input.name"
+					type="text"
+					class="form-control"
+          id="name"
+          name="name"
+					autocomplete="off">
+		  </div>
+    </div>
+    <div class="form-group">
+	    <label for="description">Description</label>
+	    <textarea
+		    v-model="input.description"
+		    class="form-control"
+		    id="description"
+		    maxlength="120"
+		    rows="3"></textarea>
+    </div>
+  </form>
+</x-dialog>

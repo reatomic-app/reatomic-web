@@ -1,0 +1,35 @@
+<x-dialog
+	:height="468"
+	:width="433"
+	@onCreate="handleSubmitClick"
+  @onCancel="$emit('return', false)"
+	name="create-insight-dialog"
+	title="new insight"
+	accept-caption="add insight">
+	<form>
+		<div class="form-group">
+			<label for="description">Description</label>
+			<textarea
+				v-model="input.description"
+				class="form-control"
+				id="description"
+				rows="3"></textarea>
+		</div>
+		<div class="form-group">
+			<label for="URL">URL</label>
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<div class="input-group-text"><img src="@/assets/img/icon-link.svg" alt="source" /></div>
+				</div>
+				<input
+					v-model="input.url"
+					type="text"
+					class="form-control"
+          id="url"
+          name="url"
+					placeholder="http://"
+					autocomplete="off">
+			</div>
+		</div>
+	</form>
+</x-dialog>

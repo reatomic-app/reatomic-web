@@ -1,0 +1,28 @@
+.create-data-source, label, select, option, button, textarea {
+  font-size: .8rem;
+}
+
+.card-primary {
+  border-radius: 0;
+}
+
+.card-body {
+  margin-top: .5rem;
+}
+
+.normal {
+  font-weight: normal;
+}
+
+.vc-pane-container {
+  width: 300px;
+  height: 250px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+}
+
+.date-picker {
+  position: absolute;
+  z-index: 1;
+  
+}
