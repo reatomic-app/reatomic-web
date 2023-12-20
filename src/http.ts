@@ -8,6 +8,9 @@ async function query<T>(url: string): Promise<T> {
     method: "get",
     mode: "cors",
   });
+  if (response.status >= 400) {
+    throw new Error("Error: " + response.status + " " + response.statusText);
+  }
   return response.json() as T;
 }
 
@@ -17,8 +20,14 @@ async function post<Response>(
   const response = await fetch(`${BASE}/${url}`, {
     method: "post",
     mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(data),
   });
+  if (response.status >= 400) {
+    throw new Error("Error: " + response.status + " " + response.statusText);
+  }
   return response.json() as Response;
 }
 
@@ -30,6 +39,9 @@ async function put<Response>(
     mode: "cors",
     body: JSON.stringify(data),
   });
+  if (response.status >= 400) {
+    throw new Error("Error: " + response.status + " " + response.statusText);
+  }
   return response.json() as Response;
 }
 
@@ -38,6 +50,9 @@ async function del(url: string): Promise<boolean> {
     method: "delete",
     mode: "cors"
   });
+  if (response.status >= 400) {
+    throw new Error("Error: " + response.status + " " + response.statusText);
+  }
   return true;
 }
 
@@ -61,6 +76,10 @@ export async function fetchProjectList(): Promise<Project[]> {
 
 export async function fetchProjectDetail(id: string): Promise<ProjectFull> {
   return query(`projects/${id}`);
+}
+
+export async function createProject(project: Project): Promise<Project> {
+  return post(`projects`, project);
 }
 
 export async function createCard(projectId: string, card: Card): Promise<Card> {

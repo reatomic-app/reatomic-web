@@ -19,11 +19,16 @@
  }
 
  function handleSubmitClick() {
-   const toReturn = {
-     type: input.selectedType.find((val: string) => val !== undefined),
+   const factType =
+     input.selectedType.find((val) => val !== undefined);
+   
+   const card: Card = {
+     cardType: "fact",
+     factType,
      description: input.description,
-     url: input.url,
+     url: input.url
    }
-   emit("return", toReturn);
+
+   emit("return", card);
  }
 </script>

@@ -1,0 +1,10 @@
+.buttons-panel {
+  display: flex;
+  gap: 0.5rem;
+
+  button {
+    border: 1px solid black;
+    border-radius: 8px;
+  }
+}
+

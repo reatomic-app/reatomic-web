@@ -5,5 +5,26 @@
 </p>
 <div v-if="current?.state === 'fetched'">
   <h1>Project: {{ current?.data?.name }}</h1>
+
+  <div class="buttons-panel">
+    <button @click="showDatasource">+ Datasource</button>
+    <button @click="showFact">+ Fact</button>
+    <button @click="showInsight">+ Insight</button>
+    <button @click="showConclusion">+ Conclusion</button>
+  </div>
+
+  <h2>Cards</h2>
+  <ul>
+    <li v-for="card in current?.data?.cards">
+      [{{ card.cardType }}] {{ card.description }}
+    </li>
+  </ul>
+
+  <h2>Links</h2>
+  <ul>
+    <li v-for="link in current?.data?.links">
+      {{ link }}
+    </li>
+  </ul>
 </div>
 

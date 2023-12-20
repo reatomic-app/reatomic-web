@@ -12,6 +12,11 @@
  }
 
  function handleSubmitClick() {
-   emit("return", input);
+   const card = {
+     cardType: "insight",
+     description: input.description,
+     url: input.url
+   }
+   emit("return", card);
  }
 </script>

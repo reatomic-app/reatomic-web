@@ -1,10 +1,26 @@
 <script lang="ts" setup>
  import { projectStore } from "../stores/project";
+ import { openModal } from "jenesius-vue-modal";
+ import ProjectDialog from "../components/modals/ProjectDialog.vue";
+ import router from "../router";
 
  const store = projectStore();
  const projectList = store.projectList;
 
  store.fetchProjectList();
+
+ async function showProject() {
+   const modal = await openModal(ProjectDialog);
+   modal.on('return', async (value: Project) => {
+     modal.close();
+     console.log(value);
+     const result = await store.createProject(value);
+     console.log(result);
+     if (result) {
+       router.push(`/project/${result.id}`);
+     }
+   });
+ }
  
 </script>
 

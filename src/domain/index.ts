@@ -73,7 +73,7 @@ export interface InsightInput {
 // GRAPH
 export interface Card {
   id: string;
-  type: 'data-source' | 'fact' | 'insight' | 'conclusion';
+  cardType: 'data-source' | 'fact' | 'insight' | 'conclusion';
   x?: number;
   y?: number;
   width?: number;

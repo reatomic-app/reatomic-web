@@ -12,7 +12,13 @@
  };
 
  function handleCreate() {
-   emit("return", input);
+   const card: Card = {
+     cardType: "data-source",
+     description: input.description,
+     date: input.date,
+     url: input.url
+   };
+   emit("return", card);
  }
 </script>
 
