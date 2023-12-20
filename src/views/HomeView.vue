@@ -13,9 +13,7 @@
    const modal = await openModal(ProjectDialog);
    modal.on('return', async (value: Project) => {
      modal.close();
-     console.log(value);
      const result = await store.createProject(value);
-     console.log(result);
      if (result) {
        router.push(`/project/${result.id}`);
      }

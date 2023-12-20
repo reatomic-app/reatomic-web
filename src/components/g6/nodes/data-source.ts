@@ -59,5 +59,37 @@ export const DataSourceNode = (): ShapeOptions => {
         [0, 0.5], // middle of left side
       ];
     },
+
+    setState(name, value, node) {
+      if (name === "hover") {
+        const group = node.getContainer();
+        const bb = group.getBBox()
+        if (value) {
+          const plusBtn = group.addGroup({
+            id: "plusBtn",
+            attrs: {
+              cursor: "pointer"
+            }
+          });
+
+          plusBtn.addShape('circle', {
+            attrs: {
+              x: bb.x + (bb.width / 2),
+              y: bb.maxY - 10,
+              fill: "white",
+              stroke: "#C4BFD9",
+              lineWidth: 3,
+              r: 20,
+              cursor: "pointer"
+            },
+            name: "buttonBackground",
+          });
+        } else {
+          const child = group.findById("plusBtn");
+          group.removeChild(child);
+        }
+      }
+    },
+
   };
 }

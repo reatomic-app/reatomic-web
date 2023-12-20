@@ -36,10 +36,10 @@ export const projectStore = defineStore('project', {
         this.current.data.cards?.push(result);
       }
     },
-    async addLink(source: Card, target: Card) {
+    async addLink(sourceId: string, targetId: string) {
       if (this.current.state === "fetched" && this.current.data) {
         const projectId = this.current.data.id;
-        const result = await http.createLink(projectId, source.id, target.id);
+        const result = await http.createLink(projectId, sourceId, targetId);
         this.current.data.links?.push(result);
       }
     },

@@ -45,6 +45,10 @@
  function showInsight() {
    open(InsightDialog);
  }
+
+ function handleLinkCreated(link: Link) {
+   store.addLink(link.source, link.target);
+ }
 </script>
 
 <template src="./ProjectView.html"></template>

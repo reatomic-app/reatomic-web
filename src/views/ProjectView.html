@@ -1,30 +1,43 @@
-<router-link to="/">Back</router-link>
 <p v-if="current?.state === 'loading'">Loading...</p>
 <p v-if="current?.state === 'error'">
   {{ current?.error }}
 </p>
-<div v-if="current?.state === 'fetched'">
-  <h1>Project: {{ current?.data?.name }}</h1>
+<div class="content" v-if="current?.state === 'fetched'">
+  <div class="project-header">
+    <router-link to="/">Back</router-link>
+    <h1>Project: {{ current?.data?.name }}</h1>
 
-  <div class="buttons-panel">
-    <button @click="showDatasource">+ Datasource</button>
-    <button @click="showFact">+ Fact</button>
-    <button @click="showInsight">+ Insight</button>
-    <button @click="showConclusion">+ Conclusion</button>
+    <div class="buttons-panel">
+      <button @click="showDatasource">+ Datasource</button>
+      <button @click="showFact">+ Fact</button>
+      <button @click="showInsight">+ Insight</button>
+      <button @click="showConclusion">+ Conclusion</button>
+    </div>
+
   </div>
 
-  <h2>Cards</h2>
-  <ul>
-    <li v-for="card in current?.data?.cards">
-      [{{ card.cardType }}] {{ card.description }}
-    </li>
-  </ul>
+  <div class="debug">
+    <h2>Cards</h2>
+    <ul>
+      <li v-for="card in current?.data?.cards">
+        [{{ card.cardType }}] {{ card.description }}
+      </li>
+    </ul>
 
-  <h2>Links</h2>
-  <ul>
-    <li v-for="link in current?.data?.links">
-      {{ link }}
-    </li>
-  </ul>
+    <h2>Links</h2>
+    <ul>
+      <li v-for="link in current?.data?.links">
+        {{ link }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="graph-wrapper">
+    <g6-graph
+      :cards="current?.data?.cards"
+      :links="current?.data?.links"
+      @on-link-created="handleLinkCreated">
+    </g6-graph>
+  </div>
 </div>
 

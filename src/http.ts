@@ -75,7 +75,14 @@ export async function fetchProjectList(): Promise<Project[]> {
 }
 
 export async function fetchProjectDetail(id: string): Promise<ProjectFull> {
-  return query(`projects/${id}`);
+  const project = await query(`projects/${id}`);
+
+  project.cards?.map((it: Card) => {
+    it.date = it.date ? new Date(it.date) : undefined;
+    return it;
+  });
+
+  return project;
 }
 
 export async function createProject(project: Project): Promise<Project> {
@@ -83,7 +90,9 @@ export async function createProject(project: Project): Promise<Project> {
 }
 
 export async function createCard(projectId: string, card: Card): Promise<Card> {
-  return post(`projects/${projectId}/cards`, card);
+  const result = await post(`projects/${projectId}/cards`, card);
+  result.date = result.date ? new Date(result.date) : undefined;
+  return result;
 }
 
 export async function createLink(projectId: string, source: string, target: string): Promise<Link> {
@@ -91,7 +100,9 @@ export async function createLink(projectId: string, source: string, target: stri
 }
 
 export async function updateCard(projectId: string, card: Card): Promise<Card> {
-  return post(`projects/${projectId}/cards/${card.id}`, card);
+  const result = await post(`projects/${projectId}/cards/${card.id}`, card);
+  result.date = result.date ? new Date(result.date) : undefined;
+  return result;
 }
 
 export async function removeCard(projectId: string, card: Card): Promise<boolean> {
@@ -101,5 +112,3 @@ export async function removeCard(projectId: string, card: Card): Promise<boolean
 export async function removeLink(projectId: string, link: Link): Promise<boolean> {
   return del(`projects/${projectId}/links/${link.source}/${link.target}`);
 }
-
-

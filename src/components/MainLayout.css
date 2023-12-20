@@ -115,3 +115,12 @@
 	padding-left: 0;
 }
 
+
+.layout-fixed.custom-wrapper {
+  width: 100%;
+  height: 100%;
+
+  .content-wrapper, .content {
+    height: 100%;
+  }
+}

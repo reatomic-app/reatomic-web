@@ -1,3 +1,18 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.project-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-right: 250px;
+}
+
+h1 {
+  flex: 1;
+}
 .buttons-panel {
   display: flex;
   gap: 0.5rem;
@@ -8,3 +23,21 @@
   }
 }
 
+.graph-wrapper {
+  flex: 1;
+  border: 1px solid silver;
+  margin: 1rem;
+  width: calc(100% - 2rem);
+  height: 100%;
+}
+
+.debug {
+  opacity: 0.2;
+  position: absolute;
+  right: 0;
+  background: white;
+  width: 250px;
+  border-left: 1px solid black;
+  height: 100%;
+  padding: 1rem;
+}

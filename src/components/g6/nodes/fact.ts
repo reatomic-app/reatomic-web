@@ -70,5 +70,14 @@ export const FactNode = (): ShapeOptions => {
         [0, 0.5], // middle of left side
       ];
     },
+
+    update(cfg, node) {
+      // console.log("update", cfg, node);
+    },
+
+    setState(name, value, node) {
+      // console.log("setState", name, value, node);
+    },
+
   };
 }

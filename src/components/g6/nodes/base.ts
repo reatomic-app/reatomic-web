@@ -74,6 +74,7 @@ export const createContentCard = (cfg: ReatomicModel, group: IGroup, colors: Car
   const x = cfg.x || 0;
   const y = cfg.y || 0;
   const textLines: TextLines = convertTextToLines(cfg.description);
+
   const commonTextAttrs = {
     class: "card-text",
     textAnchor: "middle",
@@ -84,8 +85,13 @@ export const createContentCard = (cfg: ReatomicModel, group: IGroup, colors: Car
     cursor: 'pointer',
   };
 
+  const backgroundGroup = group.addGroup({
+    id: "background",
+    draggable: true
+  });
+
   // BACKGROUND
-  const container = group.addShape('rect', {
+  const container = backgroundGroup.addShape('rect', {
     attrs: {
       x,
       y,
@@ -95,25 +101,29 @@ export const createContentCard = (cfg: ReatomicModel, group: IGroup, colors: Car
       radius: 20,
     },
     name: "card",
-    draggable: true
   });
+
   // BACKGROUND_DOWN
-  group.addShape('rect', {
+  backgroundGroup.addShape('rect', {
     attrs: {
       x,
       y,
       width,
       height: height + (height * 0.05),
       fill: colors.shadow,
-      // "rgba(196, 191, 217, 0.5)"
       radius: 20,
     },
-
     name: "card",
     draggable: true
   });
+
   // FOREGROUND
-  group.addShape('rect', {
+  const foregroundGroup = group.addGroup({
+    id: "foreground",
+    draggable: true
+  });
+
+  foregroundGroup.addShape('rect', {
     attrs: {
       x: x + (width * 0.0075),
       y: y + (height * 0.0075),
@@ -122,11 +132,9 @@ export const createContentCard = (cfg: ReatomicModel, group: IGroup, colors: Car
       fill: "#FFF",
       radius: 20,
     },
-
     name: "card",
-    draggable: true
   });
-  group.addShape('text', {
+  foregroundGroup.addShape('text', {
     attrs: {
       text: textLines.line1,
       x: x + (width * 0.1),
@@ -135,7 +143,7 @@ export const createContentCard = (cfg: ReatomicModel, group: IGroup, colors: Car
     },
     name: 'text-line-1',
   });
-  group.addShape('text', {
+  foregroundGroup.addShape('text', {
     attrs: {
       text: textLines.line2,
       x: x + (width * 0.1),
@@ -144,7 +152,7 @@ export const createContentCard = (cfg: ReatomicModel, group: IGroup, colors: Car
     },
     name: 'text-line-2',
   });
-  group.addShape('text', {
+  foregroundGroup.addShape('text', {
     attrs: {
       text: textLines.line3,
       x: x + (width * 0.1),
@@ -153,7 +161,7 @@ export const createContentCard = (cfg: ReatomicModel, group: IGroup, colors: Car
     },
     name: 'text-line-3',
   });
-  group.addShape('text', {
+  foregroundGroup.addShape('text', {
     attrs: {
       text: textLines.line4,
       x: x + (width * 0.1),
@@ -162,7 +170,7 @@ export const createContentCard = (cfg: ReatomicModel, group: IGroup, colors: Car
     },
     name: 'text-line-4',
   });
-  group.addShape('text', {
+  foregroundGroup.addShape('text', {
     attrs: {
       text: textLines.line5,
       x: x + (width * 0.1),
@@ -171,7 +179,7 @@ export const createContentCard = (cfg: ReatomicModel, group: IGroup, colors: Car
     },
     name: 'text-line-5',
   });
-  group.addShape('text', {
+  foregroundGroup.addShape('text', {
     attrs: {
       text: textLines.line6,
       x: x + (width * 0.1),
@@ -180,7 +188,7 @@ export const createContentCard = (cfg: ReatomicModel, group: IGroup, colors: Car
     },
     name: 'text-line-6',
   });
-  group.addShape('text', {
+  foregroundGroup.addShape('text', {
     attrs: {
       text: textLines.line7,
       x: x + (width * 0.1),
@@ -191,7 +199,7 @@ export const createContentCard = (cfg: ReatomicModel, group: IGroup, colors: Car
   });
 
   if (cfg.url) {
-    group.addShape('text', {
+    foregroundGroup.addShape('text', {
       attrs: {
         text: "source",
         class: "card-text",
@@ -208,6 +216,21 @@ export const createContentCard = (cfg: ReatomicModel, group: IGroup, colors: Car
       name: 'source',
     });
   }
+
+  // const plusBtn = group.addGroup({
+  //   id: "plusBtn"
+  // });
+
+  // plusBtn.addShape('circle', {
+  //   attrs: {
+  //     x: x + (width / 2),
+  //     y: y + height,
+  //     fill: "red",
+  //     r: 20,
+  //   },
+  //   name: "buttonBackground",
+  // });
+
 
   return container;
 };
