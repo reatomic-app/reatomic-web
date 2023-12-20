@@ -1,6 +1,7 @@
-import './assets/main.css'
+import './styles/main.css'
+import './styles/easymde.css'
+import './styles/adminlte.css';
 import "v-calendar/style.css";
-
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'

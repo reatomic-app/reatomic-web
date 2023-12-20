@@ -1,4 +1,125 @@
-@import "./styles/all.css";
-@import "./styles/adminlte.css";
-@import "./styles/reatomic.css";
-@import "./styles/easymde.css";
+:root {
+	--primary1: #f4f2f5;
+	--primary2: #9D95A6;
+	--primary3: #3C3940;
+	--fact1: #f5f9f9;
+	--fact2: #cde4e4;
+	--fact3: #479696;
+	--source1: #F0EEF7;
+	--source2: #C4BFD9;
+	--source3: #413673;
+	--conclusion1: #FDF2F3;
+	--conclusion2: #FFE0DB;
+	--conclusion3: #FF5345;
+	--insight1: #FDF9FB;
+	--insight2: #F7EBF2;
+	--insight3: #C93F8D;
+
+  --c2: #FFD3CC;
+  --c3: #FF5345;
+  --f2: #CDE4E4;
+  --f3: #479696;
+  --i2: #F1DAE7;
+  --i3: #C93F8D;
+
+  --gray100: #E9EFF7;
+  --gray400: #D8DEE9;
+  --gray600: #475566;
+  --gray700: #1F2833;
+
+  --ds2: #DAE5F2;
+  --ds3: #365173;
+}
+
+#app {
+  width: 100vw;
+  height: 100vh;
+  font-family: roboto;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+}
+
+
+h1 {
+	color: var(--primary3);
+	font-size: 1.1rem;
+}
+body {
+	font-family: 'Cabin', sans-serif;
+}
+.btn {
+	border-radius: 0.125rem;
+	font-size: 0.875rem;
+}
+.btn-primary {
+	background-color: var(--primary3);
+	border: none;
+	min-width: 12rem;
+}
+.btn-primary:hover, .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
+	background-color: #231E29;
+}
+
+label:not(.form-check-label):not(.custom-file-label) {
+	font-weight: 500;
+	font-size: 0.875rem;
+	line-height: 1;
+	margin-bottom: 0.5rem;
+	margin-left: 0.5rem;
+}
+.form-control, span[name="date"] input {
+	padding: 0.375rem 0.5re;
+	border-color: white;
+	font-size: 0.875rem;
+	color: var(--primary3);
+}
+.form-control:focus, span[name="date"] input:focus {
+	border-color: var(--primary2);
+	box-shadow: none;
+}
+.input-group-text {
+	background-color: white;
+	border: none;
+	color: var(--primary2);
+	padding: 0rem 0.25rem 0 0.5rem;
+	line-height: 1;
+	font-size: 0.875rem;
+}
+span[name="date"] {
+	padding: 0;
+	border: none;
+}
+span[name="date"] input {
+	line-height: 1.5rem;
+}
+input[type="date"] {
+	padding-right: 0;
+	position: relative;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    background: transparent;
+    width: 15px;
+    height: 20px;
+}
+::placeholder {
+  color: var(--primary2);
+  opacity: 1;
+}
+
+:-ms-input-placeholder {
+  color: var(--primary2);
+}
+
+::-ms-input-placeholder {
+  color: var(--primary2);
+}
+
+.vm--container .vm--overlay {
+	background-color: rgba(255,255,255,0.85);
+}
+.vm--container .vm--modal {
+	box-shadow: none;
+}
+
+

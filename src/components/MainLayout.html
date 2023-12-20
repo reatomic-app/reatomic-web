@@ -1,57 +1,108 @@
-<div class="wrapper custom-wrapper layout-fixed">
-  <nav class="main-header navbar navbar-expand">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <!-- <x-sidebar-switch /> -->
-      </li>
-    </ul>
-  </nav>
-  
-  <aside class="main-sidebar elevation-1">
-    <a href="/projects" class="brand-link">
-      <img src="@/assets/img/logotipo-xs.png" alt="reatomic" class="brand-image">
-    </a>
-    
-    <div class="sidebar">
-      <h1>addBlocker IRL</h1>
-      
-      <nav class="mt-2">
-        <!-- <x-sidebar /> -->
-      </nav>
-
-      <ul class="nav nav-pills nav-sidebar flex-column scroll-container">
-        <!-- <Li>
-             <a href="/projects/iteration2">Entrevistas al grupo de change.org</a>
-             </Li>
-             <Li>
-             <a href="/projects/iteration2">Focus group</a>
-             </Li>
-             <Li>
-             <a href="/projects/iteration2">Entrevistas a 7 neurólogos</a>
-             </Li>
-             <Li>
-             <a href="/projects/iteration2">Tests de usabilidad</a>
-             </Li> -->
-      </ul>
-
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="@/assets/img/user160.png" class="img-circle" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">Rihana</a>
-        </div>
-      </div>
-    </div>
-  </aside>
-  
-  <div class="content-wrapper">
-    <section class="content">
-      <router-view></router-view>
-    </section>
+<aside class="sidebar">
+  <div class="logo-container">
+    <router-link to="/">
+      <img src="@/assets/img/logotipo-xs.png" alt="reatomic" class="logo-image">
+    </router-link>
   </div>
-  <aside class="control-sidebar control-sidebar-dark">
-  </aside>
-  <slot name="modal"></slot>
-</div>
+  <div class="project-widget">
+    <div class="title">Projects</div>
+    <div v-if="!current.data" class="selected">No projects yet</div>
+    <div v-if="current.data" class="selected">{{ current.data?.name }}</div>
+    <button class="plus-button">
+      <plus-icon/>
+    </button>
+  </div>
+  
+  <nav class="navigation">
+    <div class="navigation-item">
+      <router-link
+        class="title"
+        :to="`/project/${current?.data?.id}`" >
+        <overview-icon/>Overview</router-link>
+    </div>
 
+    <div class="navigation-item">
+      <span class="title"><overview-icon/>Experiments</span>
+      <div v-if="!datasources" class="empty">No experiments yet</div>
+      <ul>
+        <li v-for="item of datasources">
+          <router-link :title="item.description" :to="`/project/${current.data?.id}/experiment/${item.id}`">{{ item.description }}</router-link>
+        </li>
+      </ul>
+    </div>
+
+    <div class="navigation-item">
+      <span class="title"><overview-icon/>Reports</span>
+      <div class="empty">No reports yet</div>
+    </div>
+
+    <div class="navigation-item">
+      <span class="title"><overview-icon/>Data</span>
+      <div class="empty">No data yet</div>
+    </div>
+  </nav>
+  <nav class="user"></nav>
+</aside>
+
+<main class="content">
+  <router-view></router-view>
+</main>
+
+<!-- 
+     <div class="wrapper custom-wrapper layout-fixed">
+     <nav class="main-header navbar navbar-expand">
+     <ul class="navbar-nav">
+     <li class="nav-item">
+     <x-sidebar-switch />
+     </li>
+     </ul>
+     </nav>
+     
+     <aside class="main-sidebar elevation-1">
+     <router-link to="/" class="brand-link">
+     <img src="@/assets/img/logotipo-xs.png" alt="reatomic" class="brand-image">
+     </router-link>
+     
+     <div class="sidebar">
+     <h1>addBlocker IRL</h1>
+     
+     <nav class="mt-2">
+     <x-sidebar />
+     </nav>
+
+     <ul class="nav nav-pills nav-sidebar flex-column scroll-container">
+     <Li>
+     <a href="/projects/iteration2">Entrevistas al grupo de change.org</a>
+     </Li>
+     <Li>
+     <a href="/projects/iteration2">Focus group</a>
+     </Li>
+     <Li>
+     <a href="/projects/iteration2">Entrevistas a 7 neurólogos</a>
+     </Li>
+     <Li>
+     <a href="/projects/iteration2">Tests de usabilidad</a>
+     </Li>
+     </ul>
+
+     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+     <div class="image">
+     <img src="@/assets/img/user160.png" class="img-circle" alt="User Image">
+     </div>
+     <div class="info">
+     <a href="#" class="d-block">Rihana</a>
+     </div>
+     </div>
+     </div>
+     </aside>
+     
+     <div class="content-wrapper">
+     <section class="content">
+     <router-view></router-view>
+     </section>
+     </div>
+     <aside class="control-sidebar control-sidebar-dark">
+     </aside>
+     <slot name="modal"></slot>
+     </div>
+-->

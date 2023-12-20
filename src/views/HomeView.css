@@ -1,0 +1,24 @@
+
+.home {
+  height: 100%;
+  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 30%;
+  }
+}
+
+button {
+  border: 0;
+  background: var(--ds3);
+  font-size: 14px;
+  font-weight: 700;
+  font-family: montserrat;
+  border-radius: 6px;
+  color: white;
+  padding: 1rem 4rem;
+}

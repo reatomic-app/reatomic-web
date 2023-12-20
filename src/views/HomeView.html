@@ -1,13 +1,16 @@
-<h1>Project list</h1>
 <p v-if="projectList?.state === 'loading'">Loading...</p>
 <p v-if="projectList?.state === 'error'">
   {{ projectList?.error }}
 </p>
 <ul v-if="projectList?.state === 'fetched'">
-  {{ projectList?.data?.map((it) => it.name) }}
   <li v-for="project in projectList?.data">
     <router-link :to="`/project/${project.id}`">{{ project.name }}</router-link>
   </li>
 </ul>
 
 <button @click="showProject">Project</button>
+
+<section class="home">
+  <img src="@/assets/logo.svg" alt="reatomic" class="logo-big">
+  <button @click="showProject">Create Project</button>
+</section>

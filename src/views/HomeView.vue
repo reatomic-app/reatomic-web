@@ -23,6 +23,4 @@
 </script>
 
 <template src="./HomeView.html"></template>
-
-
-
+<style scoped src="./HomeView.css"></style>

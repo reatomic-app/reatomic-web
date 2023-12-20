@@ -19,6 +19,10 @@ export const projectStore = defineStore('project', {
     }
   } as State),
 
+  getters: {
+    datasources: (state) => state.current.data?.cards.filter((c) => c.cardType === 'data-source')
+  },
+  
   actions: {
     async fetchProjectList() {
        http.load(this.projectList, () => http.fetchProjectList());
