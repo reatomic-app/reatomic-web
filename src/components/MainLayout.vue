@@ -1,22 +1,34 @@
 <script lang="ts" setup>
- // import { Vue, Component } from 'vue-property-decorator';
- // import XSidebar from "@/commons/components/x-sidebar/XSidebar.vue";
- // import XSidebarSwitch from "@/commons/components/x-sidebar/XSidebarSwitch.vue";
- import { watch, computed } from "vue";
- import { projectStore } from "../stores/project";
- import PlusIcon from "./icons/plus-icon.vue";
- import OverviewIcon from "./icons/overview-icon.vue";
+  import { watch, computed, onMounted } from "vue";
+  import { projectStore } from "../stores/project";
+  import PlusIcon from "./icons/plus-icon.vue";
+  import OverviewIcon from "./icons/overview-icon.vue";
+  import { openModal } from "jenesius-vue-modal";
+  import ProjectDialog from "../components/modals/ProjectDialog.vue";
+  import router from "../router";
 
- const store = projectStore();
- const current = store.current;
- const datasources = computed(() => {
-   console.log(store.datasources);
-   return store.datasources;
- });
+  const store = projectStore();
+  onMounted(() => {
+    store.fetchProjectList();
+  });
+  
+  const current = store.current;
+  const projectList = store.projectList;
 
- //const datasources = store.current?.data?.cards?.filter( (c) => c.cardType === "data-source");
- //console.log(store.current?.data?.cards, datasources);
+  const datasources = computed(() => {
+    return store.datasources;
+  });
 
+  async function showProject() {
+    const modal = await openModal(ProjectDialog);
+    modal.on('return', async (value: Project) => {
+      modal.close();
+      const result = await store.createProject(value);
+      if (result) {
+        router.push(`/project/${result.id}`);
+      }
+    });
+  }
 </script>
 
 <template src="./MainLayout.html"></template>

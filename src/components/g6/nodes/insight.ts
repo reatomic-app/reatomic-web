@@ -76,12 +76,17 @@ export const InsightNode = (): ShapeOptions => {
         [0, 0.5], // middle of left side
       ];
     },
-    update(cfg, node) {
-      //console.log("update", cfg, node);
-    },
-
     setState(name, value, node) {
-      //console.log("setState", name, value, node);
+      if (name === "hover") {
+        const group = node.getContainer();
+        const child = group.findById("plusBtn");
+        
+        if (value) {
+          child.attr("opacity", 1);
+        } else {
+          child.attr("opacity", 0);
+        }
+      }
     },
 
   };

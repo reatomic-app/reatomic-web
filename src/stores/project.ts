@@ -28,7 +28,9 @@ export const projectStore = defineStore('project', {
        http.load(this.projectList, () => http.fetchProjectList());
     },
     async createProject(project: Project): Promise<Project> {
-      return http.createProject(project);
+      const result = await http.createProject(project);
+      this.projectList.data = [ result, ...this.projectList.data ];
+      return result;
     },
     async fetchProjectDetail(id: string) {
       http.load(this.current, () => http.fetchProjectDetail(id));

@@ -7,8 +7,6 @@
  const store = projectStore();
  const projectList = store.projectList;
 
- store.fetchProjectList();
-
  async function showProject() {
    const modal = await openModal(ProjectDialog);
    modal.on('return', async (value: Project) => {
@@ -19,7 +17,7 @@
      }
    });
  }
- 
+
 </script>
 
 <template src="./HomeView.html"></template>

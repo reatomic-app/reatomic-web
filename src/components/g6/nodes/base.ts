@@ -1,6 +1,6 @@
 import type { ModelConfig, IShape, IGroup } from "@antv/g6/lib";
 import type { ShapeAttrs } from "@antv/g-base/lib";
-
+import icons from "./icons";
 
 export interface ReatomicModel extends ModelConfig {
   description: string;
@@ -231,6 +231,41 @@ export const createContentCard = (cfg: ReatomicModel, group: IGroup, colors: Car
   //   name: "buttonBackground",
   // });
 
+  const plusBtn = group.addGroup({
+    id: "plusBtn",
+    attrs: {
+      opacity: 0,
+      cursor: "pointer"
+    }
+  });
 
+  const circleX = x + (width / 2);
+  const circleY = y + height;
+
+  plusBtn.addShape('circle', {
+    attrs: {
+      x: circleX,
+      y: circleY,
+      fill: "white",
+      stroke: colors.principal,
+      lineWidth: 3,
+      r: 20,
+      cursor: "pointer"
+    },
+    name: "buttonBackground",
+  });
+
+  plusBtn.addShape("image", {
+    attrs: {
+      x: circleX - 15,
+      y: circleY - 15,
+      width: 30,
+      height: 30,
+      img: icons.PlusIcon(colors.text),
+      cursor: "pointer"
+    },
+    name: "plus-icon-image"
+  });
+  
   return container;
 };

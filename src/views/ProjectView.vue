@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+ import { watch } from "vue";
  import { projectStore } from "../stores/project";
  import type { Card, DataSource } from "../domain";
  import { openModal } from "jenesius-vue-modal";
@@ -16,9 +17,10 @@
 
  const store = projectStore();
 
- if (props.id) {
+ store.fetchProjectDetail(props.id);
+ watch(() => props.id, (id) => {
    store.fetchProjectDetail(props.id);
- }
+ });
 
  const current = store.current;
 

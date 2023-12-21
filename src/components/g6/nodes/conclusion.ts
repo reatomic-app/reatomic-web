@@ -22,5 +22,6 @@ export const ConclusionNode = (): ShapeOptions => {
         [0, 0.5], // middle of left side
       ];
     },
+
   };
 };

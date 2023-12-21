@@ -1,6 +1,7 @@
 import type { ShapeOptions, ModelConfig, IGroup } from "@antv/g6/lib";
 import type { ReatomicModel } from "./base";
 import { createContentCard, resolveHeight, resolveWidth } from "./base";
+import * as icons from "./icons";
 
 export const DataSourceNode = (): ShapeOptions => {
   return {
@@ -63,33 +64,14 @@ export const DataSourceNode = (): ShapeOptions => {
     setState(name, value, node) {
       if (name === "hover") {
         const group = node.getContainer();
-        const bb = group.getBBox()
+        const child = group.findById("plusBtn");
+        
         if (value) {
-          const plusBtn = group.addGroup({
-            id: "plusBtn",
-            attrs: {
-              cursor: "pointer"
-            }
-          });
-
-          plusBtn.addShape('circle', {
-            attrs: {
-              x: bb.x + (bb.width / 2),
-              y: bb.maxY - 10,
-              fill: "white",
-              stroke: "#C4BFD9",
-              lineWidth: 3,
-              r: 20,
-              cursor: "pointer"
-            },
-            name: "buttonBackground",
-          });
+          child.attr("opacity", 1);
         } else {
-          const child = group.findById("plusBtn");
-          group.removeChild(child);
+          child.attr("opacity", 0);
         }
       }
     },
-
   };
 }

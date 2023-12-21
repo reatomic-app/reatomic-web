@@ -71,7 +71,7 @@ export async function load<T>(data: Data<T>, valfn: () => Promise<T>) {
 
 export async function fetchProjectList(): Promise<Project[]> {
   const data = await query<{result: Project[]}>("projects");
-  return data.result;
+  return data.result.reverse();
 }
 
 export async function fetchProjectDetail(id: string): Promise<ProjectFull> {

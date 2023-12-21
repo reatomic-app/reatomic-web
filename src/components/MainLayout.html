@@ -6,11 +6,25 @@
   </div>
   <div class="project-widget">
     <div class="title">Projects</div>
-    <div v-if="!current.data" class="selected">No projects yet</div>
-    <div v-if="current.data" class="selected">{{ current.data?.name }}</div>
+    <div v-if="!projectList?.data" class="project-name">No projects yet</div>
+    <div v-if="projectList?.data">
+      <ul class="project-list">
+        <li v-for="p in projectList?.data">
+          <router-link
+            :class="{ selected: p.id  === current.data?.id,
+                      'project-name': true }"
+            :to="`/project/${p.id}`">
+            {{ p.name }}
+          </router-link>
+        </li>
+      </ul>
+      
+    </div>
     <button class="plus-button">
-      <plus-icon/>
+      <plus-icon @click="showProject" />
     </button>
+
+    
   </div>
   
   <nav class="navigation">
