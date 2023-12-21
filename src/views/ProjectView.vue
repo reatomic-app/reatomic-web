@@ -51,6 +51,14 @@
  function handleLinkCreated(link: Link) {
    store.addLink(link.source, link.target);
  }
+
+ async function handleCardCreated(source: Card | null, target: Card) {
+   const newCard = await store.addCard(target);
+   if (source) {
+     store.addLink(source.id, newCard.id);
+   }
+ }
+
 </script>
 
 <template src="./ProjectView.html"></template>

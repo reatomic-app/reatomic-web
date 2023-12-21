@@ -1,23 +1,49 @@
 <template src="./G6Graph.html"></template>
 
-<style scoped>
- .graph, canvas {
+<style>
+ .graph, .graph > canvas {
    width: 100%;
    height: 100%;
  }
+ .g6-component-contextmenu {
+   padding: 0;
+   border-radius: 0;
+   box-shadow: rgba(174, 174, 174, 0.3) 4px 4px 7px 2px;
+ }
+ .context-menu {
+   padding: 0;
+   margin: 0;
+   list-style: none;
+   min-width: 100px;
+   font-family: roboto;
+   font-size: 12px;
+   border-radius: 0;
 
+   li {
+     padding: 0.5rem;
+     cursor: pointer;
+
+     :hover {
+       background: var(--gray100);
+     }
+   }
+ }
 </style>
 
 <script setup lang="ts">
  import { ref, watch, onMounted } from "vue";
+ import { openModal } from "jenesius-vue-modal";
+ 
  import type { Card, Link } from '../../domain';
 
  import G6, { Graph } from "@antv/g6";
  import type { GraphData } from '@antv/g6/lib';
 
- import { AddEdgeByClickBehavior, UpdateNodePosition } from "./behaviors";
+ import { AddEdgeByClickBehavior, UpdateNodePosition, CreateCardBehavior } from "./behaviors";
  import { ConclusionNode, DataSourceNode, FactNode, InsightNode } from "./nodes";
  import { convertToData } from "./graph";
+
+ import CreateDataSource from "@/components/modals/CreateDataSource.vue";
 
  const emit = defineEmits([
    "onLinkCreated",
@@ -50,25 +76,24 @@
 
        const contextMenu = new G6.Menu({
          getContent(evt) {
-           let header;
+           let options
            if (evt.target && evt.target.isCanvas && evt.target.isCanvas()) {
-             header = 'Canvas ContextMenu';
+             options = `
+               <li data-event='create-datasource'>Create Experiment</li>`;
            } else if (evt.item) {
              const itemType = evt.item.getType();
-             header = `${itemType.toUpperCase()} ContextMenu`;
+             options = `
+               <li data-event='delete-card'>Delete</li>`;
            }
            return `
-    <h3>${header}</h3>
-    <ul>
-      <li title='1'>li 1</li>
-      <li title='2'>li 2</li>
-      <li>li 3</li>
-      <li>li 4</li>
-      <li>li 5</li>
-    </ul>`;
+             <ul class="context-menu">
+               ${options}
+             </ul>`;
          },
-         handleMenuClick: (target, item) => {
-           console.log(target, item);
+         handleMenuClick: (target: HTMLElement, item) => {
+           const event = target.dataset['event'];
+           const model = item?.getModel();
+           handleContextMenu(event, model);
          },
          offsetX: 16 + 10,
          offsetY: 0,
@@ -86,7 +111,8 @@
              //"drag-node",
              "zoom-canvas",
              "click-add-edge",
-             // "update-node-position"
+             // "update-node-position",
+             "create-card"
            ],
            addEdge: [
              //'click-add-edge',
@@ -106,21 +132,6 @@
          },
        });
 
-       graph.on('node:mouseenter', (e) => {
-         const nodeItem = e.item;
-         graph.setItemState(nodeItem, 'hover', true);
-       });
-
-       graph.on('node:mouseleave', (e) => {
-         const nodeItem = e.item;
-         graph.setItemState(nodeItem, 'hover', false);
-       });
-
-       graph.on('node:click', (e) => {
-         const plusBtn = !!e.propagationPath.find((it) => it.get("id") === "plusBtn" );
-         console.log("CLICK BUTTON", plusBtn);
-       });
-
        registerBehaviors();
 
        const data = convertToData(props.cards || [], props.links || []);
@@ -128,7 +139,6 @@
        graph.setMode("default");
        graph.render();
        graph.fitView([50, 50, 50, 50]);
-       //graph.moveTo(30,100);
      }
    } catch(err) {
      console.error(err);
@@ -140,6 +150,9 @@
      emit("onLinkCreated", link);
    }));
    G6.registerBehavior('update-node-position', UpdateNodePosition());
+   G6.registerBehavior('create-card', CreateCardBehavior(graph, (source: Card, target: Card) => {
+     emit("onCardCreated", source, target);
+   }));
  }
 
  function registerNodes() {
@@ -149,13 +162,11 @@
    G6.registerNode("conclusion", ConclusionNode(), "single-node");
  }
 
- ///@Watch("cards")
  function onCardsChanged(val: Card[]) {
    const data = convertToData(val, props.links);
    refreshData(data);
  }
 
- // @Watch("links")
  function onLinksChanged(val: Link[]) {
    const data = convertToData(props.cards, val);
    refreshData(data);
@@ -165,11 +176,16 @@
    const zoom = graph.getZoom();
    const pos = graph.getPointByCanvas(0, 0);
    graph.changeData(data);
-   //graph.refresh();
-   //graph.render();
-   //graph.zoom(zoom);
-   //graph.moveTo(-pos.x, -pos.y);
  }
 
+ async function handleContextMenu(event: String, target: Card) {
+   if (event === "create-datasource") {
+     const modal = await openModal(CreateDataSource);
+     modal.on('return', (value: Card) => {
+       modal.close();
+       emit("onCardCreated", null, value);
+     });
+   }
+ }
 
 </script>

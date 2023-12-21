@@ -115,11 +115,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   color: var(--primary2);
 }
 
-.vm--container .vm--overlay {
+div.modal-container {
 	background-color: rgba(255,255,255,0.85);
 }
-.vm--container .vm--modal {
+
+.modal-content {
 	box-shadow: none;
 }
-
-

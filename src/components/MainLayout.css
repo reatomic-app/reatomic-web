@@ -2,6 +2,8 @@
 .sidebar {
   background: var(--gray100);
   border: 1px solid var(--ds2);
+  height: 100%;
+  padding: 0;
 }
 
 .logo-container {

@@ -16,27 +16,28 @@
 
   </div>
 
-  <div class="debug">
-    <h2>Cards</h2>
-    <ul>
-      <li v-for="card in current?.data?.cards">
-        [{{ card.cardType }}] {{ card.description }}
-      </li>
-    </ul>
+  <!-- <div class="debug">
+       <h2>Cards</h2>
+       <ul>
+       <li v-for="card in current?.data?.cards">
+       [{{ card.cardType }}] {{ card.description }}
+       </li>
+       </ul>
 
-    <h2>Links</h2>
-    <ul>
-      <li v-for="link in current?.data?.links">
-        {{ link }}
-      </li>
-    </ul>
-  </div>
+       <h2>Links</h2>
+       <ul>
+       <li v-for="link in current?.data?.links">
+       {{ link }}
+       </li>
+       </ul>
+       </div> -->
 
   <div class="graph-wrapper">
     <g6-graph
       :cards="current?.data?.cards"
       :links="current?.data?.links"
-      @on-link-created="handleLinkCreated">
+      @on-link-created="handleLinkCreated"
+      @on-card-created="handleCardCreated">
     </g6-graph>
   </div>
 </div>

@@ -7,7 +7,7 @@
   height: 100%;
   border: none;
   border-radius: 0.25rem;
-  background-color: var(--primary1);
+  background-color: var(--gray400);
   color: var(--primary3);
 }
 .modal-header {

@@ -40,6 +40,7 @@ export const projectStore = defineStore('project', {
         const projectId = this.current.data.id;
         const result = await http.createCard(projectId, card);
         this.current.data.cards?.push(result);
+        return result;
       }
     },
     async addLink(sourceId: string, targetId: string) {
