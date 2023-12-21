@@ -21,7 +21,7 @@ export const DataSourceNode = (): ShapeOptions => {
 
       group.addShape('text', {
         attrs: {
-          text: cfg.dataSourceType,
+          text: cfg.title,
           x: x + (width * 0.1),
           y: y + (height * 0.12),
           textAnchor: "middle",

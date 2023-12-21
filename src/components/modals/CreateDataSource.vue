@@ -1,7 +1,6 @@
 <script lang="ts" setup>
- import XDialog from "../XDialog.vue";
- import type { DataSourceInput } from "../../domain";
- import type { Card } from "@/domain";
+ import XDialog from "@/components/XDialog.vue";
+ import type { Card, DataSourceInput } from "../../domain";
 
  const emit = defineEmits(["return"]);
 

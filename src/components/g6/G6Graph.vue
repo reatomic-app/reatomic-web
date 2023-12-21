@@ -1,43 +1,10 @@
-<template src="./G6Graph.html"></template>
-
-<style>
- .graph, .graph > canvas {
-   width: 100%;
-   height: 100%;
- }
- .g6-component-contextmenu {
-   padding: 0;
-   border-radius: 0;
-   box-shadow: rgba(174, 174, 174, 0.3) 4px 4px 7px 2px;
- }
- .context-menu {
-   padding: 0;
-   margin: 0;
-   list-style: none;
-   min-width: 100px;
-   font-family: roboto;
-   font-size: 12px;
-   border-radius: 0;
-
-   li {
-     padding: 0.5rem;
-     cursor: pointer;
-
-     :hover {
-       background: var(--gray100);
-     }
-   }
- }
-</style>
-
 <script setup lang="ts">
  import { ref, watch, onMounted } from "vue";
  import { openModal } from "jenesius-vue-modal";
- 
- import type { Card, Link } from '../../domain';
-
  import G6, { Graph } from "@antv/g6";
  import type { GraphData } from '@antv/g6/lib';
+ 
+ import type { Card, Link } from '@/domain';
 
  import { AddEdgeByClickBehavior, UpdateNodePosition, CreateCardBehavior } from "./behaviors";
  import { ConclusionNode, DataSourceNode, FactNode, InsightNode } from "./nodes";
@@ -192,3 +159,6 @@
  }
 
 </script>
+
+<template src="./G6Graph.html"></template>
+<style src="./G6Graph.css"></style>

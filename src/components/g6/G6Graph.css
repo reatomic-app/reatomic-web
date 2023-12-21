@@ -1,0 +1,29 @@
+.graph, .graph > canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.g6-component-contextmenu {
+  padding: 0;
+  border-radius: 0;
+  box-shadow: rgba(174, 174, 174, 0.3) 4px 4px 7px 2px;
+}
+
+.context-menu {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  min-width: 100px;
+  font-family: roboto;
+  font-size: 12px;
+  border-radius: 0;
+
+  li {
+    padding: 0.5rem;
+    cursor: pointer;
+
+    :hover {
+      background: var(--gray100);
+    }
+  }
+}

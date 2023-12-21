@@ -1,14 +1,15 @@
-<template src="./FactDialog.html"></template>
-<style src="./FactDialog.css" scoped></style>
-
 <script lang="ts" setup>
- import XDialog from "../XDialog.vue";
+ import XDialog from "@/components/XDialog.vue";
  import type { Card } from "@/domain";
+
+ const props = defineProps({
+   data: String
+ });
  
  const emit = defineEmits(["return"]);
 
  const input = {
-   description: "",
+   description: props.data || "",
    url: "",
    selectedType: [] as string[],
  };
@@ -33,3 +34,6 @@
    emit("return", card);
  }
 </script>
+
+<template src="./FactDialog.html"></template>
+<style src="./FactDialog.css" scoped></style>

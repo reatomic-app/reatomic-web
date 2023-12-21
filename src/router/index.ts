@@ -1,9 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import TestView from '../views/TestView.vue';
-import HomeView from '../views/HomeView.vue';
-import ProjectView from '../views/ProjectView.vue';
-import ExperimentView from '../views/ExperimentView.vue';
+import HomeView from '@/views/HomeView.vue';
+import ProjectView from '@/views/ProjectView.vue';
+import ExperimentView from '@/views/ExperimentView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,12 +25,6 @@ const router = createRouter({
       name: 'experiment',
       component: ExperimentView,
       props: true,
-      meta: { title: "Reatomic" }
-    },
-    {
-      path: '/_test',
-      name: 'test',
-      component: TestView,
       meta: { title: "Reatomic" }
     },
     {

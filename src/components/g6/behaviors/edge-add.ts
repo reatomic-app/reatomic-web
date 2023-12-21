@@ -1,6 +1,6 @@
 import type { BehaviorOption, IG6GraphEvent, Item, IEdge, Graph } from '@antv/g6/lib';
+import type { Link } from "@/domain";
 import type { ReatomicModel } from "../nodes/base";
-import type { Link } from "../../../domain";
 
 // import { ProjectManagerStore } from '@/reatomic/projects/application/services/ProjectManagerStore';
 

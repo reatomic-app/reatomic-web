@@ -1,12 +1,13 @@
 import type { Component } from "vue";
 import type { BehaviorOption, IG6GraphEvent, Item, IEdge, Graph } from '@antv/g6/lib';
-import type { ReatomicModel } from "../nodes/base";
-import type { Card, Link } from "../../../domain";
 import { openModal } from "jenesius-vue-modal";
+import type { Card, Link } from "@/domain";
 
 import InsightDialog from "@/components/modals/InsightDialog.vue";
 import FactDialog from "@/components/modals/FactDialog.vue";
 import ConclusionDialog from "@/components/modals/ConclusionDialog.vue";
+
+import type { ReatomicModel } from "../nodes/base";
 
 async function open(component: Component, cb: Function) {
   const modal = await openModal(component);

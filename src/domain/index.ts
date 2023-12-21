@@ -49,6 +49,7 @@ export interface Insight {
 // INPUTS
 export interface DataSourceInput {
   type: string;
+  title: string;
   description: string;
   date: Date;
   url: string;
@@ -80,6 +81,7 @@ export interface Card {
   height?: number;
 
   description?: string;
+  title?: string;
   factType?: string;
   dataSourceType?: string;
   source?: string;

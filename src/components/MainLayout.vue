@@ -1,12 +1,14 @@
 <script lang="ts" setup>
- import type { Project } from "@/domain";
  import { watch, computed, onMounted } from "vue";
- import { projectStore } from "../stores/project";
- import PlusIcon from "./icons/plus-icon.vue";
- import OverviewIcon from "./icons/overview-icon.vue";
  import { openModal } from "jenesius-vue-modal";
- import ProjectDialog from "../components/modals/ProjectDialog.vue";
- import router from "../router";
+
+ import router from "@/router";
+ import type { Project } from "@/domain";
+ import { projectStore } from "@/stores/project";
+
+ import PlusIcon from "@/components/icons/plus-icon.vue";
+ import OverviewIcon from "@/components/icons/overview-icon.vue";
+ import ProjectDialog from "@/components/modals/ProjectDialog.vue";
 
  const store = projectStore();
  onMounted(() => {

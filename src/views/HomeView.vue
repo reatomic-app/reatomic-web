@@ -1,9 +1,9 @@
 <script lang="ts" setup>
- import type { Project } from "@/domain";
- import { projectStore } from "../stores/project";
  import { openModal } from "jenesius-vue-modal";
- import ProjectDialog from "../components/modals/ProjectDialog.vue";
- import router from "../router";
+ import router from "@/router";
+ import type { Project } from "@/domain";
+ import { projectStore } from "@/stores/project";
+ import ProjectDialog from "@/components/modals/ProjectDialog.vue";
 
  const store = projectStore();
  const projectList = store.projectList;

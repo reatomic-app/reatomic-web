@@ -8,9 +8,12 @@
     <button class="primary-btn" v-if="edit" @click="saveDocument">Save</button>
   </header>
 
-  <div class="markdown-container">
+  <div class="markdown-container" @mouseup="handleMouseUp" ref="elRef">
     <markdown-area
       :editing="edit"
       v-model="documentText"></markdown-area>
+    <div class="create-fact">
+      <button @click="createFact"><plus-icon></plus-icon></button>
+    </div>
   </div>
 </section>

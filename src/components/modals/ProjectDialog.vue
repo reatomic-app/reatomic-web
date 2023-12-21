@@ -1,8 +1,5 @@
-<template src="./ProjectDialog.html"></template>
-<style src="./ProjectDialog.css" scoped></style>
-
 <script lang="ts" setup>
- import XDialog from "../XDialog.vue";
+ import XDialog from "@/components/XDialog.vue";
 
  const emit = defineEmits(["return"]);
 
@@ -16,3 +13,6 @@
  }
  
 </script>
+
+<template src="./ProjectDialog.html"></template>
+<style src="./ProjectDialog.css" scoped></style>

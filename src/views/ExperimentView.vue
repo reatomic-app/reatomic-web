@@ -1,9 +1,17 @@
 <script lang="ts" setup>
  import { watch, ref, computed, onMounted } from "vue";
- import MarkdownArea from "@/components/MarkdownArea.vue";
- import { projectStore } from "../stores/project";
+ import { openModal } from "jenesius-vue-modal";
 
+ import type { Card } from "@/domain";
+ import { projectStore } from "@/stores/project";
+ import MarkdownArea from "@/components/MarkdownArea.vue";
+ import PlusIcon from "@/components/icons/plus-icon.vue";
+ import FactDialog from "@/components/modals/FactDialog.vue";
+
+ const elRef = ref<HTMLElement | null>(null);
  const store = projectStore();
+
+ const selectedText = ref("");
 
  const props = defineProps({
    id: String,
@@ -13,8 +21,9 @@
  const edit = ref(false);
  const data = ref("");
 
- if(props.experimentId && store.cardData[props.experimentId]?.data) {
-   data.value = store.cardData[props.experimentId]?.data;
+ const currentData = props.experimentId && store.cardData[props.experimentId]?.data
+ if(currentData) {
+   data.value = currentData;
  }
 
  const documentText = computed({
@@ -26,7 +35,7 @@
    }
  });
 
-  watch(
+ watch(
    () => props.experimentId && store.cardData[props.experimentId]?.data,
    (value) => {
      if (value) {
@@ -38,11 +47,6 @@
  onMounted(() => {
    if (props.id && store.current.state === 'empty') {
      store.fetchProjectDetail(props.id);
-   }
-
-   // If the data is already loaded
-   if (props.experimentId && store.cardData[props.experimentId]?.data) {
-     document.value = store.cardData[props.experimentId]?.data;
    }
  });
 
@@ -60,6 +64,42 @@
    edit.value = false;
    if (props.id && props.experimentId && data.value) {
      store.updateCardData(props.id, props.experimentId, data.value);
+   }
+ }
+
+ async function createFact() {
+   const modal = await openModal(FactDialog, {data: selectedText.value});
+   modal.on('return', async (value: Card) => {
+     console.log(value);
+     modal.close();
+
+     const newCard = await store.addCard(value);
+     if (props.experimentId && newCard && newCard.id) {
+       store.addLink(props.experimentId, newCard.id);
+     }
+   });
+ }
+
+ function handleMouseUp() {
+   const selection = window.getSelection();
+
+   if (!edit.value && selection && selection.toString() !== "") {
+     const range = selection.getRangeAt(0).cloneRange(); //get the text range
+     range.collapse(false);
+     const bcr = range.getBoundingClientRect();
+
+     if (elRef.value) {
+       elRef.value.style.setProperty('--left', bcr.left + bcr.width + "px");
+       elRef.value.style.setProperty('--top', bcr.top + bcr.height + "px");
+       elRef.value.style.setProperty("--display-button", "block");
+     }
+
+     selectedText.value = selection.toString();
+   } else {
+     if (elRef.value) {
+       elRef.value.style.setProperty("--display-button", "none");
+     }
+     selectedText.value = "";
    }
  }
 </script>

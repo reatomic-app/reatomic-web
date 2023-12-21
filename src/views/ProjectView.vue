@@ -1,16 +1,17 @@
 <script lang="ts" setup>
  import type { Component } from "vue";
+ import type { Card, DataSource, Link } from "@/domain";
+
  import { watch } from "vue";
- import { projectStore } from "../stores/project";
- import type { Card, DataSource, Link } from "../domain";
  import { openModal } from "jenesius-vue-modal";
 
- import CreateDataSource from "../components/modals/CreateDataSource.vue";
- import InsightDialog from "../components/modals/InsightDialog.vue";
- import FactDialog from "../components/modals/FactDialog.vue";
- import ConclusionDialog from "../components/modals/ConclusionDialog.vue";
-
- import G6Graph from "../components/g6/G6Graph.vue";
+ import { projectStore } from "@/stores/project";
+ 
+ import CreateDataSource from "@/components/modals/CreateDataSource.vue";
+ import InsightDialog from "@/components/modals/InsightDialog.vue";
+ import FactDialog from "@/components/modals/FactDialog.vue";
+ import ConclusionDialog from "@/components/modals/ConclusionDialog.vue";
+ import G6Graph from "@/components/g6/G6Graph.vue";
 
  const props = defineProps({
    id: String

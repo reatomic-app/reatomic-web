@@ -30,4 +30,28 @@ header {
   padding: 1rem 4rem;
 }
 
+.markdown-container {
+}
 
+.create-fact {
+  display: var(--display-button, none);
+  position: absolute;
+  left: var(--left);
+  top: var(--top);
+}
+
+.create-fact button {
+  width: 30px;
+  height: 30px;
+  padding: 8px;
+  border-radius: 50%;
+  --stroke: #5c6780;
+  background: var(--ds2);
+  border: 1px solid #5c6780;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 4px 2px rgba(0,0,0,0.2);
+}

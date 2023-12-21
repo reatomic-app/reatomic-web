@@ -1,8 +1,5 @@
-<template src="./InsightDialog.html"></template>
-<style src="./InsightDialog.css" scoped></style>
-
 <script lang="ts" setup>
- import XDialog from "../XDialog.vue";
+ import XDialog from "@/components/XDialog.vue";
 
  const emit = defineEmits(["return"]);
 
@@ -20,3 +17,6 @@
    emit("return", card);
  }
 </script>
+
+<template src="./InsightDialog.html"></template>
+<style src="./InsightDialog.css" scoped></style>
