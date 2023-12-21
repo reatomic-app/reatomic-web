@@ -1,6 +1,7 @@
 <script lang="ts" setup>
  import XDialog from "../XDialog.vue";
  import type { DataSourceInput } from "../../domain";
+ import type { Card } from "@/domain";
 
  const emit = defineEmits(["return"]);
 
@@ -9,11 +10,13 @@
    description: "",
    date: new Date(),
    url: "",
+   title: ""
  };
 
  function handleCreate() {
    const card: Card = {
      cardType: "data-source",
+     title: input.title,
      description: input.description,
      date: input.date,
      url: input.url

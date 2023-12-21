@@ -45,7 +45,7 @@ export const AddEdgeByClickBehavior = (graph: Graph, onAddLink: (link: Link) => 
       // console.log("isSourceClicked", isSourceClicked);
 
       const target = node?.getModel() as ReatomicModel;
-      const source = edge?.getSource().getModel() as ReatomicModel;
+      const source = (edge as any)?.getSource().getModel() as ReatomicModel;
 
       // TODO Move this to its custom behavior
       if (isSourceClicked) {
@@ -64,7 +64,7 @@ export const AddEdgeByClickBehavior = (graph: Graph, onAddLink: (link: Link) => 
           targetAnchor: 0,
         }) as Item;
       } else if (edge && target && isValidTarget(source, target)) {
-        const source = edge.getSource().getModel() as ReatomicModel;
+        const source: ReatomicModel = (edge as any).getSource().getModel();
         // graph.updateItem(edge, { target: target.id });
         const myEdge = edge as IEdge;
         const link = {
@@ -81,13 +81,13 @@ export const AddEdgeByClickBehavior = (graph: Graph, onAddLink: (link: Link) => 
     // The responsing function for mousemove defined in getEvents
     onMousemove(ev: IG6GraphEvent) {
       // The current position the mouse clicks
-      let point = { x: ev.x, y: ev.y };
+      let point: {x: number; y: number} | string = { x: ev.x, y: ev.y };
 
       let toNode = null;
 
       if (ev.item && ev.item.getType() === "node"){
-        const source = edge.getSource().getModel() as ReatomicModel;
-        const target = ev.item.getModel() as ReatomicModel;
+        const source: ReatomicModel = (edge as any).getSource()?.getModel();
+        const target: ReatomicModel = ev.item?.getModel() as any;
         if (isValidTarget(source, target)) {
           toNode = ev.item;
           point = ev.item.getID();
@@ -109,7 +109,7 @@ export const AddEdgeByClickBehavior = (graph: Graph, onAddLink: (link: Link) => 
     onEdgeClick(ev: IG6GraphEvent) {
       const currentEdge: Item | null = ev.item;
 
-      if (!edge && currentEdge.getType() === "edge") {
+      if (!edge && currentEdge?.getType() === "edge") {
         edge = currentEdge;
       }
     },

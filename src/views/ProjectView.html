@@ -3,19 +3,6 @@
   {{ current?.error }}
 </p>
 <div class="content" v-if="current?.state === 'fetched'">
-  <div class="project-header">
-    <router-link to="/">Back</router-link>
-    <h1>Project: {{ current?.data?.name }}</h1>
-
-    <div class="buttons-panel">
-      <button @click="showDatasource">+ Datasource</button>
-      <button @click="showFact">+ Fact</button>
-      <button @click="showInsight">+ Insight</button>
-      <button @click="showConclusion">+ Conclusion</button>
-    </div>
-
-  </div>
-
   <!-- <div class="debug">
        <h2>Cards</h2>
        <ul>

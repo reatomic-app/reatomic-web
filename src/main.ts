@@ -13,7 +13,7 @@ import router from './router'
 const app = createApp(App);
 
 app.config.errorHandler = (err, instance, info) => {
-  console.log("ERROR", info);
+  console.log("ERROR", err, instance, info);
   console.error(err);
 }
 

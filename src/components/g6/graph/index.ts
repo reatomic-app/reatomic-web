@@ -2,7 +2,7 @@ import type { Card, CardNodeConfig, LinkEdgeConfig, Link } from '../../../domain
 import type { GraphData } from '@antv/g6/lib';
 
 
-function convertToNodeConfig(cards: Cards[]): CardNodeConfig[] {
+function convertToNodeConfig(cards: Card[]): CardNodeConfig[] {
   const result = [] as CardNodeConfig[];
   const positionX = {
     "data-source": 0,
@@ -10,6 +10,7 @@ function convertToNodeConfig(cards: Cards[]): CardNodeConfig[] {
     "insight": 0,
     "conclusion": 0
   };
+  
   const positionY = {
     "data-source": 10,
     "fact": 10 + 260 * 1 + 10 * 1,
@@ -19,11 +20,12 @@ function convertToNodeConfig(cards: Cards[]): CardNodeConfig[] {
 
   for (const next of cards) {
     const cardConf = {
-      type: next.cardType,
+      id: "",
       ...next,
+      type: next.cardType,
       size: [200, 260],
-      x: positionX[next.cardType] + 10,
-      y: positionY[next.cardType]
+      x: (positionX[next.cardType] || 0) + 10,
+      y: (positionY[next.cardType] || 0),
     };
     result.push(cardConf);
     positionX[next.cardType] = cardConf.x + 200;
@@ -31,7 +33,7 @@ function convertToNodeConfig(cards: Cards[]): CardNodeConfig[] {
   return result;
 }
 
-function convertToEdgeConfig(links: Link): LinkEdgeConfig[] {
+function convertToEdgeConfig(links: Link[]): LinkEdgeConfig[] {
   const result = [] as LinkEdgeConfig[];
 
   for (const next of links) {

@@ -37,6 +37,9 @@ async function put<Response>(
   const response = await fetch(`${BASE}/${url}`, {
     method: "put",
     mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(data),
   });
   if (response.status >= 400) {
@@ -46,7 +49,7 @@ async function put<Response>(
 }
 
 async function del(url: string): Promise<boolean> {
-  await fetch(`${BASE}/${url}`, {
+  const response = await fetch(`${BASE}/${url}`, {
     method: "delete",
     mode: "cors"
   });
@@ -75,7 +78,7 @@ export async function fetchProjectList(): Promise<Project[]> {
 }
 
 export async function fetchProjectDetail(id: string): Promise<ProjectFull> {
-  const project = await query(`projects/${id}`);
+  const project = await query<ProjectFull>(`projects/${id}`);
 
   project.cards?.map((it: Card) => {
     it.date = it.date ? new Date(it.date) : undefined;
@@ -90,7 +93,7 @@ export async function createProject(project: Project): Promise<Project> {
 }
 
 export async function createCard(projectId: string, card: Card): Promise<Card> {
-  const result = await post(`projects/${projectId}/cards`, card);
+  const result = await post<Card>(`projects/${projectId}/cards`, card);
   result.date = result.date ? new Date(result.date) : undefined;
   return result;
 }
@@ -100,7 +103,7 @@ export async function createLink(projectId: string, source: string, target: stri
 }
 
 export async function updateCard(projectId: string, card: Card): Promise<Card> {
-  const result = await post(`projects/${projectId}/cards/${card.id}`, card);
+  const result = await post<Card>(`projects/${projectId}/cards/${card.id}`, card);
   result.date = result.date ? new Date(result.date) : undefined;
   return result;
 }
@@ -111,4 +114,13 @@ export async function removeCard(projectId: string, card: Card): Promise<boolean
 
 export async function removeLink(projectId: string, link: Link): Promise<boolean> {
   return del(`projects/${projectId}/links/${link.source}/${link.target}`);
+}
+
+export async function fetchCardData(projectId: string, cardId: string): Promise<string> {
+  const r = await query<{result: string}>(`projects/${projectId}/cards/${cardId}/data`);
+  return r.result;
+}
+
+export async function updateCardData(projectId: string, cardId: string, data: string): Promise<string> {
+  return await put(`projects/${projectId}/cards/${cardId}/data`, { data });
 }

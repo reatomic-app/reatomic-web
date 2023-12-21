@@ -76,12 +76,11 @@
 
        const contextMenu = new G6.Menu({
          getContent(evt) {
-           let options
-           if (evt.target && evt.target.isCanvas && evt.target.isCanvas()) {
+           let options = "";
+           if (evt?.target && evt.target.isCanvas && evt.target.isCanvas()) {
              options = `
                <li data-event='create-datasource'>Create Experiment</li>`;
-           } else if (evt.item) {
-             const itemType = evt.item.getType();
+           } else if (evt?.item) {
              options = `
                <li data-event='delete-card'>Delete</li>`;
            }
@@ -92,7 +91,7 @@
          },
          handleMenuClick: (target: HTMLElement, item) => {
            const event = target.dataset['event'];
-           const model = item?.getModel();
+           const model: Card = item?.getModel() as any;
            handleContextMenu(event, model);
          },
          offsetX: 16 + 10,
@@ -163,13 +162,17 @@
  }
 
  function onCardsChanged(val: Card[]) {
-   const data = convertToData(val, props.links);
-   refreshData(data);
+   if (props.links) {
+     const data = convertToData(val, props.links);
+     refreshData(data);
+   }
  }
 
  function onLinksChanged(val: Link[]) {
-   const data = convertToData(props.cards, val);
-   refreshData(data);
+   if (props.cards) {
+     const data = convertToData(props.cards, val);
+     refreshData(data);
+   }
  }
 
  function refreshData(data: GraphData) {
@@ -178,7 +181,7 @@
    graph.changeData(data);
  }
 
- async function handleContextMenu(event: String, target: Card) {
+ async function handleContextMenu(event: String | undefined, target: Card) {
    if (event === "create-datasource") {
      const modal = await openModal(CreateDataSource);
      modal.on('return', (value: Card) => {

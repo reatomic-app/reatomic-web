@@ -6,7 +6,7 @@
   </div>
   <div class="project-widget">
     <div class="title">Projects</div>
-    <div v-if="!projectList?.data" class="project-name">No projects yet</div>
+    <div v-if="!projectList?.data || projectList?.data?.length === 0" class="project-name">No projects yet</div>
     <div v-if="projectList?.data">
       <ul class="project-list">
         <li v-for="p in projectList?.data">
@@ -27,7 +27,7 @@
     
   </div>
   
-  <nav class="navigation">
+  <nav v-if="current?.data" class="navigation">
     <div class="navigation-item">
       <router-link
         class="title"
@@ -40,7 +40,11 @@
       <div v-if="!datasources" class="empty">No experiments yet</div>
       <ul>
         <li v-for="item of datasources">
-          <router-link :title="item.description" :to="`/project/${current.data?.id}/experiment/${item.id}`">{{ item.description }}</router-link>
+          <router-link
+            :title="item.description"
+            :to="`/project/${current.data?.id}/experiment/${item.id}`">
+            {{ item.title }}
+          </router-link>
         </li>
       </ul>
     </div>

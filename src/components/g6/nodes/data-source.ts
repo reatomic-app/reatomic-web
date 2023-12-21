@@ -62,7 +62,7 @@ export const DataSourceNode = (): ShapeOptions => {
     },
 
     setState(name, value, node) {
-      if (name === "hover") {
+      if (name === "hover" && node) {
         const group = node.getContainer();
         const child = group.findById("plusBtn");
         

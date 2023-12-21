@@ -3,14 +3,15 @@
 
 <script lang="ts" setup>
  import XDialog from "../XDialog.vue";
-
+ import type { Card } from "@/domain";
+ 
  const emit = defineEmits(["return"]);
 
  const input = {
    description: "",
    url: "",
    selectedType: [] as string[],
- }
+ };
 
  function handleSelectedType(evt: MouseEvent) {
    const target = evt.target as HTMLInputElement;

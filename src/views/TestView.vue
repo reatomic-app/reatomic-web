@@ -28,25 +28,25 @@
  const cards: Card[] = [
    {
      id: "id1",
-     type: "data-source",
+     cardType: "data-source",
      dataSourceType: "Interview",
      date: new Date(),
      description: "datasource",
    },
    {
      id: "id2",
-     type: "fact",
+     cardType: "fact",
      description: "fact",
      factType: "good"
    },
    {
      id: "id3",
-     type: "insight",
+     cardType: "insight",
      description: "insight",
    },
    {
      id: "id4",
-     type: "conclusion",
+     cardType: "conclusion",
      description: "conclusion",
    }
  ];

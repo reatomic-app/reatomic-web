@@ -1,0 +1,16 @@
+<section class="experiment-view">
+  <header>
+    <div class="project-container">
+      <div class="project-name">{{ store.current?.data?.name }}</div>
+      <div class="project-description">{{ store.current?.data?.description }}</div>
+    </div>
+    <button class="primary-btn" v-if="!edit" @click="startEdit">Edit</button>
+    <button class="primary-btn" v-if="edit" @click="saveDocument">Save</button>
+  </header>
+
+  <div class="markdown-container">
+    <markdown-area
+      :editing="edit"
+      v-model="documentText"></markdown-area>
+  </div>
+</section>

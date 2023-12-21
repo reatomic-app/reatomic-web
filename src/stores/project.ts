@@ -7,6 +7,7 @@ import type { Data, Project, ProjectFull, Card, Link } from "../domain";
 interface State {
   projectList: Data<Project[]>;
   current: Data<ProjectFull>;
+  cardData: Record<string, Data<string>>;
 }
 
 export const projectStore = defineStore('project', {
@@ -16,11 +17,12 @@ export const projectStore = defineStore('project', {
     },
     current: {
       state: "empty"
-    }
+    },
+    cardData: {}
   } as State),
 
   getters: {
-    datasources: (state) => state.current.data?.cards.filter((c) => c.cardType === 'data-source')
+    datasources: (state) => state.current.data?.cards?.filter((c) => c.cardType === 'data-source')
   },
   
   actions: {
@@ -29,11 +31,24 @@ export const projectStore = defineStore('project', {
     },
     async createProject(project: Project): Promise<Project> {
       const result = await http.createProject(project);
-      this.projectList.data = [ result, ...this.projectList.data ];
+      if (this.projectList.data) {
+        this.projectList.data = [ result, ...this.projectList.data ];
+      }
       return result;
     },
     async fetchProjectDetail(id: string) {
       http.load(this.current, () => http.fetchProjectDetail(id));
+    },
+    async fetchCardData(projectId: string, cardId: string) {
+      if (!this.cardData[cardId]) {
+        this.cardData[cardId] = {
+          state: "empty"
+        }
+      }
+      http.load(this.cardData[cardId], () => http.fetchCardData(projectId, cardId));
+    },
+    async updateCardData(projectId: string, cardId: string, data: string) {
+      http.updateCardData(projectId, cardId, data);
     },
     async addCard(card: Card) {
       if (this.current.state === "fetched" && this.current.data) {

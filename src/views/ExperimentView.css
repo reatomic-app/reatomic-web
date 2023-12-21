@@ -1,1 +1,33 @@
+.experiment-view {
+  padding: 2rem;
+}
+.project-name {
+  font-family: montserrat;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+header {
+  display: flex;
+  border-bottom: 1px solid var(--ds2);
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  align-items: flex-end;
+}
+
+.project-container {
+  flex: 1;
+}
+
+.primary-btn {
+  border: 0;
+  background: var(--ds3);
+  font-size: 14px;
+  font-weight: 700;
+  font-family: montserrat;
+  border-radius: 6px;
+  color: white;
+  padding: 1rem 4rem;
+}
+
 

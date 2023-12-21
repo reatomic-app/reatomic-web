@@ -25,7 +25,6 @@ h1 {
 
 .graph-wrapper {
   flex: 1;
-  border: 1px solid silver;
   margin: 1rem;
   width: calc(100% - 2rem);
   height: 100%;

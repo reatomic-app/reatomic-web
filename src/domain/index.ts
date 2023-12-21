@@ -72,7 +72,7 @@ export interface InsightInput {
 
 // GRAPH
 export interface Card {
-  id: string;
+  id?: string;
   cardType: 'data-source' | 'fact' | 'insight' | 'conclusion';
   x?: number;
   y?: number;
@@ -88,7 +88,7 @@ export interface Card {
 }
 
 export interface Link {
-  id: string;
+  id?: string;
   target?: string;
   targetAnchor?: number;
   source?: string;
@@ -100,12 +100,11 @@ export interface LinkEdgeConfig extends G6.EdgeConfig {
 }
 
 export interface CardNodeConfig extends G6.NodeConfig {
-  id: string;
   x: number;
   y: number;
-  width: number;
-  height: number;
-  description: string;
+  width?: number;
+  height?: number;
+  description?: string;
   cardType: string;
   factType?: string;
   dataSourceType?: string;

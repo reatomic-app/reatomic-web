@@ -1,7 +1,8 @@
 <script lang="ts" setup>
+ import type { Component } from "vue";
  import { watch } from "vue";
  import { projectStore } from "../stores/project";
- import type { Card, DataSource } from "../domain";
+ import type { Card, DataSource, Link } from "../domain";
  import { openModal } from "jenesius-vue-modal";
 
  import CreateDataSource from "../components/modals/CreateDataSource.vue";
@@ -17,14 +18,18 @@
 
  const store = projectStore();
 
- store.fetchProjectDetail(props.id);
- watch(() => props.id, (id) => {
+ if (props.id) {
    store.fetchProjectDetail(props.id);
+ }
+ watch(() => props.id, (id) => {
+   if (props.id) {
+     store.fetchProjectDetail(props.id);
+   }
  });
 
  const current = store.current;
 
- async function open(component) {
+ async function open(component: Component) {
    const modal = await openModal(component);
    modal.on('return', (value: Card) => {
      modal.close();
@@ -49,12 +54,14 @@
  }
 
  function handleLinkCreated(link: Link) {
-   store.addLink(link.source, link.target);
+   if (link.source && link.target) {
+     store.addLink(link.source, link.target);
+   }
  }
 
  async function handleCardCreated(source: Card | null, target: Card) {
    const newCard = await store.addCard(target);
-   if (source) {
+   if (source && source.id && newCard && newCard.id) {
      store.addLink(source.id, newCard.id);
    }
  }

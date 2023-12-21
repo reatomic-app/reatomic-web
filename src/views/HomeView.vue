@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+ import type { Project } from "@/domain";
  import { projectStore } from "../stores/project";
  import { openModal } from "jenesius-vue-modal";
  import ProjectDialog from "../components/modals/ProjectDialog.vue";
@@ -9,6 +10,7 @@
 
  async function showProject() {
    const modal = await openModal(ProjectDialog);
+
    modal.on('return', async (value: Project) => {
      modal.close();
      const result = await store.createProject(value);
